@@ -10,7 +10,7 @@ function Signup(){
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
-    const allowedDomains = ["students.wits.ac.za", "gmail.com", "icloud.com", "yahoo.coms"]
+    const allowedDomains = ["students.wits.ac.za", "gmail.com", "icloud.com", "yahoo.com"]
 
     const handleSign = (event) => {
       event.preventDefault();
@@ -41,7 +41,7 @@ function Signup(){
       }
     
       setPasswordError("");
-      navigate("/Home");
+      navigate("/home");
     };
     
 

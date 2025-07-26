@@ -27,7 +27,6 @@ const JobDetails = () => {
       </p>
       <p>Posted: {job.timePosted}</p>
       <p>Priority: {job.priority}</p>
-      {/* Add more job details here if needed */}
     </div>
   );
 };

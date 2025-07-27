@@ -1,0 +1,131 @@
+/* Header Section */
+.header-section {
+  display: flex;
+  justify-content: space-between; /* Ensures elements are spaced out horizontally */
+  align-items: center; /* Ensures elements are vertically aligned */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+}
+
+.hamburger-menu {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center; /* Ensures vertical alignment */
+}
+
+.header-title {
+  flex: 1; /* Ensures the title takes up available space */
+  text-align: center; /* Centers the title horizontally */
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0; /* Removes any default margin */
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center; /* Ensures vertical alignment */
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: center; /* Centers the filter buttons */
+  gap: 10px; /* Adds spacing between buttons */
+  margin: 20px 0;
+}
+
+.filter-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%; /* Makes buttons circular */
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.1); /* Adds hover effect */
+}
+
+.filter-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.filter-icon {
+  font-size: 24px;
+}
+
+.filter-text {
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.home-wrapper {
+    background-color: #f9fafb;
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  .home-header {
+    background-color: #1e3a8a; /* Deep blue */
+    color: white;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    padding: 16px 20px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative; /* Allows positioning of other elements like the hamburger menu and profile picture */
+  }
+  
+  .hamburger {
+    position: absolute; /* Position the hamburger menu */
+    left: 16px; /* Align it to the left */
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .home-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center; /* Ensure text is centered */
+  }
+  
+  .profile-picture {
+    position: absolute; /* Position the profile picture */
+    right: 16px; /* Align it to the right */
+  }
+  
+  .profile-picture img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* Content Container */
+  .home-content {
+    padding: 16px;
+  }
+  
+  /* You can keep your filter buttons + job-container styles as-is */

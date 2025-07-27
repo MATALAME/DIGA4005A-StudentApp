@@ -11,6 +11,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "55 mins ago",
+    "category": "Other Jobs",
     "id": 1
   },
   {
@@ -25,6 +26,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "46 mins ago",
+    "category": "Other Jobs",
     "id": 2
   },
   {
@@ -39,6 +41,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "26 mins ago",
+    "category": "Errands",
     "id": 3
   },
   {
@@ -53,6 +56,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "1 mins ago",
+    "category": "Errands",
     "id": 4
   },
   {
@@ -67,6 +71,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "12 mins ago",
+    "category": "Errands",
     "id": 5
   },
   {
@@ -81,6 +86,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "36 mins ago",
+    "category": "Other Jobs",
     "id": 6
   },
   {
@@ -95,6 +101,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "16 mins ago",
+    "category": "Errands",
     "id": 7
   },
   {
@@ -109,6 +116,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "19 mins ago",
+    "category": "Tutoring",
     "id": 8
   },
   {
@@ -123,6 +131,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "44 mins ago",
+    "category": "Errands",
     "id": 9
   },
   {
@@ -136,7 +145,8 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "Urgent",
-    "timePosted": "12 mins ago",
+    "timePosted": "10 mins ago",
+    "category": "Errands",
     "id": 10
   },
   {
@@ -151,6 +161,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "1 mins ago",
+    "category": "Pet Care",
     "id": 11
   },
   {
@@ -165,6 +176,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "56 mins ago",
+    "category": "Technical Assistance",
     "id": 12
   },
   {
@@ -179,6 +191,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "40 mins ago",
+    "category": "Child Care",
     "id": 13
   },
   {
@@ -193,6 +206,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "57 mins ago",
+    "category": "Pet Care",
     "id": 14
   },
   {
@@ -207,6 +221,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "24 mins ago",
+    "category": "Errands",
     "id": 15
   },
   {
@@ -221,6 +236,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "42 mins ago",
+    "category": "Outdoor Work",
     "id": 16
   },
   {
@@ -235,6 +251,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "22 mins ago",
+    "category": "Outdoor Work",
     "id": 17
   },
   {
@@ -249,6 +266,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "52 mins ago",
+    "category": "Cleaning",
     "id": 18
   },
   {
@@ -263,6 +281,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "46 mins ago",
+    "category": "Outdoor Work",
     "id": 19
   },
   {
@@ -277,6 +296,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "9 mins ago",
+    "category": "Beauty",
     "id": 20
   },
   {
@@ -291,6 +311,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "3 mins ago",
+    "category": "Pet Care",
     "id": 21
   },
   {
@@ -305,6 +326,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "48 mins ago",
+    "category": "Cleaning",
     "id": 22
   },
   {
@@ -319,6 +341,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "44 mins ago",
+    "category": "Errands",
     "id": 23
   },
   {
@@ -333,6 +356,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "22 mins ago",
+    "category": "Tutoring",
     "id": 24
   },
   {
@@ -347,6 +371,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "58 mins ago",
+    "category": "Technical Assistance",
     "id": 25
   },
   {
@@ -361,6 +386,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "2 mins ago",
+    "category": "Outdoor Work",
     "id": 26
   },
   {
@@ -375,6 +401,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "32 mins ago",
+    "category": "Technical Assistance",
     "id": 27
   },
   {
@@ -389,6 +416,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "33 mins ago",
+    "category": "Pet Care",
     "id": 28
   },
   {
@@ -403,6 +431,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "19 mins ago",
+    "category": "Outdoor Work",
     "id": 29
   },
   {
@@ -417,6 +446,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "40 mins ago",
+    "category": "Outdoor Work",
     "id": 30
   },
   {
@@ -431,6 +461,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "7 mins ago",
+    "category": "Beauty",
     "id": 31
   },
   {
@@ -445,6 +476,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "19 mins ago",
+    "category": "Tutoring",
     "id": 32
   },
   {
@@ -459,6 +491,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "17 mins ago",
+    "category": "Cleaning",
     "id": 33
   },
   {
@@ -473,6 +506,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "6 mins ago",
+    "category": "Pet Care",
     "id": 34
   },
   {
@@ -487,6 +521,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "52 mins ago",
+    "category": "Beauty",
     "id": 35
   },
   {
@@ -501,6 +536,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "58 mins ago",
+    "category": "Cleaning",
     "id": 36
   },
   {
@@ -515,6 +551,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "49 mins ago",
+    "category": "Outdoor Work",
     "id": 37
   },
   {
@@ -529,6 +566,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "21 mins ago",
+    "category": "Tutoring",
     "id": 38
   },
   {
@@ -543,6 +581,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "31 mins ago",
+    "category": "Technical Assistance",
     "id": 39
   },
   {
@@ -557,6 +596,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "39 mins ago",
+    "category": "Pet Care",
     "id": 40
   },
   {
@@ -571,6 +611,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "40 mins ago",
+    "category": "Beauty",
     "id": 41
   },
   {
@@ -585,6 +626,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "51 mins ago",
+    "category": "Cleaning",
     "id": 42
   },
   {
@@ -599,6 +641,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "52 mins ago",
+    "category": "Pet Care",
     "id": 43
   },
   {
@@ -613,6 +656,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "55 mins ago",
+    "category": "Pet Care",
     "id": 44
   },
   {
@@ -627,6 +671,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "7 mins ago",
+    "category": "Beauty",
     "id": 45
   },
   {
@@ -641,6 +686,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "26 mins ago",
+    "category": "Pet Care",
     "id": 46
   },
   {
@@ -655,6 +701,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "3 mins ago",
+    "category": "Tutoring",
     "id": 47
   },
   {
@@ -669,6 +716,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "4 mins ago",
+    "category": "Outdoor Work",
     "id": 48
   },
   {
@@ -683,6 +731,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "3 mins ago",
+    "category": "Child Care",
     "id": 49
   },
   {
@@ -697,6 +746,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "40 mins ago",
+    "category": "Technical Assistance",
     "id": 50
   },
   {
@@ -711,6 +761,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "22 mins ago",
+    "category": "Cleaning",
     "id": 51
   },
   {
@@ -725,6 +776,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "20 mins ago",
+    "category": "Outdoor Work",
     "id": 52
   },
   {
@@ -739,6 +791,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "47 mins ago",
+    "category": "Tutoring",
     "id": 53
   },
   {
@@ -753,6 +806,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "21 mins ago",
+    "category": "Tutoring",
     "id": 54
   },
   {
@@ -767,6 +821,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "45 mins ago",
+    "category": "Pet Care",
     "id": 55
   },
   {
@@ -781,6 +836,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "28 mins ago",
+    "category": "Technical Assistance",
     "id": 56
   },
   {
@@ -795,6 +851,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "59 mins ago",
+    "category": "Pet Care",
     "id": 57
   },
   {
@@ -809,6 +866,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "32 mins ago",
+    "category": "Technical Assistance",
     "id": 58
   },
   {
@@ -823,6 +881,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "33 mins ago",
+    "category": "Outdoor Work",
     "id": 59
   },
   {
@@ -837,6 +896,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "57 mins ago",
+    "category": "Technical Assistance",
     "id": 60
   },
   {
@@ -851,6 +911,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "20 mins ago",
+    "category": "Errands",
     "id": 61
   },
   {
@@ -865,6 +926,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "33 mins ago",
+    "category": "Pet Care",
     "id": 62
   },
   {
@@ -879,6 +941,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "45 mins ago",
+    "category": "Outdoor Work",
     "id": 63
   },
   {
@@ -893,6 +956,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "25 mins ago",
+    "category": "Cleaning",
     "id": 64
   },
   {
@@ -907,6 +971,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "25 mins ago",
+    "category": "Outdoor Work",
     "id": 65
   },
   {
@@ -921,6 +986,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "1 mins ago",
+    "category": "Beauty",
     "id": 66
   },
   {
@@ -935,6 +1001,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "28 mins ago",
+    "category": "Child Care",
     "id": 67
   },
   {
@@ -949,6 +1016,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "26 mins ago",
+    "category": "Errands",
     "id": 68
   },
   {
@@ -963,6 +1031,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "26 mins ago",
+    "category": "Outdoor Work",
     "id": 69
   },
   {
@@ -977,6 +1046,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "18 mins ago",
+    "category": "Pet Care",
     "id": 70
   },
   {
@@ -991,6 +1061,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "20 mins ago",
+    "category": "Child Care",
     "id": 71
   },
   {
@@ -1005,6 +1076,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "11 mins ago",
+    "category": "Child Care",
     "id": 72
   },
   {
@@ -1019,6 +1091,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "53 mins ago",
+    "category": "Child Care",
     "id": 73
   },
   {
@@ -1033,6 +1106,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "58 mins ago",
+    "category": "Errands",
     "id": 74
   },
   {
@@ -1047,6 +1121,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "4 mins ago",
+    "category": "Beauty",
     "id": 75
   },
   {
@@ -1061,6 +1136,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "46 mins ago",
+    "category": "Child Care",
     "id": 76
   },
   {
@@ -1075,6 +1151,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "15 mins ago",
+    "category": "Child Care",
     "id": 77
   },
   {
@@ -1089,6 +1166,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "26 mins ago",
+    "category": "Child Care",
     "id": 78
   },
   {
@@ -1103,6 +1181,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "40 mins ago",
+    "category": "Beauty",
     "id": 79
   },
   {
@@ -1117,6 +1196,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "57 mins ago",
+    "category": "Technical Assistance",
     "id": 80
   },
   {
@@ -1131,6 +1211,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "31 mins ago",
+    "category": "Technical Assistance",
     "id": 81
   },
   {
@@ -1145,6 +1226,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "46 mins ago",
+    "category": "Cleaning",
     "id": 82
   },
   {
@@ -1159,6 +1241,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "16 mins ago",
+    "category": "Technical Assistance",
     "id": 83
   },
   {
@@ -1173,6 +1256,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "45 mins ago",
+    "category": "Pet Care",
     "id": 84
   },
   {
@@ -1187,6 +1271,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "25 mins ago",
+    "category": "Errands",
     "id": 85
   },
   {
@@ -1201,6 +1286,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "6 mins ago",
+    "category": "Child Care",
     "id": 86
   },
   {
@@ -1215,6 +1301,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "46 mins ago",
+    "category": "Beauty",
     "id": 87
   },
   {
@@ -1229,6 +1316,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "32 mins ago",
+    "category": "Outdoor Work",
     "id": 88
   },
   {
@@ -1243,6 +1331,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "10 mins ago",
+    "category": "Technical Assistance",
     "id": 89
   },
   {
@@ -1257,6 +1346,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "52 mins ago",
+    "category": "Beauty",
     "id": 90
   },
   {
@@ -1271,6 +1361,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "40 mins ago",
+    "category": "Technical Assistance",
     "id": 91
   },
   {
@@ -1285,6 +1376,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "14 mins ago",
+    "category": "Errands",
     "id": 92
   },
   {
@@ -1299,6 +1391,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "57 mins ago",
+    "category": "Tutoring",
     "id": 93
   },
   {
@@ -1313,6 +1406,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "20 mins ago",
+    "category": "Pet Care",
     "id": 94
   },
   {
@@ -1327,6 +1421,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "19 mins ago",
+    "category": "Beauty",
     "id": 95
   },
   {
@@ -1341,6 +1436,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "59 mins ago",
+    "category": "Pet Care",
     "id": 96
   },
   {
@@ -1355,6 +1451,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "36 mins ago",
+    "category": "Technical Assistance",
     "id": 97
   },
   {
@@ -1369,6 +1466,7 @@
     "province": "Gauteng",
     "priority": "High priority",
     "timePosted": "3 mins ago",
+    "category": "Child Care",
     "id": 98
   },
   {
@@ -1383,6 +1481,7 @@
     "province": "Gauteng",
     "priority": "Low priority",
     "timePosted": "30 mins ago",
+    "category": "Child Care",
     "id": 99
   },
   {
@@ -1397,6 +1496,7 @@
     "province": "Gauteng",
     "priority": "Urgent",
     "timePosted": "50 mins ago",
+    "category": "Cleaning",
     "id": 100
   },
   {
@@ -1411,7 +1511,9 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "Urgent",
-    "timePosted": "8 mins ago"
+    "timePosted": "8 mins ago",
+    "category": "Event Assistance",
+    "id": 101
   },
   {
     "id": 142,
@@ -1425,7 +1527,9 @@
     "city": "Pretoria",
     "province": "Gauteng",
     "priority": "Low priority",
-    "timePosted": "25 mins ago"
+    "timePosted": "25 mins ago",
+    "category": "Design",
+    "id": 102
   },
   {
     "id": 143,
@@ -1439,7 +1543,9 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "High priority",
-    "timePosted": "13 mins ago"
+    "timePosted": "13 mins ago",
+    "category": "Errands",
+    "id": 103
   },
   {
     "id": 144,
@@ -1453,7 +1559,9 @@
     "city": "Pretoria",
     "province": "Gauteng",
     "priority": "Urgent",
-    "timePosted": "2 mins ago"
+    "timePosted": "2 mins ago",
+    "category": "Beauty",
+    "id": 104
   },
   {
     "id": 145,
@@ -1467,7 +1575,9 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "High priority",
-    "timePosted": "30 mins ago"
+    "timePosted": "30 mins ago",
+    "category": "Photography",
+    "id": 105
   },
   {
     "id": 146,
@@ -1481,7 +1591,9 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "Low priority",
-    "timePosted": "11 mins ago"
+    "timePosted": "11 mins ago",
+    "category": "Media",
+    "id": 106
   },
   {
     "id": 147,
@@ -1495,7 +1607,9 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "Urgent",
-    "timePosted": "4 mins ago"
+    "timePosted": "4 mins ago",
+    "category": "Errands",
+    "id": 107
   },
   {
     "id": 148,
@@ -1509,7 +1623,9 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "High priority",
-    "timePosted": "10 mins ago"
+    "timePosted": "10 mins ago",
+    "category": "Admin",
+    "id": 108
   },
   {
     "id": 149,
@@ -1523,7 +1639,9 @@
     "city": "Pretoria",
     "province": "Gauteng",
     "priority": "Low priority",
-    "timePosted": "18 mins ago"
+    "timePosted": "18 mins ago",
+    "category": "Tutoring",
+    "id": 109
   },
   {
     "id": 150,
@@ -1537,6 +1655,8 @@
     "city": "Johannesburg",
     "province": "Gauteng",
     "priority": "High priority",
-    "timePosted": "7 mins ago"
+    "timePosted": "7 mins ago",
+    "category": "Admin",
+    "id": 110
   }
 ]

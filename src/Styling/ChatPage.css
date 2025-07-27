@@ -1,0 +1,119 @@
+.chat-page {
+    background-color: #f8f8f8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-header {
+    background-color: #1e3a8a;
+    color: white;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 16px 20px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    position: relative; 
+  }
+  
+  .back-button {
+    position: absolute; 
+    left: 16px; 
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+  }
+  
+  .chat-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center; 
+  }
+  
+  .profile-picture {
+    position: absolute; 
+    right: 16px; 
+  }
+  
+  .profile-picture img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .chat-bubble-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  
+  .chat-bubble-wrapper.left {
+    justify-content: flex-start;
+  }
+  
+  .chat-bubble-wrapper.right {
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+  }
+  
+  .chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .chat-bubble {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 20px;
+    max-width: 65%;
+    word-wrap: break-word;
+  }
+  
+  .chat-input-wrapper {
+    background-color: #e5e5e5;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ccc;
+  }
+  
+  .chat-input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: white;
+    margin-right: 12px;
+  }
+  
+  .chat-send-button {
+    background-color: #1e3a8a;
+    border: none;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  
+  .send-icon {
+    color: white;
+    font-size: 18px;
+  }

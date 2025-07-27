@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import "../Styling/SignUp.css";
 
 function Signup(){
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ function Signup(){
       }
     
       setPasswordError("");
-      navigate("/home");
+      navigate("/");
     };
 
     //function for create
@@ -86,8 +87,9 @@ function Signup(){
       } else {
         setCreatePasswordMatchError("");
       }
+      navigate("/");
   
-      // alert(`Account created for ${createName}!`);
+     // alert(`Account created for ${createName}!`);
       // setShowCreateAccount(false);
     };
   

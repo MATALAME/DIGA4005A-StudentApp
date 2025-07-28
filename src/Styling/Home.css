@@ -1,8 +1,8 @@
 /* Header Section */
 .header-section {
   display: flex;
-  justify-content: space-between; /* Ensures elements are spaced out horizontally */
-  align-items: center; /* Ensures elements are vertically aligned */
+  justify-content: space-between; 
+  align-items: center; 
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -15,15 +15,15 @@
   cursor: pointer;
   color: white;
   display: flex;
-  align-items: center; /* Ensures vertical alignment */
+  align-items: center;
 }
 
 .header-title {
-  flex: 1; /* Ensures the title takes up available space */
-  text-align: center; /* Centers the title horizontally */
+  flex: 1; 
+  text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin: 0; /* Removes any default margin */
+  margin: 0; 
 }
 
 .profile-button {
@@ -33,14 +33,14 @@
   cursor: pointer;
   color: white;
   display: flex;
-  align-items: center; /* Ensures vertical alignment */
+  align-items: center; 
 }
 
 /* Filter Buttons */
 .filter-buttons {
   display: flex;
-  justify-content: center; /* Centers the filter buttons */
-  gap: 10px; /* Adds spacing between buttons */
+  justify-content: center;
+  gap: 10px; 
   margin: 20px 0;
 }
 
@@ -52,7 +52,7 @@
   width: 60px;
   height: 60px;
   border: none;
-  border-radius: 50%; /* Makes buttons circular */
+  border-radius: 50%; 
   background-color: #f9f9f9;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
@@ -60,7 +60,7 @@
 
 .filter-button:hover {
   background-color: #e0e0e0;
-  transform: scale(1.1); /* Adds hover effect */
+  transform: scale(1.1); 
 }
 
 .filter-button.active {
@@ -85,21 +85,21 @@
   
   /* Header */
   .home-header {
-    background-color: #1e3a8a; /* Deep blue */
+    background-color: #1e3a8a; 
     color: white;
     display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
+    align-items: center; 
+    justify-content: center; 
     padding: 16px 20px;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    position: relative; /* Allows positioning of other elements like the hamburger menu and profile picture */
+    position: relative;
   }
   
   .hamburger {
-    position: absolute; /* Position the hamburger menu */
-    left: 16px; /* Align it to the left */
+    position: absolute; 
+    left: 16px; 
     font-size: 24px;
     cursor: pointer;
   }
@@ -108,12 +108,12 @@
     font-size: 20px;
     font-weight: bold;
     margin: 0;
-    text-align: center; /* Ensure text is centered */
+    text-align: center; 
   }
   
   .profile-picture {
-    position: absolute; /* Position the profile picture */
-    right: 16px; /* Align it to the right */
+    position: absolute; 
+    right: 16px; 
   }
   
   .profile-picture img {
@@ -128,4 +128,4 @@
     padding: 16px;
   }
   
-  /* You can keep your filter buttons + job-container styles as-is */
+ 

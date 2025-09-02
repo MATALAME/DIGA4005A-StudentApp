@@ -13,7 +13,8 @@ function App() {
     <JobProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Load />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/load" element={<Load />} />
           <Route path="/job/:jobId" element={<JobDetails />} />

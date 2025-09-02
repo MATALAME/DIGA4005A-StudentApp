@@ -1,0 +1,76 @@
+.Load-Pages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .Start-Page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1C4689; 
+    color: white;
+    width: 100%;
+    height: 100vh; 
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .Start-Page h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .Start-Page p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .Start-Page img {
+    width: 60%;
+    max-width: 300px;
+    height: auto;
+  }
+  
+  
+  .Page img {
+    width: 100%;       
+    max-width: 500px; 
+    height: auto;     
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .Page h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .Page p {
+    font-size: 1rem;
+    color: #333;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .next-button {
+    background-color: #366CC2;  
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .next-button:hover {
+    background-color: #274c8a;  
+  }
+  

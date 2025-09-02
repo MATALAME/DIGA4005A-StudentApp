@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "../Styling/SignUp.css";
+import { Link } from "react-router-dom";
 
 function Signup(){
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ function Signup(){
       }
     
       setPasswordError("");
-      navigate("/");
+      navigate("/Home");
     };
 
     //function for create
@@ -87,7 +88,7 @@ function Signup(){
       } else {
         setCreatePasswordMatchError("");
       }
-      navigate("/");
+      navigate("/Home");
   
      // alert(`Account created for ${createName}!`);
       // setShowCreateAccount(false);
@@ -217,16 +218,10 @@ function Signup(){
               </form>
 
               <div className="end-text">
-              <p className="short-policy">By creating an account, you agree to the Terms & Conditions and Privacy Policy</p>
-              <p className="back-to-sign">Already have an account?</p>
+              <p className="short-policy">By creating an account, you agree to the Terms & Conditions and Privacy Policy.</p>
+              <p className="back-to-sign">Already have an account?{" "}
+                <button type="button" className="signup-link" onClick={() => setShowCreateAccount(false)}>Log in</button></p>
 
-              <button
-                type="button"
-                className="back-button"
-                onClick={() => setShowCreateAccount(false)}
-              >
-                Log In Here
-              </button>
               </div>
             </div>
           )}

@@ -7,6 +7,8 @@ import { JobProvider } from "./Context/JobContext";
 import JobDetails from "./pages/JobDetails";
 import ChatPage from "./pages/ChatPage";
 import ChatListPage from "./pages/ChatListPage"; 
+import Questionnaire from "./pages/Questionnaire";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -16,10 +18,12 @@ function App() {
           <Route path="/" element={<Load />} />
           <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/questionnaire" element = {<Questionnaire/>} />
           <Route path="/load" element={<Load />} />
           <Route path="/job/:jobId" element={<JobDetails />} />
           <Route path="/chat" element={<ChatListPage />} /> 
           <Route path="/chat/:username" element={<ChatPage />} /> 
+          <Route path="/profile" element={<ProfilePage/>} />
         </Routes>
       </Router>
     </JobProvider>

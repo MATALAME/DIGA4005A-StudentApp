@@ -1,0 +1,49 @@
+.questionnaire, .profile-page {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .Questionnaire-icon {
+    width: 80px;   
+    height: 80px; 
+    margin: 10px auto;  
+    display: block;
+    object-fit: contain; 
+  }  
+  
+  input, select, button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background: #1d4ed8;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #274c8a;
+  }
+  
+  .active-skill {
+    background: #226A4D;
+    color: white;
+  }
+  
+  .skill-tag {
+    display: inline-block;
+    background: #555;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin: 4px;
+  }
+  

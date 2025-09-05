@@ -7,6 +7,7 @@ export default function Home() {
   const { jobs } = useJobContext();
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   const categories = [
     { name: "All", icon: "🌍" },
@@ -27,12 +28,28 @@ export default function Home() {
     <div className="home-wrapper">
       {/* HEADER */}
       <header className="home-header">
-        <div className="hamburger">&#9776;</div>
+        <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}> &#9776; </div>
         <h1 className="home-title">FIND JOBS</h1>
         <div className="profile-picture">
           <img src="https://picsum.photos/150" alt="Profile" />
         </div>
       </header>
+
+      {/* SIDEBAR MENU */}
+      {isMenuOpen && (
+        <div className="sidebar">
+          <button onClick={() => setIsMenuOpen(false)} className="close-btn">
+            ✕
+          </button>
+          <ul>
+            <li> Home</li>
+            <li> Profile</li>
+            <li> Saved Jobs</li>
+            <li> Settings</li>
+            <li> Logout</li>
+          </ul>
+        </div>
+      )}
 
       {/* CONTENT */}
       <div className="home-content">

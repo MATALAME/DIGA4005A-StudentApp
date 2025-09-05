@@ -128,4 +128,47 @@
     padding: 16px;
   }
   
- 
+ /*SideMenu*/
+
+ /* Hamburger button */
+.hamburger {
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background: #1e3a8a; 
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Close button */
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  float: right;
+}
+

@@ -88,7 +88,7 @@ function Signup(){
       } else {
         setCreatePasswordMatchError("");
       }
-      navigate("/Home");
+      navigate("/questionnaire");
   
      // alert(`Account created for ${createName}!`);
       // setShowCreateAccount(false);
@@ -215,6 +215,7 @@ function Signup(){
                 <button type="submit" className="submit-button">
                   Create Account
                 </button>
+
               </form>
 
               <div className="end-text">

@@ -50,20 +50,34 @@
   }
   
   .password-input-wrapper {
-    position: relative;
+    position: relative;   /* 👈 ensures absolute children stay inside */
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; /* space for the icon */
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+    outline: none;
   }
   
   .toggle-password-btn {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 12px;
     transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 0.9rem;
-    color: #6b7280;
+    all: unset;            /* reset default button styles */
     cursor: pointer;
+    color: #6b7280;        /* gray */
+    font-size: 1rem;       /* size of the eye icon */
+    display: flex;
+    align-items: center;
   }
+  
   
   .submit-button {
     width: 100%;

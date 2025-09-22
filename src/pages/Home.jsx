@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import JobComponent from "../Components/JobComponent";
 import { useJobContext } from "../Context/JobContext";
 import "../Styling/Home.css"; 
+import Layout from "../Components/Layout";
 
 export default function Home() {
   const { jobs } = useJobContext();
 
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   const categories = [
     { name: "All", icon: "🌍" },
@@ -25,59 +25,36 @@ export default function Home() {
   const jobsToShow = filteredJobs.slice(0, 10);
 
   return (
-    <div className="home-wrapper">
-      {/* HEADER */}
-      <header className="home-header">
-        <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}> &#9776; </div>
-        <h1 className="home-title">FIND JOBS</h1>
-        <div className="profile-picture">
-          <img src="https://picsum.photos/150" alt="Profile" />
-        </div>
-      </header>
+    <Layout>
+      <div className="home-wrapper">
+        {/* CONTENT */}
+        <div className="home-content">
+          {/* Filter Buttons */}
+          <div className="filter-buttons">
+            {categories.map((category) => (
+              <button
+                key={category.name}
+                className={`filter-button ${
+                  selectedCategory === category.name ? "active" : ""
+                }`}
+                onClick={() => setSelectedCategory(category.name)}
+              >
+                <span className="filter-icon">{category.icon}</span>
+                <span className="filter-text">{category.name}</span>
+              </button>
+            ))}
+          </div>
 
-      {/* SIDEBAR MENU */}
-      {isMenuOpen && (
-        <div className="sidebar">
-          <button onClick={() => setIsMenuOpen(false)} className="close-btn">
-            ✕
-          </button>
-          <ul>
-            <li> Home</li>
-            <li> Profile</li>
-            <li> Saved Jobs</li>
-            <li> Settings</li>
-            <li> Logout</li>
-          </ul>
-        </div>
-      )}
-
-      {/* CONTENT */}
-      <div className="home-content">
-        {/* Filter Buttons */}
-        <div className="filter-buttons">
-          {categories.map((category) => (
-            <button
-              key={category.name}
-              className={`filter-button ${
-                selectedCategory === category.name ? "active" : ""
-              }`}
-              onClick={() => setSelectedCategory(category.name)}
-            >
-              <span className="filter-icon">{category.icon}</span>
-              <span className="filter-text">{category.name}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Job Conttainer */}
-        <div className="job-container">
-          {jobsToShow.length === 0 ? (
-            <p>Loading jobs...</p>
-          ) : (
-            jobsToShow.map((job) => <JobComponent key={job.id} job={job} />)
-          )}
+          {/* Job Container */}
+          <div className="job-container">
+            {jobsToShow.length === 0 ? (
+              <p>Loading jobs...</p>
+            ) : (
+              jobsToShow.map((job) => <JobComponent key={job.id} job={job} />)
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }

@@ -36,12 +36,18 @@
   align-items: center; 
 }
 
-/* Filter Buttons */
 .filter-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px; 
+  gap: 12px;
   margin: 20px 0;
+  overflow-x: auto; 
+  padding-bottom: 10px;
+  scrollbar-width: none; 
+}
+
+.filter-buttons::-webkit-scrollbar {
+  display: none; 
 }
 
 .filter-button {
@@ -49,126 +55,62 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border: none;
   border-radius: 50%; 
   background-color: #f9f9f9;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
 }
 
 .filter-button:hover {
   background-color: #e0e0e0;
-  transform: scale(1.1); 
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.filter-button:active {
+  transform: scale(0.95);
 }
 
 .filter-button.active {
   background-color: #007bff;
   color: white;
+  transform: scale(1.2);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
 }
 
 .filter-icon {
-  font-size: 24px;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  margin-bottom: 4px;
+  transition: transform 0.25s ease;
 }
 
 .filter-text {
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 500;
   text-align: center;
+  transition: color 0.25s ease;
+  color: black;
 }
 
-.home-wrapper {
-    background-color: #f9fafb;
-    min-height: 100vh;
+@media (max-width: 480px) {
+  .filter-button {
+    width: 60px;
+    height: 60px;
   }
-  
-  /* Header */
-  .home-header {
-    background-color: #1e3a8a; 
-    color: white;
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    padding: 16px 20px;
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  
-  .hamburger {
-    position: absolute; 
-    left: 16px; 
+
+  .filter-icon {
     font-size: 24px;
-    cursor: pointer;
   }
-  
-  .home-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-    text-align: center; 
+
+  .filter-text {
+    font-size: 11px;
   }
-  
-  .profile-picture {
-    position: absolute; 
-    right: 16px; 
-  }
-  
-  .profile-picture img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  /* Content Container */
-  .home-content {
-    padding: 16px;
-  }
-  
- /*SideMenu*/
-
- /* Hamburger button */
-.hamburger {
-  font-size: 24px;
-  cursor: pointer;
-  padding: 10px;
 }
-
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100%;
-  background: #1e3a8a; 
-  color: white;
-  padding: 20px;
-  box-shadow: 2px 0 6px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin: 15px 0;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-/* Close button */
-.close-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  float: right;
-}
-

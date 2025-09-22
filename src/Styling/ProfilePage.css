@@ -1,0 +1,113 @@
+/* PAGE LAYOUT */
+.profile-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #f0f3f8, #ffffff);
+    padding: 20px;
+  }
+  
+  /* PROFILE CARD */
+  .profile-card {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  /* NO DATA MESSAGE */
+  .no-data {
+    font-size: 18px;
+    color: #999;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  /* PROFILE HEADER */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: #366CC2;
+    color: white;
+    font-weight: 700;
+    font-size: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  }
+  
+  .profile-info h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #222;
+  }
+  
+  .profile-info p {
+    margin: 5px 0 0 0;
+    color: #555;
+    font-size: 15px;
+  }
+  
+  /* PROFILE SECTIONS */
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .profile-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #366CC2;
+    border-bottom: 2px solid #366CC2;
+    display: inline-block;
+    padding-bottom: 3px;
+  }
+  
+  .profile-section p {
+    color: #444;
+    font-size: 14px;
+    margin: 2px 0;
+  }
+  
+  /* SKILLS TAGS */
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .skill-tag {
+    background: #E25C62;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: transform 0.2s;
+  }
+  
+  .skill-tag:hover {
+    transform: scale(1.05);
+  }
+  
+  /* NO SKILLS */
+  .no-skills {
+    font-style: italic;
+    color: #999;
+  }
+  

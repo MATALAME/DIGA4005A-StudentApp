@@ -16,7 +16,7 @@ export default function Layout({ children }) {
           &#9776;
         </div>
 
-        <h1 className="home-title">FIND JOBS</h1>
+        <h1 className="home-title">Student Hustle</h1>
 
         <div className="profile-picture">
           <img src="https://picsum.photos/150" alt="Profile" />

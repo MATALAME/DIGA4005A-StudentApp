@@ -44,7 +44,9 @@ export default function Home() {
               </button>
             ))}
           </div>
-
+            <div className="home-title">
+              <h2>FIND JOBS</h2>
+            </div>
           {/* Job Container */}
           <div className="job-container">
             {jobsToShow.length === 0 ? (

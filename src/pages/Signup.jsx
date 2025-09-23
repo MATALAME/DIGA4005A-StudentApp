@@ -153,7 +153,7 @@ function Signup(){
             </>
           )  : (
             <div className="create-account-div">
-              <h2>Create Your Account</h2>
+              <h2>CREATE YOUR ACCOUNT</h2>
               <form onSubmit={handleCreateAccount} className="create-form">
                 <div className="form-group">
                   <label className="form-label">NAME & SURNAME</label>

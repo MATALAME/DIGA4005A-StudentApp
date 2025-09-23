@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, MapPin } from "lucide-react"; 
 import { useJobContext } from "../Context/JobContext";
 import "../Styling/JobDetails.css";
+import Layout from "../Components/Layout";
 
 const JobDetails = () => {
   const { jobId } = useParams();
@@ -36,9 +37,9 @@ const JobDetails = () => {
   };
 
   return (
+     <Layout>
     <div className="job-details-wrapper">
-      {/* HEADER */}
-      <header className="job-details-header">
+      {/* <header className="job-details-header">
         <button className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeft size={24} color="white" />
         </button>
@@ -47,7 +48,7 @@ const JobDetails = () => {
           <img src={job.profileImage || "https://picsum.photos/150"} alt="Profile" />
           
         </div>
-      </header>
+      </header> */}
 
       {/* JOB DETAILS */}
       <div className="job-details-card">
@@ -90,6 +91,7 @@ const JobDetails = () => {
         </button>
       </div>
     </div>
+    </Layout>
   );
 };
 

@@ -2,19 +2,6 @@
     padding: 0px;
   }
   
-  /* Header */
-.job-details-header {
-  background-color: #1e3a8a; 
-  color: white;
-  display: flex;
-  align-items: center; 
-  justify-content: center; 
-  padding: 16px 20px;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  position: relative; 
-}
 
 .back-button {
   position: absolute; 
@@ -42,7 +29,7 @@
 }
   
   .job-details-card {
-    background-color: #f1f5f9;
+    background-color: #e3e7ef;
     border-radius: 16px;
     padding: 24px;
     text-align: center;

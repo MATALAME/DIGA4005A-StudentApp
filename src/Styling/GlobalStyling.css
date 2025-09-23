@@ -1,0 +1,57 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%; /* keeps text scalable */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f7f2;
+  color: #171a1b;
+  line-height: 1.6;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden; /* prevents horizontal scroll issues */
+}
+
+/* Global container for spacing */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Mobile first design */
+@media (max-width: 768px) {
+  body {
+    font-size: 0.95rem;
+  }
+  .container {
+    width: 95%;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .container {
+    width: 92%;
+  }
+}

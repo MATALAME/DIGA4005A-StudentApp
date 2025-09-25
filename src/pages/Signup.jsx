@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import "../Styling/SignUp.css";
-import bcrypt from "bcryptjs";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
@@ -154,139 +154,128 @@ function Signup() {
     }
   };
 
-  return (
-    <div className="signup-container">
-      <div className="signup-box">
-        {!showCreateAccount ? (
-          <>
-            <h2 className="signup-title">SIGN IN</h2>
-            <p className="signup-intro">Log in by entering your email address and password</p>
-
-            <form onSubmit={handleSign} className="signup-form">
-              <div className="form-group">
-                <label className="form-label">EMAIL</label>
-                <input
-                  type="email"
-                  className="form-input"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  required
-                />
-                {emailError && <p className="form-error">{emailError}</p>}
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">PASSWORD</label>
-                <div className="password-input-wrapper">
+    return (
+      <div className="signup-container">
+        <div className="signup-box">
+          {!showCreateAccount ? (
+            <>
+              <h2 className="signup-title">SIGN IN</h2>
+              <p className="signup-intro">Log in by entering your email address and password</p>
+  
+              <form onSubmit={handleSign} className="signup-form">
+                <div className="form-group">
+                  <label className="form-label">NAME & SURNAME</label>
                   <input
-                    type={showPassword ? "text" : "password"}
-                    className="form-input password-input"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
-                  />
-                  <button
-                    type="button"
-                    className="toggle-password-btn"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? "Hide" : "Show"}
-                  </button>
-                </div>
-                {passwordError && <p className="form-error">{passwordError}</p>}
-              </div>
-
-              <button type="submit" className="submit-button">
-                Sign In
-              </button>
-            </form>
-
-            <div className="Create-Section">
-              <button
-                type="button"
-                className="create-button"
-                onClick={() => setShowCreateAccount(true)}
-              >
-                Create Account
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className="create-account-div">
-            <h2>CREATE YOUR ACCOUNT</h2>
-            <form onSubmit={handleCreateAccount} className="create-form">
-              <div className="form-group">
-                <label className="form-label">NAME & SURNAME</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  value={createName}
-                  onChange={(e) => setCreateName(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">EMAIL</label>
-                <input
-                  type="email"
-                  className="form-input"
-                  value={createEmail}
-                  onChange={(e) => setCreateEmail(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">PASSWORD</label>
-                <div className="password-input-wrapper">
-                  <input
-                    type={showCreatePassword ? "text" : "password"}
+                    type="text"
                     className="form-input"
-                    value={createPassword}
-                    onChange={(e) => setCreatePassword(e.target.value)}
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
                     required
                   />
-                  <button
-                    type="button"
-                    className="toggle-password-btn"
-                    onClick={() => setShowCreatePassword(!showCreatePassword)}
-                  >
-                    {showCreatePassword ? "Hide" : "Show"}
-                  </button>
                 </div>
-                {createPasswordError && (
-                  <p className="form-error">{createPasswordError}</p>
-                )}
+  
+                <div className="form-group">
+                  <label className="form-label">PASSWORD</label>
+                  <div className="password-input-wrapper">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-input password-input"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="toggle-password-btn"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                  {passwordError && <p className="form-error">{passwordError}</p>}
+                </div>
+  
+                <button type="submit" className="submit-button">
+                  Sign In
+                </button>
+              </form>
+  
+              <div className="Create-Section">
+                <button
+                  type="button"
+                  className="create-button"
+                  onClick={() => setShowCreateAccount(true)}
+                >
+                  Create Account
+                </button>
               </div>
-
-              <div className="form-group">
-                <label className="form-label">RE-ENTER PASSWORD</label>
-                <div className="password-input-wrapper">
+            </>
+          )  : (
+            <div className="create-account-div">
+              <h2>CREATE YOUR ACCOUNT</h2>
+              <form onSubmit={handleCreateAccount} className="create-form">
+                <div className="form-group">
+                  <label className="form-label">NAME & SURNAME</label>
                   <input
-                    type={showReenterPassword ? "text" : "password"}
+                    type="text"
                     className="form-input"
-                    value={reenterPassword}
-                    onChange={(e) => setReenterPassword(e.target.value)}
+                    value={createName}
+                    onChange={(e) => setCreateName(e.target.value)}
                     required
                   />
-                  <button
-                    type="button"
-                    className="toggle-password-btn"
-                    onClick={() => setShowReenterPassword(!showReenterPassword)}
-                  >
-                    {showReenterPassword ? "Hide" : "Show"}
-                  </button>
                 </div>
-                {createPasswordMatchError && (
-                  <p className="form-error">{createPasswordMatchError}</p>
-                )}
-              </div>
+  
+                <div className="form-group">
+                  <label className="form-label">PASSWORD</label>
+                  <div className="password-input-wrapper">
+                    <input
+                      type={showCreatePassword ? "text" : "password"}
+                      className="form-input"
+                      value={createPassword}
+                      onChange={(e) => setCreatePassword(e.target.value)}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="toggle-password-btn"
+                      onClick={() => setShowCreatePassword(!showCreatePassword)}
+                    >
+                      {showCreatePassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                  {createPasswordError && (
+                    <p className="form-error">{createPasswordError}</p>
+                  )}
+                </div>
+  
+                <div className="form-group">
+                  <label className="form-label">RE-ENTER PASSWORD</label>
+                  <div className="password-input-wrapper">
+                    <input
+                      type={showReenterPassword ? "text" : "password"}
+                      className="form-input"
+                      value={reenterPassword}
+                      onChange={(e) => setReenterPassword(e.target.value)}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="toggle-password-btn"
+                      onClick={() => setShowReenterPassword(!showReenterPassword)}
+                    >
+                      {showReenterPassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                  {createPasswordMatchError && (
+                    <p className="form-error">{createPasswordMatchError}</p>
+                  )}
+                </div>
+  
+                <button type="submit" className="submit-button">
+                  Create Account
+                </button>
 
-              <button type="submit" className="submit-button">
-                Create Account
-              </button>
-            </form>
+              </form>
 
             <div className="end-text">
               <p className="short-policy">

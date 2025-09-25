@@ -1,11 +1,9 @@
-
-
 .signup-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f6f7f8;
+    background: white;
     padding: 20px;
   }
   
@@ -48,9 +46,18 @@
   .form-input:focus {
     border-color: #2563eb;
   }
+
+  .form-error {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 4px;
+    font-weight: 500;
+    line-height: 1.2;
+    transition: opacity 0.3s ease;
+  }
   
   .password-input-wrapper {
-    position: relative;   /* 👈 ensures absolute children stay inside */
+    position: relative;  
     display: flex;
     align-items: center;
   }
@@ -58,7 +65,7 @@
   .password-input {
     width: 100%;
     padding: 10px;
-    padding-right: 40px; /* space for the icon */
+    padding-right: 40px; 
     border-radius: 8px;
     border: 1px solid #d1d5db;
     font-size: 1rem;
@@ -70,13 +77,20 @@
     top: 50%;
     right: 12px;
     transform: translateY(-50%);
-    all: unset;            /* reset default button styles */
+    all: unset;            
     cursor: pointer;
-    color: #6b7280;        /* gray */
-    font-size: 1rem;       /* size of the eye icon */
+    color: #6b7280;      
+    font-size: 1rem;   
     display: flex;
     align-items: center;
   }
+
+  .toggle-password-btn svg {
+    margin-left: 8px;
+    font-size: 1.8rem;
+    color: #6b7280;
+  }
+  
   
   
   .submit-button {

@@ -1,49 +1,140 @@
-.questionnaire, .profile-page {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-  }
+.questionnaire-container {
+  height: 100vh;            
+  display: flex;
+  justify-content: center;    
+  align-items: center;        
+}
 
-  .Questionnaire-icon {
-    width: 80px;   
-    height: 80px; 
-    margin: 10px auto;  
-    display: block;
-    object-fit: contain; 
-  }  
-  
-  input, select, button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    background: #1d4ed8;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: #274c8a;
-  }
-  
-  .active-skill {
-    background: #226A4D;
-    color: white;
-  }
-  
-  .skill-tag {
-    display: inline-block;
-    background: #555;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    margin: 4px;
-  }
-  
+.questionnaire {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.Questionnaire-icon {
+  width: 80px;   
+  height: 80px; 
+  margin: 10px auto;  
+  display: block;
+  object-fit: contain; 
+}
+
+input, select, button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #366CC2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #274c8a;
+}
+
+.active-skill {
+  background: #226A4D;
+  color: white;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 10px; 
+  margin: 10px 0;
+}
+
+.skill-button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #FF914D; 
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.skill-button:hover {
+  background-color: #e67e36;
+}
+
+.skill-button.active-skill {
+  background-color: #226A4D; 
+}
+
+
+input, select {
+  display: block;
+  width: 100%;
+  padding: 10px;       
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;     
+  box-sizing: border-box; 
+}
+
+.dropdown-container {
+  position: relative;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 10px 40px 10px 10px; 
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  background-color: #f7f7f7;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #555;
+  font-size: 16px;
+}
+
+.custom-select:focus {
+  border-color: #366CC2;
+  outline: none;
+}
+
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.radio-group input[type="radio"] {
+  accent-color: #366CC2; 
+  width: 18px;
+  height: 18px;
+}

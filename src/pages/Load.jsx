@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import AppStart from "../images/AppLogo.png"
@@ -10,6 +10,15 @@ import "../Styling/Load.css";
 function Load() {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentPage === 1) {
+      const timer = setTimeout(() => {
+        setCurrentPage(2);
+      }, 4000); //Apps usually have a loading time, so we added a 4 second loading time, just to simulate that effect
+      return () => clearTimeout(timer); 
+    }
+  }, [currentPage]);
 
   const handleNext = () => {  // This function runs when the "Next" button is clicked, 
     if (currentPage < 4) {
@@ -28,6 +37,11 @@ function Load() {
           <h2>Student Hustle</h2>
           <img src={AppStart} alt="StudentHustleLogo" />
           <p>2025 B&M Studio</p>
+          <div className="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       )}
 
@@ -55,9 +69,11 @@ function Load() {
         </div>
       )}
 
-      <button onClick={handleNext} className="next-button">
-        {currentPage === 4 ? "Get Started" : "Next"}
-      </button>
+      {currentPage > 1 && (  
+        <button onClick={handleNext} className="next-button">
+          {currentPage === 4 ? "Get Started" : "Next"}
+        </button>
+    )}
     </div>
   );
 }

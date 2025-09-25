@@ -45,45 +45,81 @@ function ProfilePage() {
 
   return (
     <Layout>
-    <div className="profile-page">
-      <div className="profile-card">
-        <div className="profile-header">
-          <div className="profile-avatar">
-            {profileData.name[0].toUpperCase()}{profileData.surname[0].toUpperCase()}
+      <div className="profile-page">
+        <div className="profile-card">
+          {/* Header */}
+          <div className="profile-header">
+            <div className="profile-avatar">{initials}</div>
+            <div className="profile-info">
+              <h2>{`${profileData.name ?? ""} ${profileData.surname ?? ""}`}</h2>
+              <p>{profileData.gender ?? ""}{profileData.age ? `, ${profileData.age} years` : ""}</p>
+            </div>
           </div>
-          <div className="profile-info">
-            <h2>{profileData.name} {profileData.surname}</h2>
-            <p>{profileData.gender}, {profileData.age} years</p>
+
+          {/* Institution */}
+          <div className="profile-section">
+            <h3>Institution</h3>
+            <div className="institution-info">
+              {profileData.institutionLogo && (
+                <img
+                  src={profileData.institutionLogo}
+                  alt={profileData.institution}
+                  className="institution-logo"
+                />
+              )}
+              <span className="institution-name">{profileData.institution ?? "-"}</span>
+            </div>
+            <p>{profileData.faculty ?? "-"}</p>
+            <p>
+              {profileData.studyType ?? "-"}
+              {profileData.yearOfStudy ? ` - ${profileData.yearOfStudy}` : ""}
+            </p>
           </div>
-        </div>
 
-        <div className="profile-section">
-          <h3>Institution</h3>
-          <p>{profileData.institution}</p>
-          <p>{profileData.faculty}</p>
-          <p>{profileData.studyType} - {profileData.yearOfStudy}</p>
-        </div>
+          {/* Skills */}
+          <div className="profile-section">
+            <h3>Skills</h3>
+            <div className="skills">
+              {profileData.skills?.length > 0 ? (
+                profileData.skills.map(skill => (
+                  <span key={skill} className="skill-tag">{skill}</span>
+                ))
+              ) : (
+                <p className="no-skills">No skills selected</p>
+              )}
+            </div>
+          </div>
 
-        <div className="profile-section">
-          <h3>Skills</h3>
-          <div className="skills">
-            {profileData.skills.length > 0 ? (
-              profileData.skills.map(skill => (
-                <span key={skill} className="skill-tag">{skill}</span>
-              ))
-            ) : (
-              <p className="no-skills">No skills selected</p>
+          {/* Contact */}
+          <div className="profile-section">
+            <h3>Contact</h3>
+            {profileData.phone && (
+              <p>
+                <img src={whatsapp} alt="Whatsapp" className="contact-icon" />
+                {profileData.phone}
+              </p>
+            )}
+            {profileData.linkedin && (
+              <p>
+                <img src={linkedin} alt="LinkedIn" className="contact-icon" />
+                {profileData.linkedin}
+              </p>
+            )}
+            {profileData.instagram && (
+              <p>
+                <img src={instagram} alt="Instagram" className="contact-icon" />
+                {profileData.instagram}
+              </p>
+            )}
+            {profileData.facebook && (
+              <p>
+                <img src={facebook} alt="Facebook" className="contact-icon" />
+                {profileData.facebook}
+              </p>
             )}
           </div>
         </div>
-
-        <div className="profile-section">
-          <h3>Contact</h3>
-          {profileData.phone && <p>📞 {profileData.phone}</p>}
-          {profileData.linkedin && <p>🔗 {profileData.linkedin}</p>}
-        </div>
       </div>
-    </div>
     </Layout>
   );
 }

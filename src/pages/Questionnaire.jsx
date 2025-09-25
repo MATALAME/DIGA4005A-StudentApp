@@ -160,13 +160,30 @@ function Questionnaire({ setProfileData }) {
 
       {step === 2 && (
         <div>
-          <h2>Institution</h2>
-          <img className = "Questionnaire-icon" src={institution} alt="Institution-Icon" />
-          <input name="institution" placeholder="Institution" onChange={handleChange} />
+          <h2>Insitution</h2>
+          <img className = "Questionnaire-icon" src={institution} alt="ID-Icon" />
+        <div className="Insititution">
+          <div className="dropdown-container">
+        <select
+          name="institution"
+          onChange={handleInstitutionChange}
+          className="custom-select"
+        >
+          <option value="">Select Institution</option>
+          {institutions.map(inst => (
+            <option key={inst.name} value={inst.name}>{inst.name}</option>
+          ))}
+        </select>
+        <FaChevronDown className="dropdown-icon" />
+      </div>
+
           <input name="faculty" placeholder="Faculty / Department" onChange={handleChange} />
           <div>
+
+          <div className="radio-group">
             <label><input type="radio" name="studyType" value="Full-Time" onChange={handleChange}/> Full-Time</label>
             <label><input type="radio" name="studyType" value="Part-Time" onChange={handleChange}/> Part-Time</label>
+            </div>
           </div>
 
           <div className="dropdown-container">
@@ -181,6 +198,7 @@ function Questionnaire({ setProfileData }) {
           </div>
           
           <button onClick={nextStep}>Continue</button>
+        </div>
         </div>
       )}
 
@@ -197,24 +215,23 @@ function Questionnaire({ setProfileData }) {
         </div>
       )}
 
-{step === 4 && (
-  <div>
-    <h2>Select Skills</h2>
-    <img className="Questionnaire-icon" src={skills} alt="Skills-Icon" />
-    {["Tutoring","Deliveries","Errands","Photography","Cleaning","Repairs"].map(skill => (
-      <button
-        key={skill}
-        className={`skill-button ${formData.skills.includes(skill) ? "active-skill" : ""}`}
-        onClick={() => toggleSkill(skill)}
-        type="button"
-      >
-        {skill}
-      </button>
-    ))}
-    <button onClick={nextStep}>Continue</button>
-  </div>
-)}
-
+      {step === 4 && (
+        <div>
+          <h2>Select Skills</h2>
+          <img className = "Questionnaire-icon" src={skills} alt="Skills-Icon" />
+          {["Tutoring","Deliveries","Errands","Photography","Cleaning","Repairs"].map(skill => (
+            <button
+              key={skill}
+              className={formData.skills.includes(skill) ? "active-skill" : ""}
+              onClick={() => toggleSkill(skill)}
+              type="button"
+            >
+              {skill}
+            </button>
+          ))}
+          <button onClick={nextStep}>Continue</button>
+        </div>
+      )}
 
       {step === 5 && (
         <div>
@@ -228,8 +245,6 @@ function Questionnaire({ setProfileData }) {
         </div>
       )}
     </div>
-    </div>
-  
   );
 }
 

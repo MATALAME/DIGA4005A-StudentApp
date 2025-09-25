@@ -58,19 +58,19 @@ function Signup() {
     setPasswordError("");
 
     try {
-     
+
       const response = await fetch("http://localhost:5000/users");
       const users = await response.json();
 
-     
+
       const user = users.find((u) => u.email === email);
 
       if (user) {
-      
+
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (isPasswordValid) {
-         
+
           localStorage.setItem("loggedInUser", JSON.stringify(user));
           alert(`Welcome back, ${user.name}!`);
           navigate("/Home");
@@ -126,10 +126,10 @@ function Signup() {
         return;
       }
 
-      
+     
       const hashedPassword = await bcrypt.hash(createPassword, 10);
 
-      
+   
       const createResponse = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
@@ -138,17 +138,17 @@ function Signup() {
         body: JSON.stringify({
           name: createName,
           email: createEmail,
-          password: hashedPassword,
+          password: hashedPassword, 
         }),
       });
 
       if (createResponse.ok) {
         const newUser = await createResponse.json();
 
-        
+
         localStorage.setItem("loggedInUser", JSON.stringify(newUser));
 
-       
+
         alert(`Account created for ${createName}! Redirecting to the questionnaire.`);
         navigate("/questionnaire");
       } else {

@@ -9,21 +9,81 @@ import ChatPage from "./pages/ChatPage";
 import ChatListPage from "./pages/ChatListPage"; 
 import Questionnaire from "./pages/Questionnaire";
 import ProfilePage from "./pages/ProfilePage";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   return (
     <JobProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Load />} />
-          <Route path="/home" element={<Home />} />
+          {/* Public Route */}
           <Route path="/signup" element={<Signup />} />
-          <Route path="/questionnaire" element = {<Questionnaire/>} />
-          <Route path="/load" element={<Load />} />
-          <Route path="/job/:jobId" element={<JobDetails />} />
-          <Route path="/chat" element={<ChatListPage />} /> 
-          <Route path="/chat/:username" element={<ChatPage />} /> 
-          <Route path="/profile" element={<ProfilePage/>} />
+
+          {/* Protected Routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Load />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/questionnaire"
+            element={
+              <ProtectedRoute>
+                <Questionnaire />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/load"
+            element={
+              <ProtectedRoute>
+                <Load />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/job/:jobId"
+            element={
+              <ProtectedRoute>
+                <JobDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <ProtectedRoute>
+                <ChatListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chat/:username"
+            element={
+              <ProtectedRoute>
+                <ChatPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </JobProvider>

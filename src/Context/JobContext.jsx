@@ -7,13 +7,17 @@ export const JobProvider = ({ children }) => {
 
   useEffect(() => {
    
-    fetch('/data/JobData.json')
-      .then(res => res.json())
-      .then(data => {
-    
+    fetch('http://localhost:5000/jobs')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch jobs');
+        }
+        return res.json();
+      })
+      .then((data) => {
         setJobs(data);
       })
-      .catch(err => console.error('Failed to fetch jobs:', err));
+      .catch((err) => console.error('Error fetching jobs:', err));
   }, []);
 
   return (
@@ -22,6 +26,5 @@ export const JobProvider = ({ children }) => {
     </JobContext.Provider>
   );
 };
-
 
 export const useJobContext = () => useContext(JobContext);

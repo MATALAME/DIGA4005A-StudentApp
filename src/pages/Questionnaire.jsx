@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styling/Questionnaire.css";
 
-import name from "../images/Name.png"
+import name from "../images/Name.png";
 import institution from "../images/Institution.png";
 import location from "../images/Location.png";
 import skills from "../images/Skills.png";
@@ -47,9 +47,40 @@ function Questionnaire({ setProfileData }) {
 
   const nextStep = () => setStep((prev) => prev + 1);
 
-  const handleSubmit = () => {
-    localStorage.setItem("profileData", JSON.stringify(formData)); 
-    navigate("/profile"); 
+  const handleSubmit = async () => {
+    try {
+      // Get the logged in user from localStorage
+      const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+      if (!loggedInUser) {
+        alert("No user is logged in. Please log in first.");
+        return;
+      }
+
+      
+      const response = await fetch(`http://localhost:5000/users/${loggedInUser.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ profile: formData }), 
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+
+        
+        localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+
+        alert("Profile updated successfully!");
+        navigate("/profile"); 
+      } else {
+        alert("Failed to update profile. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -57,7 +88,7 @@ function Questionnaire({ setProfileData }) {
       {step === 1 && (
         <div>
           <h2>Personal Info</h2>
-          <img className = "Questionnaire-icon" src={name} alt="ID-Icon" />
+          <img className="Questionnaire-icon" src={name} alt="ID-Icon" />
           <input name="name" placeholder="Name" onChange={handleChange} />
           <input name="middleName" placeholder="Middle Name" onChange={handleChange} />
           <input name="surname" placeholder="Surname" onChange={handleChange} />
@@ -74,12 +105,16 @@ function Questionnaire({ setProfileData }) {
       {step === 2 && (
         <div>
           <h2>Institution</h2>
-          <img className = "Questionnaire-icon" src={institution} alt="Institution-Icon" />
+          <img className="Questionnaire-icon" src={institution} alt="Institution-Icon" />
           <input name="institution" placeholder="Institution" onChange={handleChange} />
           <input name="faculty" placeholder="Faculty / Department" onChange={handleChange} />
           <div>
-            <label><input type="radio" name="studyType" value="Full-Time" onChange={handleChange}/> Full-Time</label>
-            <label><input type="radio" name="studyType" value="Part-Time" onChange={handleChange}/> Part-Time</label>
+            <label>
+              <input type="radio" name="studyType" value="Full-Time" onChange={handleChange} /> Full-Time
+            </label>
+            <label>
+              <input type="radio" name="studyType" value="Part-Time" onChange={handleChange} /> Part-Time
+            </label>
           </div>
           <select name="yearOfStudy" onChange={handleChange}>
             <option value="">Year of Study</option>
@@ -95,7 +130,7 @@ function Questionnaire({ setProfileData }) {
       {step === 3 && (
         <div>
           <h2>Location</h2>
-          <img className = "Questionnaire-icon" src={location} alt="Location-Icon" />
+          <img className="Questionnaire-icon" src={location} alt="Location-Icon" />
           <input name="street" placeholder="Street" onChange={handleChange} />
           <input name="suburb" placeholder="Suburb" onChange={handleChange} />
           <input name="city" placeholder="Town / City" onChange={handleChange} />
@@ -108,8 +143,8 @@ function Questionnaire({ setProfileData }) {
       {step === 4 && (
         <div>
           <h2>Select Skills</h2>
-          <img className = "Questionnaire-icon" src={skills} alt="Skills-Icon" />
-          {["Tutoring","Deliveries","Errands","Photography","Cleaning","Repairs"].map(skill => (
+          <img className="Questionnaire-icon" src={skills} alt="Skills-Icon" />
+          {["Tutoring", "Deliveries", "Errands", "Photography", "Cleaning", "Repairs"].map((skill) => (
             <button
               key={skill}
               className={formData.skills.includes(skill) ? "active-skill" : ""}
@@ -126,7 +161,7 @@ function Questionnaire({ setProfileData }) {
       {step === 5 && (
         <div>
           <h2>Contact</h2>
-          <img className = "Questionnaire-icon" src={contact} alt="Contact-Icon" />
+          <img className="Questionnaire-icon" src={contact} alt="Contact-Icon" />
           <input name="phone" placeholder="Phone Number (Optional)" onChange={handleChange} />
           <input name="linkedin" placeholder="LinkedIn (Optional)" onChange={handleChange} />
           <button onClick={handleSubmit}>Submit</button>

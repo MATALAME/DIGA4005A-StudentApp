@@ -1708,6 +1708,33 @@
         "phone": "",
         "linkedin": ""
       }
+    },
+    {
+      "id": "9f19",
+      "name": "Jack Doe",
+      "email": "jackdoe@example.com",
+      "password": "$2b$10$lRUZ79v.FTlF8JOWLxyFauCiG64lLPzAK.BXI33ks9NXB5M9BvQYW",
+      "profile": {
+        "name": "Jack",
+        "middleName": "",
+        "surname": "Doe",
+        "gender": "Male",
+        "age": "40",
+        "institution": "Wits",
+        "faculty": "Law",
+        "studyType": "Full-Time",
+        "yearOfStudy": "",
+        "street": "",
+        "suburb": "",
+        "city": "",
+        "province": "",
+        "zip": "",
+        "skills": [
+          "Tutoring"
+        ],
+        "phone": "",
+        "linkedin": ""
+      }
     }
   ]
 }

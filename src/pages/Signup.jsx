@@ -115,7 +115,7 @@ function Signup() {
     }
 
     try {
-      
+      // Check if the email already exists
       const response = await fetch("http://localhost:5000/users");
       const users = await response.json();
 
@@ -126,10 +126,10 @@ function Signup() {
         return;
       }
 
-     
+      
       const hashedPassword = await bcrypt.hash(createPassword, 10);
 
-   
+      
       const createResponse = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
@@ -138,13 +138,19 @@ function Signup() {
         body: JSON.stringify({
           name: createName,
           email: createEmail,
-          password: hashedPassword, 
+          password: hashedPassword,
         }),
       });
 
       if (createResponse.ok) {
-        alert(`Account created for ${createName}!`);
-        setShowCreateAccount(false); 
+        const newUser = await createResponse.json();
+
+        
+        localStorage.setItem("loggedInUser", JSON.stringify(newUser));
+
+       
+        alert(`Account created for ${createName}! Redirecting to the questionnaire.`);
+        navigate("/questionnaire");
       } else {
         alert("Failed to create account. Please try again.");
       }

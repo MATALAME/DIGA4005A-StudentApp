@@ -245,6 +245,7 @@ function Questionnaire({ setProfileData }) {
         </div>
       )}
     </div>
+    </div>
   );
 }
 

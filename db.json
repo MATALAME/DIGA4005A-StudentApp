@@ -1789,6 +1789,18 @@
         "phone": "",
         "linkedin": ""
       }
+    },
+    {
+      "id": "7d65",
+      "name": "Matalame Mamabolo",
+      "email": "mamabolomatalame@gmail.com",
+      "password": "$2b$10$yNcebvUpAyDIW.Uz7RcHreyGyPeRzH.5LcywU8.Ajd6m/r2ztYYP2"
+    },
+    {
+      "id": "6d74",
+      "name": "Brayden P",
+      "email": "braydenp@gmail.com",
+      "password": "$2b$10$BN7Mg26XTX6ca26BjcPgQepHb5VZNAozwyXZwZvVv4U/5wn3aNYHS"
     }
   ]
 }

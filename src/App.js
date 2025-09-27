@@ -16,18 +16,11 @@ function App() {
     <JobProvider>
       <Router>
         <Routes>
-          {/* Public Route */}
+          {/* Public Routes */}
+          <Route path="/" element={<Load />} />
           <Route path="/signup" element={<Signup />} />
 
           {/* Protected Routes */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Load />
-              </ProtectedRoute>
-            }
-          />
           <Route
             path="/home"
             element={

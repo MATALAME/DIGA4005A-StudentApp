@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Send } from "lucide-react"; 
+import { ArrowLeft, Send } from "lucide-react";
 import "../Styling/ChatPage.css";
 
 const ChatPage = () => {
@@ -11,10 +11,16 @@ const ChatPage = () => {
   const [userMessage, setUserMessage] = useState("");
 
   useEffect(() => {
+    // Load chats from localStorage
     const storedChats = JSON.parse(localStorage.getItem("chats")) || [];
     const chat = storedChats.find((chat) => chat.username === username);
+
     if (chat) {
       setMessages(chat.messages || []);
+    } else {
+      // Initialize a new chat if it doesn't exist
+      const newChat = { username, messages: [], lastMessage: "" };
+      localStorage.setItem("chats", JSON.stringify([...storedChats, newChat]));
     }
   }, [username]);
 
@@ -28,16 +34,27 @@ const ChatPage = () => {
           text: "Thank you for your message. I'll get back to you soon!",
         },
       ];
+
       setMessages(newMessages);
 
+      // Update chats in localStorage
       const storedChats = JSON.parse(localStorage.getItem("chats")) || [];
       const updatedChats = storedChats.map((chat) =>
         chat.username === username
           ? { ...chat, messages: newMessages, lastMessage: userMessage }
           : chat
       );
-      localStorage.setItem("chats", JSON.stringify(updatedChats));
 
+      // If the chat doesn't exist, add it
+      if (!storedChats.find((chat) => chat.username === username)) {
+        updatedChats.push({
+          username,
+          messages: newMessages,
+          lastMessage: userMessage,
+        });
+      }
+
+      localStorage.setItem("chats", JSON.stringify(updatedChats));
       setUserMessage("");
     }
   };
@@ -51,8 +68,7 @@ const ChatPage = () => {
         </button>
         <h1 className="chat-title">{username}</h1>
         <div className="profile-picture">
-          <img src={"https://picsum.photos/150"}
-          alt="Profile" />
+          <img src={"https://picsum.photos/150"} alt="Profile" />
         </div>
       </header>
 
@@ -66,7 +82,11 @@ const ChatPage = () => {
             }`}
           >
             <img
-              src={message.sender === "You" ? "https://picsum.photos/150" : "https://picsum.photos/151"}
+              src={
+                message.sender === "You"
+                  ? "https://picsum.photos/150"
+                  : "https://picsum.photos/151"
+              }
               alt={message.sender}
               className="chat-avatar"
             />

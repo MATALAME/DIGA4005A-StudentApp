@@ -7,7 +7,7 @@ export const JobProvider = ({ children }) => {
 
   useEffect(() => {
    
-    fetch('http://localhost:5000/jobs')
+    fetch('http://localhost:5001/jobs')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch jobs');

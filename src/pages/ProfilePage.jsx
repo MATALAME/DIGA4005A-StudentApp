@@ -17,13 +17,13 @@ function ProfilePage() {
         }
 
       
-        const response = await fetch(`http://localhost:5000/users/${loggedInUser.id}`);
+        const response = await fetch(`http://localhost:5001/users/${loggedInUser.id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch user profile.");
         }
 
         const userData = await response.json();
-        setProfileData(userData.profile); // Set the profile data
+        setProfileData(userData.profile); 
       } catch (error) {
         console.error("Error fetching profile:", error);
         alert("An error occurred while fetching the profile. Please try again.");

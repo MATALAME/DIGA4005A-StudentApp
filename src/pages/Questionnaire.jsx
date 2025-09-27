@@ -58,7 +58,7 @@ function Questionnaire({ setProfileData }) {
       }
 
       
-      const response = await fetch(`http://localhost:5000/users/${loggedInUser.id}`, {
+      const response = await fetch(`http://localhost:5001/users/${loggedInUser.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

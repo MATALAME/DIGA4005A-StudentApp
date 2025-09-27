@@ -59,7 +59,7 @@ function Signup() {
 
     try {
 
-      const response = await fetch("http://localhost:5000/users");
+      const response = await fetch("http://localhost:5001/users");
       const users = await response.json();
 
 
@@ -116,7 +116,7 @@ function Signup() {
 
     try {
       // Check if the email already exists
-      const response = await fetch("http://localhost:5000/users");
+      const response = await fetch("http://localhost:5001/users");
       const users = await response.json();
 
       const emailExists = users.some((user) => user.email === createEmail);
@@ -130,7 +130,7 @@ function Signup() {
       const hashedPassword = await bcrypt.hash(createPassword, 10);
 
    
-      const createResponse = await fetch("http://localhost:5000/users", {
+      const createResponse = await fetch("http://localhost:5001/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

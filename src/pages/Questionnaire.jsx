@@ -48,6 +48,8 @@ const institutions = [
 
 function Questionnaire({ setProfileData }) {
   const [step, setStep] = useState(1);
+  const totalSteps = 5;
+
   const [formData, setFormData] = useState({
     name: "",
     middleName: "",
@@ -109,7 +111,7 @@ function Questionnaire({ setProfileData }) {
 
       
       const response = await fetch(`http://localhost:5001/users/${loggedInUser.id}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -136,6 +138,12 @@ function Questionnaire({ setProfileData }) {
   return (
     <div className="questionnaire-container">
     <div className="questionnaire">
+
+    {/* Progress bar */}
+    <div className="progress-bar-container">
+       <div className={`progress-bar-fill step-${step}`} />
+    </div>
+
       {step === 1 && (
         <div>
           <h2>Personal Info</h2>

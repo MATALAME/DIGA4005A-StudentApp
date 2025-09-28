@@ -1,128 +1,46 @@
 import React, { useEffect, useState } from "react";
-import "../Styling/ProfilePage.css";
 import Layout from "../Components/Layout";
-import StarRating from "../Components/StarRating";
-import whatsapp from "../images/whatsapp.png";
-import linkedin from "../images/linkedin.png";
-import instagram from "../images/instagram.png";
-import facebook from "../images/facebook.png";
+import "../Styling/ProfilePage.css";
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState(null);
+  const [accountType, setAccountType] = useState("");
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        
-        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-        if (!loggedInUser) {
-          alert("No user is logged in. Please log in first.");
-          return;
-        }
-
-      
-        const response = await fetch(`http://localhost:5001/users/${loggedInUser.id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch user profile.");
-        }
-
-        const userData = await response.json();
-        setProfileData(userData.profile); 
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-        alert("An error occurred while fetching the profile. Please try again.");
-      }
-    };
-
-    fetchProfile();
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser) {
+      setProfileData(loggedInUser.profile);
+      setAccountType(loggedInUser.accountType);
+    }
   }, []);
 
-  if (!profileData) return <p className="no-data">No profile data yet</p>;
-
-  // Safe initials
-  const initials = `${profileData.name?.[0] ?? ""}${profileData.surname?.[0] ?? ""}`.toUpperCase();
+  if (!profileData) return <p>Loading profile...</p>;
 
   return (
     <Layout>
       <div className="profile-page">
-        <div className="profile-card">
-          {/* Header */}
-          <div className="profile-header">
-            <div className="profile-avatar">{initials}</div>
-            <div className="profile-info">
-              <h2>{`${profileData.name ?? ""} ${profileData.surname ?? ""}`}</h2>
-              <p>{profileData.gender ?? ""}{profileData.age ? `, ${profileData.age} years` : ""}</p>
-              <div className="review-score">
-                <span>Reviews:</span>
-                <StarRating rating={profileData.reviewScore || 0} />
-              </div>
-            </div>
-          </div>
+        <h2>{profileData.name}'s Profile</h2>
 
-          {/* Institution */}
-          <div className="profile-section">
-            <h3>Institution</h3>
-            <div className="institution-info">
-              {profileData.institutionLogo && (
-                <img
-                  src={profileData.institutionLogo}
-                  alt={profileData.institution}
-                  className="institution-logo"
-                />
-              )}
-              <span className="institution-name">{profileData.institution ?? "-"}</span>
-            </div>
-            <p>{profileData.faculty ?? "-"}</p>
-            <p>
-              {profileData.studyType ?? "-"}
-              {profileData.yearOfStudy ? ` - ${profileData.yearOfStudy}` : ""}
-            </p>
+        {accountType === "student" && (
+          <div>
+            <p>Institution: {profileData.institution}</p>
+            <p>Faculty: {profileData.faculty}</p>
+            <p>Year: {profileData.yearOfStudy}</p>
           </div>
+        )}
 
-          {/* Skills */}
-          <div className="profile-section">
-            <h3>Skills</h3>
-            <div className="skills">
-              {profileData.skills?.length > 0 ? (
-                profileData.skills.map(skill => (
-                  <span key={skill} className="skill-tag">{skill}</span>
-                ))
-              ) : (
-                <p className="no-skills">No skills selected</p>
-              )}
-            </div>
+        {accountType === "client" && (
+          <div>
+            <p>Email: {profileData.email}</p>
+            <p>Skills: {profileData.skills.join(", ")}</p>
           </div>
+        )}
 
-          {/* Contact */}
-          <div className="profile-section">
-            <h3>Contact</h3>
-            {profileData.phone && (
-              <p>
-                <img src={whatsapp} alt="Whatsapp" className="contact-icon" />
-                {profileData.phone}
-              </p>
-            )}
-            {profileData.linkedin && (
-              <p>
-                <img src={linkedin} alt="LinkedIn" className="contact-icon" />
-                {profileData.linkedin}
-              </p>
-            )}
-            {profileData.instagram && (
-              <p>
-                <img src={instagram} alt="Instagram" className="contact-icon" />
-                {profileData.instagram}
-              </p>
-            )}
-            {profileData.facebook && (
-              <p>
-                <img src={facebook} alt="Facebook" className="contact-icon" />
-                {profileData.facebook}
-              </p>
-            )}
-          </div>
-        </div>
+        <p>Phone: {profileData.phone}</p>
+        <p>Social Links:</p>
+        <p>LinkedIn: {profileData.linkedin}</p>
+        <p>Instagram: {profileData.instagram}</p>
+        <p>Facebook: {profileData.facebook}</p>
       </div>
     </Layout>
   );

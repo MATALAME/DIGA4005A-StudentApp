@@ -26,7 +26,6 @@ function Signup() {
 
   const [showCreateAccount, setShowCreateAccount] = useState(false);
 
-  // NEW: account type
   const [accountType, setAccountType] = useState("student");
 
   const allowedDomains = ["students.wits.ac.za", "gmail.com", "icloud.com", "yahoo.com", "example.com"];
@@ -136,6 +135,7 @@ function Signup() {
           name: createName,
           email: createEmail,
           password: hashedPassword,
+          accountType
         }),
       });
 

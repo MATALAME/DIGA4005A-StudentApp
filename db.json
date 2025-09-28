@@ -2022,6 +2022,31 @@
         "institutionLogo": "/static/media/nwuicon.0a6f825aa582411a88d8.png"
       },
       "id": "fa6a"
+    },
+    {
+      "id": "ed49",
+      "name": "Mat Armstrong",
+      "email": "armstrongmat@gmail.com",
+      "password": "$2b$10$oUlVvqxRASWn6sWz7tcnLeheYdpTZgHlfr6wZSmrjHmr.6RqJlT0G"
+    },
+    {
+      "id": "c6bc",
+      "name": "MJ",
+      "email": "mj@gmail.com",
+      "password": "$2b$10$lo9tgwaAX4XSCrzY5KVZzOOlxLLC2ZIO/GqSkO5bBbEr95Up9/5OC",
+      "accountType": "client"
+    },
+    {
+      "id": "781d",
+      "name": "JIJ",
+      "email": "jij@gmail.com",
+      "password": "$2b$10$u2CYpM0m3U3ZMn0Pw01InuF7u7F9Tr.srDyC36Zv4C32c7B5rpbZC"
+    },
+    {
+      "id": "031e",
+      "name": "Client",
+      "email": "client@gmail.com",
+      "password": "$2b$10$OzvJ8eRETBYksGgvM1jYl.khcc7ePk/4gS4tc5D54rsKpaHJk0baa"
     }
   ]
 }

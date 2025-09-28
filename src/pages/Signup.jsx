@@ -26,6 +26,9 @@ function Signup() {
 
   const [showCreateAccount, setShowCreateAccount] = useState(false);
 
+  // NEW: account type
+  const [accountType, setAccountType] = useState("student");
+
   const allowedDomains = ["students.wits.ac.za", "gmail.com", "icloud.com", "yahoo.com", "example.com"];
 
   // Function for sign in
@@ -58,19 +61,15 @@ function Signup() {
     setPasswordError("");
 
     try {
-
       const response = await fetch("http://localhost:5001/users");
       const users = await response.json();
-
 
       const user = users.find((u) => u.email === email);
 
       if (user) {
-
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (isPasswordValid) {
-
           localStorage.setItem("loggedInUser", JSON.stringify(user));
           alert(`Welcome back, ${user.name}!`);
           navigate("/Home");
@@ -126,10 +125,8 @@ function Signup() {
         return;
       }
 
-     
       const hashedPassword = await bcrypt.hash(createPassword, 10);
 
-   
       const createResponse = await fetch("http://localhost:5001/users", {
         method: "POST",
         headers: {
@@ -138,19 +135,19 @@ function Signup() {
         body: JSON.stringify({
           name: createName,
           email: createEmail,
-          password: hashedPassword, 
+          password: hashedPassword,
         }),
       });
 
       if (createResponse.ok) {
         const newUser = await createResponse.json();
 
-
         localStorage.setItem("loggedInUser", JSON.stringify(newUser));
 
-
         alert(`Account created for ${createName}! Redirecting to the questionnaire.`);
-        navigate("/questionnaire");
+
+        // Navigate to questionnaire and pass accountType
+        navigate("/questionnaire", { state: { accountType } });
       } else {
         alert("Failed to create account. Please try again.");
       }
@@ -220,6 +217,7 @@ function Signup() {
         ) : (
           <div className="create-account-div">
             <h2>CREATE YOUR ACCOUNT</h2>
+
             <form onSubmit={handleCreateAccount} className="create-form">
               <div className="form-group">
                 <label className="form-label">NAME & SURNAME</label>
@@ -243,6 +241,30 @@ function Signup() {
                 />
               </div>
 
+              {/* Account type selection */}
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="student"
+                  checked={accountType === "student"}
+                  onChange={(e) => setAccountType(e.target.value)}
+                />
+                Student Account
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="client"
+                  checked={accountType === "client"}
+                  onChange={(e) => setAccountType(e.target.value)}
+                />
+                Client Account
+              </label>
+            </div>
+
               <div className="form-group">
                 <label className="form-label">PASSWORD</label>
                 <div className="password-input-wrapper">
@@ -261,9 +283,7 @@ function Signup() {
                     {showCreatePassword ? "Hide" : "Show"}
                   </button>
                 </div>
-                {createPasswordError && (
-                  <p className="form-error">{createPasswordError}</p>
-                )}
+                {createPasswordError && <p className="form-error">{createPasswordError}</p>}
               </div>
 
               <div className="form-group">
@@ -311,8 +331,6 @@ function Signup() {
             </div>
           </div>
         )}
-
-        <footer className="signup-footer">© Student Hustle. All rights reserved.</footer>
       </div>
     </div>
   );

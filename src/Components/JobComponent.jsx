@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MapPin } from "lucide-react"; 
+import { MapPin } from "lucide-react";
+import StarRating from "./StarRating";
 import "../Styling/JobComponent.css";
 
 const JobComponent = ({ job }) => {
   const navigate = useNavigate();
+  const [reviewScore, setReviewScore] = useState(null);
+
+  useEffect(() => {
+    const fetchUserReviewScore = async () => {
+      try {
+        const response = await fetch(`http://localhost:5001/users`);
+        const users = await response.json();
+
+        console.log("Fetched users:", users);
+        console.log("Job username:", job.username); 
+
+       
+        const user = users.find((user) => user.name === job.username);
+
+        console.log("Matched user:", user); 
+
+     
+        if (user && user.profile?.reviewScore) {
+          setReviewScore(user.profile.reviewScore);
+        } else {
+          console.log("No review score found for user:", job.username); 
+        }
+      } catch (error) {
+        console.error("Error fetching user review score:", error);
+      }
+    };
+
+    fetchUserReviewScore();
+  }, [job.username]);
 
   const handleClick = () => {
     navigate(`/job/${job.id}`);
@@ -21,6 +51,14 @@ const JobComponent = ({ job }) => {
         <div className="job-title-section">
           <h3 className="job-title">{job.jobTitle}</h3>
           <p className="job-poster">Posted by {job.username}</p>
+          {reviewScore !== null ? (
+  <div className="review-score">
+    <span>Review Score:</span>
+    <StarRating rating={reviewScore} />
+  </div>
+) : (
+  <p>No reviews yet</p>
+)}
         </div>
       </div>
 
@@ -33,7 +71,7 @@ const JobComponent = ({ job }) => {
       </div>
 
       <div className="job-location">
-        <MapPin size={16} color="black" className="location-icon" /> 
+        <MapPin size={16} color="black" className="location-icon" />
         {job.suburb}, {job.city}
       </div>
 

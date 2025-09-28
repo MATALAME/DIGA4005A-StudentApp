@@ -57,6 +57,7 @@
     color: #555;
     font-size: 15px;
   }
+  
 
   .profile-section {
     display: flex;
@@ -78,6 +79,13 @@
     font-size: 14px;
     margin: 2px 0;
   }
+
+  .profile-info .review-score {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f59e0b;
+  }
+
   
   .skills {
     display: flex;

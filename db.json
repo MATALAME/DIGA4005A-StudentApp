@@ -13,6 +13,7 @@
       "priority": "Urgent",
       "timePosted": "55 mins ago",
       "category": "Other Jobs",
+      "reviewScore": 4.5,
       "id": "1"
     },
     {
@@ -1656,31 +1657,46 @@
       "id": "1",
       "username": "Admin",
       "password": "Password123",
-      "name": "John Doe"
+      "name": "John Doe",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "2",
       "username": "Admin1",
       "password": "Password1234",
-      "name": "Jane Doe"
+      "name": "Jane Doe",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "5bfa",
       "name": "John Doe",
       "email": "johndoe@example.com",
-      "password": "John123@"
+      "password": "John123@",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "ee4a",
       "name": "John Doe",
       "email": "johndoe1@example.com",
-      "password": "John123@"
+      "password": "John123@",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "fa7d",
       "name": "John Doe",
       "email": "johndoe3@example.com",
-      "password": "$2b$10$uh8wrthgnHxqlDLyotQbS.iOCYZ9MbW5eV2je0tyzCgGTEpbuH6J6"
+      "password": "$2b$10$uh8wrthgnHxqlDLyotQbS.iOCYZ9MbW5eV2je0tyzCgGTEpbuH6J6",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "b0fa",
@@ -1706,7 +1722,8 @@
           "Tutoring"
         ],
         "phone": "",
-        "linkedin": ""
+        "linkedin": "",
+        "reviewScore": 0
       }
     },
     {
@@ -1733,7 +1750,8 @@
           "Tutoring"
         ],
         "phone": "",
-        "linkedin": ""
+        "linkedin": "",
+        "reviewScore": 0
       }
     },
     {
@@ -1760,7 +1778,8 @@
           "Tutoring"
         ],
         "phone": "",
-        "linkedin": ""
+        "linkedin": "",
+        "reviewScore": 0
       }
     },
     {
@@ -1786,6 +1805,7 @@
         "skills": [
           "Tutoring"
         ],
+        "reviewScore": 4.5,
         "phone": "",
         "linkedin": ""
       }
@@ -1794,36 +1814,63 @@
       "id": "6d74",
       "name": "Brayden P",
       "email": "braydenp@gmail.com",
-      "password": "$2b$10$BN7Mg26XTX6ca26BjcPgQepHb5VZNAozwyXZwZvVv4U/5wn3aNYHS"
+      "password": "$2b$10$BN7Mg26XTX6ca26BjcPgQepHb5VZNAozwyXZwZvVv4U/5wn3aNYHS",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "2236",
       "name": "Matalame Mamabolo",
       "email": "mamabolomatalame@gmail.com",
-      "password": "$2b$10$jFknihl6i.OcbUBuVV9ZweWn4PGbXDuRN9yLnMIQXycClTaG5bq9e"
+      "password": "$2b$10$jFknihl6i.OcbUBuVV9ZweWn4PGbXDuRN9yLnMIQXycClTaG5bq9e",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "733d",
       "name": "Thomas King",
       "email": "kingthomas@gmail.com",
-      "password": "$2b$10$W/jwNm4WSnWhTtpSv6/3zeH3.d.CJZtnt6aSpEGvBjTajSgKQspi6"
+      "password": "$2b$10$W/jwNm4WSnWhTtpSv6/3zeH3.d.CJZtnt6aSpEGvBjTajSgKQspi6",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "a1d4",
       "name": "Lorrey Thomas",
       "email": "thomaslorrey@gmail.com",
-      "password": "$2b$10$EtdvXyCP3L8hhpp9r9Jbquf6ymR0HJHkwV2MpAmPnVm6BqllpOnbe"
+      "password": "$2b$10$EtdvXyCP3L8hhpp9r9Jbquf6ymR0HJHkwV2MpAmPnVm6BqllpOnbe",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "fa0c",
       "name": "Matalame M",
       "email": "yern@gmail.com",
-      "password": "$2b$10$hsGjNw/J.zIiKL2Yn0NFjuy8Gnw8elmFnuumN8/QB9zZM6IUcol22"
+      "password": "$2b$10$hsGjNw/J.zIiKL2Yn0NFjuy8Gnw8elmFnuumN8/QB9zZM6IUcol22",
+      "profile": {
+        "reviewScore": 0
+      }
     },
     {
       "id": "5c9d",
       "name": "Matalame M",
       "email": "kk@gmail.com",
+      "password": "$2b$10$hdElXitPXSdve0wk.g8Pz.WPwmdb8s/WoxcAOwAPPj3PeHHTWqmLm",
+      "profile": {
+        "reviewScore": 0
+      }
+    },
+    {
+      "id": "sfd5",
+      "name": "Refilwe Makgatho",
+      "profile": {
+        "reviewScore": 4.5
+      },
+      "email": "refilwe@example.com",
       "password": "$2b$10$hdElXitPXSdve0wk.g8Pz.WPwmdb8s/WoxcAOwAPPj3PeHHTWqmLm"
     },
     {
@@ -1850,7 +1897,8 @@
         "phone": "",
         "linkedin": "",
         "instagram": "",
-        "facebook": ""
+        "facebook": "",
+        "reviewScore": 0
       },
       "id": "96ef"
     },
@@ -1880,7 +1928,8 @@
         "linkedin": "Kenan C",
         "instagram": "kenan.c",
         "facebook": "kenansdiary",
-        "institutionLogo": "/static/media/witsicon.b718e6876ac2acd6a876.png"
+        "institutionLogo": "/static/media/witsicon.b718e6876ac2acd6a876.png",
+        "reviewScore": 0
       },
       "id": "8d63"
     },
@@ -1922,6 +1971,37 @@
         "age": "34",
         "institution": "North-West University",
         "faculty": "Science",
+        "studyType": "Part-Time",
+        "yearOfStudy": "3rd",
+        "street": "34 Craze Street ",
+        "suburb": "Baze",
+        "city": "Pretoria",
+        "province": "Gauteng",
+        "zip": "0700",
+        "skills": [
+          "Tutoring",
+          "Photography",
+          "Errands",
+          "Deliveries"
+        ],
+        "phone": "074 234 6739",
+        "linkedin": "Alex Naul",
+        "instagram": "alex.n",
+        "facebook": "alex.n",
+        "institutionLogo": "/static/media/nwuicon.0a6f825aa582411a88d8.png"
+      },
+      "id": "fa6a"
+    },
+    {
+      "profile": {
+        "name": "Refilwe Makgatho",
+        "middleName": "Issac",
+        "surname": "Newton",
+        "gender": "Male",
+        "age": "34",
+        "institution": "North-West University",
+        "faculty": "Science",
+        "reviewScore": 4.5,
         "studyType": "Part-Time",
         "yearOfStudy": "3rd",
         "street": "34 Craze Street ",

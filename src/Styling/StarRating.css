@@ -1,0 +1,26 @@
+.star-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .star {
+    font-size: 20px;
+    color: #ccc; 
+  }
+  
+  .star.filled {
+    color: #f59e0b; 
+  }
+  
+  .star.half {
+    color: #f59e0b; 
+    position: relative;
+  }
+  
+  .star.half::before {
+    content: "★";
+    color: #ccc; 
+    position: absolute;
+    clip-path: inset(0 0 0 50%); 
+  }

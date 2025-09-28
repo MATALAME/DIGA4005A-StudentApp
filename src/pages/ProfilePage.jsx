@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Styling/ProfilePage.css";
 import Layout from "../Components/Layout";
-
+import StarRating from "../Components/StarRating";
 import whatsapp from "../images/whatsapp.png";
 import linkedin from "../images/linkedin.png";
 import instagram from "../images/instagram.png";
@@ -53,6 +53,10 @@ function ProfilePage() {
             <div className="profile-info">
               <h2>{`${profileData.name ?? ""} ${profileData.surname ?? ""}`}</h2>
               <p>{profileData.gender ?? ""}{profileData.age ? `, ${profileData.age} years` : ""}</p>
+              <div className="review-score">
+                <span>Reviews:</span>
+                <StarRating rating={profileData.reviewScore || 0} />
+              </div>
             </div>
           </div>
 

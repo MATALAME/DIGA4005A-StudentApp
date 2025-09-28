@@ -1,4 +1,4 @@
-/* Layout */
+
 .app-layout {
     display: flex;
     flex-direction: column;
@@ -6,7 +6,7 @@
     position: relative;
   }
   
-  /* Header */
+
   .home-header {
     display: flex;
     align-items: center;
@@ -46,7 +46,33 @@
     text-align: center;
   }
   
-  /* Sidebar */
+  .header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .notification-bell {
+    position: absolute;
+    right: 70px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+
+  .notification-dot {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 2px 6px;
+  }
+  
+ 
   .sidebar {
     position: fixed;
     top: 0;
@@ -108,4 +134,3 @@
     filter: brightness(0.7);
     pointer-events: auto; 
   }
-  

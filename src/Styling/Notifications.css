@@ -1,0 +1,26 @@
+.notifications-page {
+  padding: 20px;
+}
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notification-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.notification-item.unread {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+
+.notification-item.read {
+  background-color: #fff;
+  color: #999;
+}

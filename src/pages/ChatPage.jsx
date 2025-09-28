@@ -1,63 +1,95 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Send } from "lucide-react";
+import { db } from "../firebase";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 import "../Styling/ChatPage.css";
 
 const ChatPage = () => {
-  const { username } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams(); 
+  const location = useLocation();
+  const stateOtherUser = location.state?.otherUser;
 
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [otherUser, setOtherUser] = useState(stateOtherUser || null);
   const [messages, setMessages] = useState([]);
   const [userMessage, setUserMessage] = useState("");
 
+  // Fetches logged-in user
   useEffect(() => {
-    // Load chats from localStorage
-    const storedChats = JSON.parse(localStorage.getItem("chats")) || [];
-    const chat = storedChats.find((chat) => chat.username === username);
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (user) setLoggedInUser(user);
+    else navigate("/signup");
+  }, [navigate]);
 
-    if (chat) {
-      setMessages(chat.messages || []);
-    } else {
-      // Initialize a new chat if it doesn't exist
-      const newChat = { username, messages: [], lastMessage: "" };
-      localStorage.setItem("chats", JSON.stringify([...storedChats, newChat]));
+ 
+  useEffect(() => {
+    if (!otherUser && id) {
+      fetch(`http://localhost:5001/users/${id}`)
+        .then((res) => res.json())
+        .then((data) => setOtherUser(data))
+        .catch(console.error);
     }
-  }, [username]);
+  }, [id, otherUser]);
 
-  const handleSendMessage = () => {
-    if (userMessage.trim()) {
-      const newMessages = [
-        ...messages,
-        { sender: "You", text: userMessage },
-        {
-          sender: username,
-          text: "Thank you for your message. I'll get back to you soon!",
-        },
-      ];
+  // Set up chat listener
+  useEffect(() => {
+    if (!loggedInUser || !otherUser) return;
 
-      setMessages(newMessages);
+    const chatId = [loggedInUser.email, otherUser.email].sort().join("_");
+    const messagesRef = collection(db, "chats", chatId, "messages");
+    const q = query(messagesRef, orderBy("timestamp", "asc"));
 
-      // Update chats in localStorage
-      const storedChats = JSON.parse(localStorage.getItem("chats")) || [];
-      const updatedChats = storedChats.map((chat) =>
-        chat.username === username
-          ? { ...chat, messages: newMessages, lastMessage: userMessage }
-          : chat
-      );
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setMessages(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+    });
 
-      // If the chat doesn't exist, add it
-      if (!storedChats.find((chat) => chat.username === username)) {
-        updatedChats.push({
-          username,
-          messages: newMessages,
-          lastMessage: userMessage,
-        });
-      }
+    return () => unsubscribe();
+  }, [loggedInUser, otherUser]);
 
-      localStorage.setItem("chats", JSON.stringify(updatedChats));
+  const handleSendMessage = async () => {
+    if (!userMessage.trim() || !loggedInUser || !otherUser) return;
+
+    try {
+      const chatId = [loggedInUser.email, otherUser.email].sort().join("_");
+      const messagesRef = collection(db, "chats", chatId, "messages");
+
+      // Adds message to Firestore (its on the firebase ddatabase section)
+      await addDoc(messagesRef, {
+        text: userMessage.trim(),
+        sender: loggedInUser.email,
+        senderName: loggedInUser.name,
+        receiver: otherUser.email,
+        timestamp: serverTimestamp(),
+      });
+
+      
+      const notificationsRef = collection(db, "notifications", otherUser.email, "messages");
+      await addDoc(notificationsRef, {
+        senderId: loggedInUser.email,
+        senderName: loggedInUser.name,
+        text: userMessage.trim(),
+        read: false,
+        timestamp: serverTimestamp(),
+      });
+
       setUserMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
     }
   };
+
+  if (!loggedInUser || !otherUser) {
+    return <p>Loading chat...</p>;
+  }
 
   return (
     <div className="chat-page">
@@ -66,7 +98,7 @@ const ChatPage = () => {
         <button className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeft size={24} color="white" />
         </button>
-        <h1 className="chat-title">{username}</h1>
+        <h1 className="chat-title">{otherUser.name}</h1>
         <div className="profile-picture">
           <img src={"https://picsum.photos/150"} alt="Profile" />
         </div>
@@ -74,16 +106,16 @@ const ChatPage = () => {
 
       {/* MESSAGES */}
       <div className="chat-messages">
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <div
-            key={index}
+            key={message.id}
             className={`chat-bubble-wrapper ${
-              message.sender === "You" ? "right" : "left"
+              message.sender === loggedInUser.email ? "right" : "left"
             }`}
           >
             <img
               src={
-                message.sender === "You"
+                message.sender === loggedInUser.email
                   ? "https://picsum.photos/150"
                   : "https://picsum.photos/151"
               }
@@ -92,7 +124,7 @@ const ChatPage = () => {
             />
             <div
               className={`chat-bubble ${
-                message.sender === "You" ? "sent" : "received"
+                message.sender === loggedInUser.email ? "sent" : "received"
               }`}
             >
               {message.text}

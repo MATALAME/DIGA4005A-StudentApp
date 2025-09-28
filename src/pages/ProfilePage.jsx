@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout";
 import "../Styling/ProfilePage.css";
+import StarRating from "../Components/StarRating";
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState(null);
@@ -27,6 +28,13 @@ function ProfilePage() {
             </div>
             <div className="profile-info">
               <h2>{profileData.name}'s Profile</h2>
+              <div className="star-rating">
+                {profileData.reviewScore ? (
+                  <StarRating rating={profileData.reviewScore} />
+                ) : (
+                  <p>No reviews yet</p>
+                )}
+              </div>
             </div>
           </div>
 

@@ -1,0 +1,40 @@
+.all-users {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.all-users h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.user-item p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.online-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 6px;
+    border-radius: 50%;
+    background-color: #4caf50; 
+  }
+  

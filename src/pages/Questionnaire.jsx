@@ -66,11 +66,17 @@ function StudentQuestionnaire() {
     skills: [], phone: "", linkedin: "", instagram: "", facebook: ""
   });
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); 
+  };
 
   const handleInstitutionChange = (e) => {
     const selected = institutions.find(inst => inst.name === e.target.value);
     setFormData({ ...formData, institution: selected.name, institutionLogo: selected.logo });
+    setErrors({ ...errors, institution: "" }); 
   };
 
   const toggleSkill = (skill) => {
@@ -80,11 +86,43 @@ function StudentQuestionnaire() {
         ? prev.skills.filter(s => s !== skill)
         : [...prev.skills, skill],
     }));
+    setErrors({ ...errors, skills: "" });
   };
 
-  const nextStep = () => setStep(prev => Math.min(prev + 1, totalSteps));
+  const validateStep = () => {
+    const stepErrors = {};
+    if (step === 1) {
+      if (!formData.name) stepErrors.name = "Name is required.";
+      if (!formData.surname) stepErrors.surname = "Surname is required.";
+      if (!formData.gender) stepErrors.gender = "Gender is required.";
+      if (!formData.age) stepErrors.age = "Age is required.";
+    } else if (step === 2) {
+      if (!formData.institution) stepErrors.institution = "Institution is required.";
+      if (!formData.faculty) stepErrors.faculty = "Faculty is required.";
+      if (!formData.studyType) stepErrors.studyType = "Study type is required.";
+      if (!formData.yearOfStudy) stepErrors.yearOfStudy = "Year of study is required.";
+    } else if (step === 3) {
+      if (!formData.street) stepErrors.street = "Street is required.";
+      if (!formData.suburb) stepErrors.suburb = "Suburb is required.";
+      if (!formData.city) stepErrors.city = "City is required.";
+      if (!formData.province) stepErrors.province = "Province is required.";
+      if (!formData.zip) stepErrors.zip = "ZIP Code is required.";
+    } else if (step === 4) {
+      if (formData.skills.length === 0) stepErrors.skills = "At least one skill is required.";
+    }
+    setErrors(stepErrors);
+    return Object.keys(stepErrors).length === 0; 
+  };
+
+  const nextStep = () => {
+    if (validateStep()) {
+      setStep(prev => Math.min(prev + 1, totalSteps));
+    }
+  };
 
   const handleSubmit = async () => {
+    if (!validateStep()) return;
+
     try {
       const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
       if (!loggedInUser) return alert("No user logged in.");
@@ -123,8 +161,10 @@ function StudentQuestionnaire() {
             <h2>Personal Info</h2>
             <img src={nameIcon} alt="Name Icon" className="Questionnaire-icon" />
             <input name="name" placeholder="Name" onChange={handleChange} />
+            {errors.name && <p className="error">{errors.name}</p>}
             <input name="middleName" placeholder="Middle Name" onChange={handleChange} />
             <input name="surname" placeholder="Surname" onChange={handleChange} />
+            {errors.surname && <p className="error">{errors.surname}</p>}
             <div className="dropdown-container">
               <select name="gender" onChange={handleChange}>
                 <option value="">Select Gender</option>
@@ -133,7 +173,9 @@ function StudentQuestionnaire() {
               </select>
               <FaChevronDown className="dropdown-icon" />
             </div>
+            {errors.gender && <p className="error">{errors.gender}</p>}
             <input name="age" type="number" placeholder="Age" onChange={handleChange} />
+            {errors.age && <p className="error">{errors.age}</p>}
             <button onClick={nextStep}>Continue</button>
           </div>
         )}
@@ -147,11 +189,14 @@ function StudentQuestionnaire() {
               <option value="">Select Institution</option>
               {institutions.map(inst => <option key={inst.name} value={inst.name}>{inst.name}</option>)}
             </select>
+            {errors.institution && <p className="error">{errors.institution}</p>}
             <input name="faculty" placeholder="Faculty / Department" onChange={handleChange} />
+            {errors.faculty && <p className="error">{errors.faculty}</p>}
             <div>
               <label><input type="radio" name="studyType" value="Full-Time" onChange={handleChange} /> Full-Time</label>
               <label><input type="radio" name="studyType" value="Part-Time" onChange={handleChange} /> Part-Time</label>
             </div>
+            {errors.studyType && <p className="error">{errors.studyType}</p>}
             <select name="yearOfStudy" onChange={handleChange}>
               <option value="">Year of Study</option>
               <option>1st</option>
@@ -159,6 +204,7 @@ function StudentQuestionnaire() {
               <option>3rd</option>
               <option>4th</option>
             </select>
+            {errors.yearOfStudy && <p className="error">{errors.yearOfStudy}</p>}
             <button onClick={nextStep}>Continue</button>
           </div>
         )}
@@ -169,10 +215,15 @@ function StudentQuestionnaire() {
             <h2>Location</h2>
             <img src={locationIcon} alt="Location Icon" className="Questionnaire-icon" />
             <input name="street" placeholder="Street" onChange={handleChange} />
+            {errors.street && <p className="error">{errors.street}</p>}
             <input name="suburb" placeholder="Suburb" onChange={handleChange} />
+            {errors.suburb && <p className="error">{errors.suburb}</p>}
             <input name="city" placeholder="City" onChange={handleChange} />
+            {errors.city && <p className="error">{errors.city}</p>}
             <input name="province" placeholder="Province" onChange={handleChange} />
+            {errors.province && <p className="error">{errors.province}</p>}
             <input name="zip" placeholder="ZIP Code" onChange={handleChange} />
+            {errors.zip && <p className="error">{errors.zip}</p>}
             <button onClick={nextStep}>Continue</button>
           </div>
         )}
@@ -182,7 +233,7 @@ function StudentQuestionnaire() {
           <div>
             <h2>Skills</h2>
             <img src={skillsIcon} alt="Skills Icon" className="Questionnaire-icon" />
-            {["Tutoring","Deliveries","Errands","Photography","Cleaning","Repairs"].map(skill => (
+            {["Tutoring", "Deliveries", "Errands", "Photography", "Cleaning", "Repairs"].map(skill => (
               <button
                 key={skill}
                 type="button"
@@ -192,6 +243,7 @@ function StudentQuestionnaire() {
                 {skill}
               </button>
             ))}
+            {errors.skills && <p className="error">{errors.skills}</p>}
             <button onClick={nextStep}>Continue</button>
           </div>
         )}

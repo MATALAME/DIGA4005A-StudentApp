@@ -53,7 +53,7 @@ const JobComponent = ({ job }) => {
           <p className="job-poster">Posted by {job.username}</p>
           {reviewScore !== null ? (
   <div className="review-score">
-    <span>Review Score:</span>
+    {/*<span>Review Score:</span>*/}
     <StarRating rating={reviewScore} />
   </div>
 ) : (

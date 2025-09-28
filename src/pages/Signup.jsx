@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styling/SignUp.css";
 import bcrypt from "bcryptjs";
+import { addUserToFirestore, setUserOnlineStatus } from "../firebaseUtils";
 
 function Signup() {
   const navigate = useNavigate();
 
-  // SignUp section
+  // SignIn state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +15,7 @@ function Signup() {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Create section
+  // Create account state
   const [createName, setCreateName] = useState("");
   const [createEmail, setCreateEmail] = useState("");
   const [createPassword, setCreatePassword] = useState("");
@@ -23,147 +24,154 @@ function Signup() {
   const [showReenterPassword, setShowReenterPassword] = useState(false);
   const [createPasswordError, setCreatePasswordError] = useState("");
   const [createPasswordMatchError, setCreatePasswordMatchError] = useState("");
-
   const [showCreateAccount, setShowCreateAccount] = useState(false);
-
   const [accountType, setAccountType] = useState("student");
 
-  const allowedDomains = ["students.wits.ac.za", "gmail.com", "icloud.com", "yahoo.com", "example.com"];
+  const allowedDomains = [
+    "students.wits.ac.za",
+    "gmail.com",
+    "icloud.com",
+    "yahoo.com",
+    "example.com",
+  ];
 
-  // Function for sign in
+  // ------------------ SIGN IN ------------------
   const handleSign = async (event) => {
     event.preventDefault();
 
-    const isEmailValid = allowedDomains.some((domain) => email.endsWith(domain));
-    if (!isEmailValid) {
+    // Email validation
+    if (!allowedDomains.some((d) => email.endsWith(d))) {
       setEmailError("Email must end with a valid domain like @gmail.com");
       return;
-    } else {
-      setEmailError("");
-    }
+    } else setEmailError("");
 
+    // Password validation
     if (password.length < 8) {
       setPasswordError("Password must be at least 8 characters long");
       return;
     }
-
     if (!/[A-Z]/.test(password)) {
       setPasswordError("Password must include at least one capital letter");
       return;
     }
-
     if (!/[0-9]/.test(password)) {
       setPasswordError("Password must include at least one number");
       return;
     }
-
     setPasswordError("");
 
     try {
       const response = await fetch("http://localhost:5001/users");
       const users = await response.json();
-
       const user = users.find((u) => u.email === email);
 
-      if (user) {
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-
-        if (isPasswordValid) {
-          localStorage.setItem("loggedInUser", JSON.stringify(user));
-          alert(`Welcome back, ${user.name}!`);
-          navigate("/Home");
-        } else {
-          alert("Invalid email or password. Please try again.");
-        }
-      } else {
+      if (!user) {
         alert("Invalid email or password. Please try again.");
+        return;
       }
+
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        alert("Invalid email or password. Please try again.");
+        return;
+      }
+
+    
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+     
+      await setUserOnlineStatus(user.email, true);
+
+      alert(`Welcome back, ${user.name}!`);
+      navigate("/home");
     } catch (error) {
       console.error("Error during sign in:", error);
       alert("An error occurred. Please try again.");
     }
   };
 
-  // Function for create account
+  // ------------------ CREATE ACCOUNT ------------------
   const handleCreateAccount = async (event) => {
     event.preventDefault();
 
+  
     if (createPassword.length < 8) {
       setCreatePasswordError("Password must be at least 8 characters long");
       return;
     }
-
     if (!/[A-Z]/.test(createPassword)) {
       setCreatePasswordError("Password must include at least one capital letter");
       return;
     }
-
     if (!/[0-9]/.test(createPassword)) {
       setCreatePasswordError("Password must include at least one number");
       return;
     }
-
     setCreatePasswordError("");
 
     if (createPassword !== reenterPassword) {
       setCreatePasswordMatchError("Passwords do not match");
       return;
-    } else {
-      setCreatePasswordMatchError("");
-    }
+    } else setCreatePasswordMatchError("");
 
     try {
-      // Check if the email already exists
+     
       const response = await fetch("http://localhost:5001/users");
       const users = await response.json();
-
-      const emailExists = users.some((user) => user.email === createEmail);
-
-      if (emailExists) {
+      if (users.some((u) => u.email === createEmail)) {
         alert("This email is already registered. Please use a different email.");
         return;
       }
 
+      // Hash password so we dont store plain text passwords ()
       const hashedPassword = await bcrypt.hash(createPassword, 10);
 
+      // Create user locally (new users also get sent to firebase after signup)
       const createResponse = await fetch("http://localhost:5001/users", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: createName,
           email: createEmail,
           password: hashedPassword,
-          accountType
+          accountType,
         }),
       });
 
-      if (createResponse.ok) {
-        const newUser = await createResponse.json();
-
-        localStorage.setItem("loggedInUser", JSON.stringify(newUser));
-
-        alert(`Account created for ${createName}! Redirecting to the questionnaire.`);
-
-        // Navigate to questionnaire and pass accountType
-        navigate("/questionnaire", { state: { accountType } });
-      } else {
+      if (!createResponse.ok) {
         alert("Failed to create account. Please try again.");
+        return;
       }
+
+      const newUser = await createResponse.json();
+
+      
+      localStorage.setItem("loggedInUser", JSON.stringify(newUser));
+
+     
+      await addUserToFirestore(newUser);
+
+      
+      await setUserOnlineStatus(newUser.email, true);
+
+      alert(`Account created for ${createName}!`);
+      navigate("/questionnaire", { state: { accountType } });
     } catch (error) {
       console.error("Error creating account:", error);
       alert("An error occurred. Please try again.");
     }
   };
 
+ 
   return (
     <div className="signup-container">
       <div className="signup-box">
         {!showCreateAccount ? (
           <>
             <h2 className="signup-title">SIGN IN</h2>
-            <p className="signup-intro">Log in by entering your email address and password</p>
+            <p className="signup-intro">
+              Log in by entering your email address and password
+            </p>
 
             <form onSubmit={handleSign} className="signup-form">
               <div className="form-group">
@@ -172,7 +180,7 @@ function Signup() {
                   type="email"
                   className="form-input"
                   value={email}
-                  onChange={(event) => setEmail(event.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 {emailError && <p className="form-error">{emailError}</p>}
@@ -185,7 +193,7 @@ function Signup() {
                     type={showPassword ? "text" : "password"}
                     className="form-input password-input"
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                   <button
@@ -241,29 +249,28 @@ function Signup() {
                 />
               </div>
 
-              {/* Account type selection */}
-            <div className="radio-group">
-              <label>
-                <input
-                  type="radio"
-                  name="accountType"
-                  value="student"
-                  checked={accountType === "student"}
-                  onChange={(e) => setAccountType(e.target.value)}
-                />
-                Student Account
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="accountType"
-                  value="client"
-                  checked={accountType === "client"}
-                  onChange={(e) => setAccountType(e.target.value)}
-                />
-                Client Account
-              </label>
-            </div>
+              <div className="radio-group">
+                <label>
+                  <input
+                    type="radio"
+                    name="accountType"
+                    value="student"
+                    checked={accountType === "student"}
+                    onChange={(e) => setAccountType(e.target.value)}
+                  />
+                  Student Account
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="accountType"
+                    value="client"
+                    checked={accountType === "client"}
+                    onChange={(e) => setAccountType(e.target.value)}
+                  />
+                  Client Account
+                </label>
+              </div>
 
               <div className="form-group">
                 <label className="form-label">PASSWORD</label>
@@ -283,7 +290,9 @@ function Signup() {
                     {showCreatePassword ? "Hide" : "Show"}
                   </button>
                 </div>
-                {createPasswordError && <p className="form-error">{createPasswordError}</p>}
+                {createPasswordError && (
+                  <p className="form-error">{createPasswordError}</p>
+                )}
               </div>
 
               <div className="form-group">
@@ -298,42 +307,43 @@ function Signup() {
                   />
                   <button
                     type="button"
-                    className="toggle-password-btn"
-                    onClick={() => setShowReenterPassword(!showReenterPassword)}
-                  >
-                    {showReenterPassword ? "Hide" : "Show"}
-                  </button>
-                </div>
-                {createPasswordMatchError && (
-                  <p className="form-error">{createPasswordMatchError}</p>
-                )}
-              </div>
-
-              <button type="submit" className="submit-button">
-                Create Account
-              </button>
-            </form>
-
-            <div className="end-text">
-              <p className="short-policy">
-                By creating an account, you agree to the Terms & Conditions and Privacy Policy.
-              </p>
-              <p className="back-to-sign">
-                Already have an account?{" "}
-                <button
-                  type="button"
-                  className="signup-link"
-                  onClick={() => setShowCreateAccount(false)}
+                    className="                  toggle-password-btn"
+                  onClick={() => setShowReenterPassword(!showReenterPassword)}
                 >
-                  Log in
+                  {showReenterPassword ? "Hide" : "Show"}
                 </button>
-              </p>
+              </div>
+              {createPasswordMatchError && (
+                <p className="form-error">{createPasswordMatchError}</p>
+              )}
             </div>
+
+            <button type="submit" className="submit-button">
+              Create Account
+            </button>
+          </form>
+
+          <div className="end-text">
+            <p className="short-policy">
+              By creating an account, you agree to the Terms & Conditions and Privacy Policy.
+            </p>
+            <p className="back-to-sign">
+              Already have an account?{" "}
+              <button
+                type="button"
+                className="signup-link"
+                onClick={() => setShowCreateAccount(false)}
+              >
+                Log in
+              </button>
+            </p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
 }
 
 export default Signup;
+

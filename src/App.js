@@ -1,4 +1,6 @@
 import React from "react";
+import { doc, setDoc, onSnapshot } from "firebase/firestore";
+import { db } from "./firebase";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -9,7 +11,9 @@ import ChatPage from "./pages/ChatPage";
 import ChatListPage from "./pages/ChatListPage"; 
 import Questionnaire from "./pages/Questionnaire";
 import ProfilePage from "./pages/ProfilePage";
+import AllUsers from "./pages/AllUsers";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import Notifications from "./pages/Notifications";
 
 function App() {
   return (
@@ -38,6 +42,14 @@ function App() {
             }
           />
           <Route
+            path="/all-users"
+            element={
+              <ProtectedRoute>
+                <AllUsers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/load"
             element={
               <ProtectedRoute>
@@ -62,7 +74,7 @@ function App() {
             }
           />
           <Route
-            path="/chat/:username"
+            path="/chat/:userId"
             element={
               <ProtectedRoute>
                 <ChatPage />
@@ -74,6 +86,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoute>
+                <Notifications />
               </ProtectedRoute>
             }
           />

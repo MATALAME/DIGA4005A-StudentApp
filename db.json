@@ -1660,7 +1660,8 @@
       "name": "John Doe",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "2",
@@ -1669,7 +1670,8 @@
       "name": "Jane Doe",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "5bfa",
@@ -1678,7 +1680,8 @@
       "password": "John123@",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "ee4a",
@@ -1687,7 +1690,8 @@
       "password": "John123@",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "fa7d",
@@ -1696,7 +1700,8 @@
       "password": "$2b$10$uh8wrthgnHxqlDLyotQbS.iOCYZ9MbW5eV2je0tyzCgGTEpbuH6J6",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "b0fa",
@@ -1724,7 +1729,8 @@
         "phone": "",
         "linkedin": "",
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "9f19",
@@ -1752,7 +1758,8 @@
         "phone": "",
         "linkedin": "",
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "6727",
@@ -1780,7 +1787,8 @@
         "phone": "",
         "linkedin": "",
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "8b88",
@@ -1808,7 +1816,8 @@
         "reviewScore": 4.5,
         "phone": "",
         "linkedin": ""
-      }
+      },
+      "isMock": true
     },
     {
       "id": "6d74",
@@ -1817,7 +1826,8 @@
       "password": "$2b$10$BN7Mg26XTX6ca26BjcPgQepHb5VZNAozwyXZwZvVv4U/5wn3aNYHS",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "2236",
@@ -1826,7 +1836,8 @@
       "password": "$2b$10$jFknihl6i.OcbUBuVV9ZweWn4PGbXDuRN9yLnMIQXycClTaG5bq9e",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "733d",
@@ -1835,7 +1846,8 @@
       "password": "$2b$10$W/jwNm4WSnWhTtpSv6/3zeH3.d.CJZtnt6aSpEGvBjTajSgKQspi6",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "a1d4",
@@ -1844,7 +1856,8 @@
       "password": "$2b$10$EtdvXyCP3L8hhpp9r9Jbquf6ymR0HJHkwV2MpAmPnVm6BqllpOnbe",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "fa0c",
@@ -1853,7 +1866,8 @@
       "password": "$2b$10$hsGjNw/J.zIiKL2Yn0NFjuy8Gnw8elmFnuumN8/QB9zZM6IUcol22",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "5c9d",
@@ -1862,7 +1876,8 @@
       "password": "$2b$10$hdElXitPXSdve0wk.g8Pz.WPwmdb8s/WoxcAOwAPPj3PeHHTWqmLm",
       "profile": {
         "reviewScore": 0
-      }
+      },
+      "isMock": true
     },
     {
       "id": "sfd5",
@@ -1871,16 +1886,99 @@
         "reviewScore": 4.5
       },
       "email": "refilwe@example.com",
-      "password": "$2b$10$hdElXitPXSdve0wk.g8Pz.WPwmdb8s/WoxcAOwAPPj3PeHHTWqmLm"
+      "password": "$2b$10$hdElXitPXSdve0wk.g8Pz.WPwmdb8s/WoxcAOwAPPj3PeHHTWqmLm",
+      "isMock": true
     },
     {
+      "id": "ed49",
+      "name": "Mat Armstrong",
+      "email": "armstrongmat@gmail.com",
+      "password": "$2b$10$oUlVvqxRASWn6sWz7tcnLeheYdpTZgHlfr6wZSmrjHmr.6RqJlT0G",
+      "isMock": true
+    },
+    {
+      "id": "c6bc",
+      "name": "MJ",
+      "email": "mj@gmail.com",
+      "password": "$2b$10$lo9tgwaAX4XSCrzY5KVZzOOlxLLC2ZIO/GqSkO5bBbEr95Up9/5OC",
+      "accountType": "client",
+      "isMock": true
+    },
+    {
+      "id": "781d",
+      "name": "JIJ",
+      "email": "jij@gmail.com",
+      "password": "$2b$10$u2CYpM0m3U3ZMn0Pw01InuF7u7F9Tr.srDyC36Zv4C32c7B5rpbZC",
+      "isMock": true
+    },
+    {
+      "id": "031e",
+      "name": "Client",
+      "email": "client@gmail.com",
+      "password": "$2b$10$OzvJ8eRETBYksGgvM1jYl.khcc7ePk/4gS4tc5D54rsKpaHJk0baa",
+      "isMock": true
+    },
+    {
+      "id": "3fd9",
+      "name": "yH",
+      "email": "yh@gmail.com",
+      "password": "$2b$10$QmalaqDSpCWlDbJ9.Msd/.cm0ECrjg7OOXl33v7R.A.Nde1SmrfC2",
+      "accountType": "client",
+      "isMock": true
+    },
+    {
+      "id": "e932",
+      "name": "hjh n",
+      "email": "hjh@gmail.com",
+      "password": "$2b$10$iVjEee2yucKyK4xDx4BwSuGywZjw7rVRGIiSWFqpYMXE9K3iilLvu",
+      "accountType": "student",
+      "isMock": true
+    },
+    {
+      "id": "bfa9",
+      "name": "hgsy@gmail.com",
+      "email": "hgsy@gmail.com",
+      "password": "$2b$10$/eSvR/3Yj27N/nN3Yg1U1eJoaupmQ00OqPXZUrPOsoSqyOUJNP.OC",
+      "accountType": "client",
+      "isMock": true
+    },
+    {
+      "id": "774b",
+      "name": "Client Doe",
+      "email": "clientdoe@example.com",
+      "password": "$2b$10$QkN0LJJB4LCV4S891FRlLeb523B5b2U0ke76QjSGgx4d3YRz0qBia",
+      "accountType": "client",
       "profile": {
-        "name": "",
+        "name": "Client",
         "middleName": "",
-        "surname": "",
-        "gender": "",
-        "age": "",
+        "surname": "Doe",
+        "gender": "Male",
+        "age": "30",
+        "email": "",
+        "phone": "",
+        "street": "",
+        "suburb": "",
+        "city": "",
+        "province": "",
+        "zip": "",
+        "skills": []
+      },
+      "isMock": false
+    },
+    {
+      "id": "a2cd",
+      "name": "Real Doe",
+      "email": "realdoe@example.com",
+      "password": "$2b$10$tDxB9fFD.d3fo9nVeWhrWeA5mpJdxF1m0B7TN9NXj1xzvrxmENvl2",
+      "accountType": "student",
+      "profile": {
+        "name": "Real",
+        "middleName": "",
+        "surname": "Doe",
+        "gender": "Male",
+        "age": "30",
         "institution": "",
+        "institutionLogo": "",
         "faculty": "",
         "studyType": "",
         "yearOfStudy": "",
@@ -1889,185 +1987,111 @@
         "city": "",
         "province": "",
         "zip": "",
-        "skills": [
-          "Tutoring",
-          "Cleaning",
-          "Photography"
-        ],
+        "skills": [],
         "phone": "",
         "linkedin": "",
         "instagram": "",
-        "facebook": "",
-        "reviewScore": 0
+        "facebook": ""
       },
-      "id": "96ef"
+      "isMock": false
     },
     {
-      "profile": {
-        "name": "Kenan",
-        "middleName": "Larry",
-        "surname": "Copeland",
-        "gender": "Male",
-        "age": "21",
-        "institution": "University of the Witwatersrand",
-        "faculty": "Humanities",
-        "studyType": "Full-Time",
-        "yearOfStudy": "1st",
-        "street": "23 Thomas Road",
-        "suburb": "Flora",
-        "city": "Johannesburg",
-        "province": "Gauteng",
-        "zip": "9832",
-        "skills": [
-          "Tutoring",
-          "Errands",
-          "Photography",
-          "Repairs"
-        ],
-        "phone": "0753672865",
-        "linkedin": "Kenan C",
-        "instagram": "kenan.c",
-        "facebook": "kenansdiary",
-        "institutionLogo": "/static/media/witsicon.b718e6876ac2acd6a876.png",
-        "reviewScore": 0
-      },
-      "id": "8d63"
+      "id": "8fa9",
+      "name": "User Doe",
+      "email": "userdoe@example.com",
+      "password": "$2b$10$D1eF7XQRJ1tq3Vrdjx472eFsf1SWA6j4z2O098HGUmLZmkAxZF9OG",
+      "accountType": "student"
     },
     {
+      "id": "9121",
+      "name": "New Doe",
+      "email": "newdoe@example.com",
+      "password": "$2b$10$YFc.gFTMNEY5VVia3CaA3eT1L41nlNM7Ny7eqs/l6/BfyQVTMxRqi",
+      "accountType": "student",
       "profile": {
-        "name": "Allies",
-        "middleName": "Bernard",
-        "surname": "Noah",
+        "name": "New",
+        "middleName": "",
+        "surname": "Doe",
         "gender": "Male",
-        "age": "24",
-        "institution": "University of Cape Town",
-        "faculty": "Humanities",
-        "studyType": "Full-Time",
-        "yearOfStudy": "3rd",
+        "age": "30",
+        "institution": "",
+        "institutionLogo": "",
+        "faculty": "",
+        "studyType": "",
+        "yearOfStudy": "",
         "street": "",
         "suburb": "",
         "city": "",
         "province": "",
         "zip": "",
+        "skills": [],
+        "phone": "",
+        "linkedin": "",
+        "instagram": "",
+        "facebook": ""
+      }
+    },
+    {
+      "id": "4611",
+      "name": "Question Doe",
+      "email": "questiondoe@example.com",
+      "password": "$2b$10$Nta9Z5V984btW.57bjAH9ujW9SkI/yt9TBxl0PYuev/DNeq/LMRJu",
+      "accountType": "student",
+      "profile": {
+        "name": "Question",
+        "middleName": "",
+        "surname": "Doe",
+        "gender": "Male",
+        "age": "25",
+        "institution": "Stellenbosch University",
+        "institutionLogo": "/static/media/Stelliesicon.fa5b9a8cbf6e26b30b29.png",
+        "faculty": "Law",
+        "studyType": "Full-Time",
+        "yearOfStudy": "1st",
+        "street": "12",
+        "suburb": "4",
+        "city": "2",
+        "province": "34",
+        "zip": "34",
         "skills": [
-          "Photography",
-          "Cleaning",
           "Tutoring"
         ],
         "phone": "",
         "linkedin": "",
         "instagram": "",
-        "facebook": "",
-        "institutionLogo": "/static/media/ucticon.d3ffbaf46255f7b0812d.png"
-      },
-      "id": "4ce1"
+        "facebook": ""
+      }
     },
     {
+      "id": "f781",
+      "name": "Student Doe",
+      "email": "studentdoe@example.com",
+      "password": "$2b$10$y0UYYphx7MEBeL0tTzeYge/wGlFchA5uqj93ttsOQmVPAsxnX6bPa",
+      "accountType": "student",
       "profile": {
-        "name": "Junes ",
-        "middleName": "Issac",
-        "surname": "Newton",
+        "name": "Student",
+        "middleName": "",
+        "surname": "Doe",
         "gender": "Male",
-        "age": "34",
-        "institution": "North-West University",
-        "faculty": "Science",
-        "studyType": "Part-Time",
-        "yearOfStudy": "3rd",
-        "street": "34 Craze Street ",
-        "suburb": "Baze",
-        "city": "Pretoria",
-        "province": "Gauteng",
-        "zip": "0700",
+        "age": "20",
+        "institution": "University of KwaZulu-Natal",
+        "institutionLogo": "/static/media/ukznicon.3e1f5828abe12566a5cd.png",
+        "faculty": "Law",
+        "studyType": "Full-Time",
+        "yearOfStudy": "1st",
+        "street": "1",
+        "suburb": "3",
+        "city": "2",
+        "province": "4",
+        "zip": "5",
         "skills": [
-          "Tutoring",
-          "Photography",
-          "Errands",
-          "Deliveries"
+          "Tutoring"
         ],
-        "phone": "074 234 6739",
-        "linkedin": "Alex Naul",
-        "instagram": "alex.n",
-        "facebook": "alex.n",
-        "institutionLogo": "/static/media/nwuicon.0a6f825aa582411a88d8.png"
-      },
-      "id": "fa6a"
-    },
-    {
-      "profile": {
-        "name": "Refilwe Makgatho",
-        "middleName": "Issac",
-        "surname": "Newton",
-        "gender": "Male",
-        "age": "34",
-        "institution": "North-West University",
-        "faculty": "Science",
-        "reviewScore": 4.5,
-        "studyType": "Part-Time",
-        "yearOfStudy": "3rd",
-        "street": "34 Craze Street ",
-        "suburb": "Baze",
-        "city": "Pretoria",
-        "province": "Gauteng",
-        "zip": "0700",
-        "skills": [
-          "Tutoring",
-          "Photography",
-          "Errands",
-          "Deliveries"
-        ],
-        "phone": "074 234 6739",
-        "linkedin": "Alex Naul",
-        "instagram": "alex.n",
-        "facebook": "alex.n",
-        "institutionLogo": "/static/media/nwuicon.0a6f825aa582411a88d8.png"
-      },
-      "id": "fa6a"
-    },
-    {
-      "id": "ed49",
-      "name": "Mat Armstrong",
-      "email": "armstrongmat@gmail.com",
-      "password": "$2b$10$oUlVvqxRASWn6sWz7tcnLeheYdpTZgHlfr6wZSmrjHmr.6RqJlT0G"
-    },
-    {
-      "id": "c6bc",
-      "name": "MJ",
-      "email": "mj@gmail.com",
-      "password": "$2b$10$lo9tgwaAX4XSCrzY5KVZzOOlxLLC2ZIO/GqSkO5bBbEr95Up9/5OC",
-      "accountType": "client"
-    },
-    {
-      "id": "781d",
-      "name": "JIJ",
-      "email": "jij@gmail.com",
-      "password": "$2b$10$u2CYpM0m3U3ZMn0Pw01InuF7u7F9Tr.srDyC36Zv4C32c7B5rpbZC"
-    },
-    {
-      "id": "031e",
-      "name": "Client",
-      "email": "client@gmail.com",
-      "password": "$2b$10$OzvJ8eRETBYksGgvM1jYl.khcc7ePk/4gS4tc5D54rsKpaHJk0baa"
-    },
-    {
-      "id": "3fd9",
-      "name": "yH",
-      "email": "yh@gmail.com",
-      "password": "$2b$10$QmalaqDSpCWlDbJ9.Msd/.cm0ECrjg7OOXl33v7R.A.Nde1SmrfC2",
-      "accountType": "client"
-    },
-    {
-      "id": "e932",
-      "name": "hjh n",
-      "email": "hjh@gmail.com",
-      "password": "$2b$10$iVjEee2yucKyK4xDx4BwSuGywZjw7rVRGIiSWFqpYMXE9K3iilLvu",
-      "accountType": "student"
-    },
-    {
-      "id": "bfa9",
-      "name": "hgsy@gmail.com",
-      "email": "hgsy@gmail.com",
-      "password": "$2b$10$/eSvR/3Yj27N/nN3Yg1U1eJoaupmQ00OqPXZUrPOsoSqyOUJNP.OC",
-      "accountType": "client"
+        "phone": "",
+        "linkedin": "",
+        "instagram": "",
+        "facebook": ""
+      }
     }
   ]
 }

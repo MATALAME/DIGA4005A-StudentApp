@@ -14,10 +14,9 @@ export default function Layout({ children }) {
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (!loggedInUser) return;
-
-    const notificationsRef = collection(db, "notifications", loggedInUser.email, "messages");
-
-    //Checks for new notificationns
+  
+    const notificationsRef = collection(db, "notifications", loggedInUser.id, "messages"); // ✅ use id
+  
     const unsubscribe = onSnapshot(notificationsRef, (snapshot) => {
       const newNotifications = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -25,9 +24,10 @@ export default function Layout({ children }) {
       }));
       setNotifications(newNotifications);
     });
-
+  
     return () => unsubscribe();
   }, []);
+  
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 

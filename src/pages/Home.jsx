@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import JobComponent from "../Components/JobComponent";
-import { useJobContext } from "../Context/JobContext";
-import "../Styling/Home.css"; 
 import Layout from "../Components/Layout";
+import "../Styling/Home.css";
+import { useJobContext } from "../Context/JobContext";
 
 export default function Home() {
-  const { jobs } = useJobContext();
-
+  const { jobs } = useJobContext(); 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [filteredJobs, setFilteredJobs] = useState([]);
 
   const categories = [
     { name: "All", icon: "🌍" },
@@ -17,17 +17,25 @@ export default function Home() {
     { name: "Other Jobs", icon: "💼" },
   ];
 
-  const filteredJobs =
-    selectedCategory === "All"
-      ? jobs
-      : jobs.filter((job) => job.category === selectedCategory);
+  
+  useEffect(() => {
+    const sortedJobs = [...jobs].sort((a, b) => {
+      const tA = a.timestamp?.seconds || 0; 
+      const tB = b.timestamp?.seconds || 0;
+      return tB - tA; 
+    });
 
-  const jobsToShow = filteredJobs.slice(0, 10);
+    const filtered =
+      selectedCategory === "All"
+        ? sortedJobs
+        : sortedJobs.filter((job) => job.category === selectedCategory);
+
+    setFilteredJobs(filtered);
+  }, [jobs, selectedCategory]);
 
   return (
     <Layout>
       <div className="home-wrapper">
-        {/* CONTENT */}
         <div className="home-content">
           {/* Filter Buttons */}
           <div className="filter-buttons">
@@ -44,15 +52,19 @@ export default function Home() {
               </button>
             ))}
           </div>
-            <div className="home-title">
-              <h2>FIND JOBS</h2>
-            </div>
+
+          <div className="home-title">
+            <h2>FIND JOBS</h2>
+          </div>
+
           {/* Job Container */}
           <div className="job-container">
-            {jobsToShow.length === 0 ? (
-              <p>Loading jobs...</p>
+            {filteredJobs.length === 0 ? (
+              <p>No jobs available.</p>
             ) : (
-              jobsToShow.map((job) => <JobComponent key={job.id} job={job} />)
+              filteredJobs.map((job) => (
+                <JobComponent key={job.id} job={job} />
+              ))
             )}
           </div>
         </div>

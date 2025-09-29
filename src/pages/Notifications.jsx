@@ -38,7 +38,6 @@ export default function Notifications() {
 
     await updateDoc(notificationRef, { read: true });
 
-    // Fetching the sender's full user data
     const senderRef = doc(db, "users", notification.senderId);
     const senderSnap = await getDoc(senderRef);
 

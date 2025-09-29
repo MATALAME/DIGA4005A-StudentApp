@@ -137,4 +137,48 @@
     font-weight: 500;
     color: #333;
   }
+
+  .create-job-button {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
   
+  .create-job-button:hover {
+    background-color: #16316e;
+  }
+  
+  .job-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .job-form input,
+  .job-form textarea,
+  .job-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .job-form button {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .job-form button:hover {
+    background-color: #16316e;
+  }
+

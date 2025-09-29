@@ -1,11 +1,11 @@
 import React from "react";
-import { doc, setDoc, onSnapshot } from "firebase/firestore";
-import { db } from "./firebase";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { JobProvider } from "./Context/JobContext";
+
+import UploadMockJobs from "./Components/UploadMockJobs"; 
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Load from "./pages/Load";
-import { JobProvider } from "./Context/JobContext";
 import JobDetails from "./pages/JobDetails";
 import ChatPage from "./pages/ChatPage";
 import ChatListPage from "./pages/ChatListPage"; 
@@ -14,10 +14,12 @@ import ProfilePage from "./pages/ProfilePage";
 import AllUsers from "./pages/AllUsers";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Notifications from "./pages/Notifications";
+import UploadMockJobTimestamps from "./Components/UploadMockJobTimestamps"; 
 
 function App() {
   return (
     <JobProvider>
+
       <Router>
         <Routes>
           {/* Public Routes */}

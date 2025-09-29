@@ -24,7 +24,7 @@ export const addUserToFirestore = async (user) => {
     );
     console.log("User added to Firestore:", user.id);
 
-    // Start heartbeat for online status (periodic checks)
+    // Start heartbeat for online status (the hearbeat is just periodic checks, like a "tick") 
     startUserHeartbeat(user.id);
   } catch (error) {
     console.error("Error adding user to Firestore:", error);
@@ -32,7 +32,7 @@ export const addUserToFirestore = async (user) => {
 };
 
 /**
- * Update online status for a user
+ * Update online status for a user 
  * @param {string} userId
  * @param {boolean} status
  */
@@ -53,7 +53,7 @@ export const setUserOnlineStatus = async (userId, status = true) => {
 };
 
 /**
- * Heartbeat system: updates lastActive every 10 seconds
+ * Heartbeat system updates lastActive every 10 seconds
  * @param {string} userId
  */
 export const startUserHeartbeat = (userId) => {
@@ -62,7 +62,8 @@ export const startUserHeartbeat = (userId) => {
 
   const interval = setInterval(async () => {
     try {
-      await setDoc(userRef, { lastActive: serverTimestamp() }, { merge: true });
+   
+      await setDoc(userRef, { lastActive: serverTimestamp(), online: true }, { merge: true });
     } catch (error) {
       console.error("Error updating heartbeat:", error);
     }
@@ -87,7 +88,7 @@ export const startUserHeartbeat = (userId) => {
 };
 
 /**
- * Sends a notification automatically when a message is sent
+ * Sends a notification when a message is sent
  * @param {object} sender - { id, name, email }
  * @param {object} receiver - { id, name, email }
  * @param {string} messageText
@@ -110,5 +111,29 @@ export const sendNotification = async (sender, receiver, messageText) => {
     console.log(`Notification sent to ${receiver.id} from ${sender.id}`);
   } catch (error) {
     console.error("Error sending notification:", error);
+  }
+};
+
+/**
+ * Adding a new job to Firestore that way it can be done automatically one signup and we dont need manually add it
+ * @param {object} job 
+ */
+export const addJobToFirestore = async (job) => {
+  if (!job?.id) return;
+
+  const jobRef = doc(db, "jobs", job.id); 
+
+  try {
+    await setDoc(
+      jobRef,
+      {
+        ...job,
+        timestamp: serverTimestamp(), // Adds timestamp when the job was created, this is NEEDED for users/jobs to be disaplayed correctly
+      },
+      { merge: true }
+    );
+    console.log("Job added to Firestore:", job.id);
+  } catch (error) {
+    console.error("Error adding job to Firestore:", error);
   }
 };

@@ -23,7 +23,8 @@ function Signup() {
   const [showCreatePassword, setShowCreatePassword] = useState(false);
   const [showReenterPassword, setShowReenterPassword] = useState(false);
   const [createPasswordError, setCreatePasswordError] = useState("");
-  const [createPasswordMatchError, setCreatePasswordMatchError] = useState("");
+  const [createPasswordMatchError, setCreatePasswordMatchError] =
+    useState("");
   const [showCreateAccount, setShowCreateAccount] = useState(false);
   const [accountType, setAccountType] = useState("student");
 
@@ -76,14 +77,15 @@ function Signup() {
         return;
       }
 
-    
-      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      // Ensure user has an id (fallback to email if old users)
+      const userWithId = { ...user, id: user.id || user.email };
+      localStorage.setItem("loggedInUser", JSON.stringify(userWithId));
 
-     
-      await setUserOnlineStatus(user.email, true);
+    
+      setUserOnlineStatus(user.email, true);
 
       alert(`Welcome back, ${user.name}!`);
-      navigate("/home");
+      setTimeout(() => navigate("/home"), 100);
     } catch (error) {
       console.error("Error during sign in:", error);
       alert("An error occurred. Please try again.");
@@ -94,13 +96,14 @@ function Signup() {
   const handleCreateAccount = async (event) => {
     event.preventDefault();
 
-  
     if (createPassword.length < 8) {
       setCreatePasswordError("Password must be at least 8 characters long");
       return;
     }
     if (!/[A-Z]/.test(createPassword)) {
-      setCreatePasswordError("Password must include at least one capital letter");
+      setCreatePasswordError(
+        "Password must include at least one capital letter"
+      );
       return;
     }
     if (!/[0-9]/.test(createPassword)) {
@@ -115,22 +118,23 @@ function Signup() {
     } else setCreatePasswordMatchError("");
 
     try {
-     
       const response = await fetch("http://localhost:5001/users");
       const users = await response.json();
       if (users.some((u) => u.email === createEmail)) {
-        alert("This email is already registered. Please use a different email.");
+        alert(
+          "This email is already registered. Please use a different email."
+        );
         return;
       }
 
-      // Hash password so we dont store plain text passwords ()
       const hashedPassword = await bcrypt.hash(createPassword, 10);
 
-      // Create user locally (new users also get sent to firebase after signup)
+      // Create user in JSON Server
       const createResponse = await fetch("http://localhost:5001/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          id: Date.now().toString(),
           name: createName,
           email: createEmail,
           password: hashedPassword,
@@ -145,24 +149,24 @@ function Signup() {
 
       const newUser = await createResponse.json();
 
-      
       localStorage.setItem("loggedInUser", JSON.stringify(newUser));
 
-     
-      await addUserToFirestore(newUser);
-
-      
-      await setUserOnlineStatus(newUser.email, true);
+    
+      addUserToFirestore(newUser);
+      setUserOnlineStatus(newUser.email, true);
 
       alert(`Account created for ${createName}!`);
-      navigate("/questionnaire", { state: { accountType } });
+      setTimeout(
+        () => navigate("/questionnaire", { state: { accountType } }),
+        100
+      );
     } catch (error) {
       console.error("Error creating account:", error);
       alert("An error occurred. Please try again.");
     }
   };
 
- 
+  // ------------------ UI ------------------
   return (
     <div className="signup-container">
       <div className="signup-box">
@@ -204,7 +208,9 @@ function Signup() {
                     {showPassword ? "Hide" : "Show"}
                   </button>
                 </div>
-                {passwordError && <p className="form-error">{passwordError}</p>}
+                {passwordError && (
+                  <p className="form-error">{passwordError}</p>
+                )}
               </div>
 
               <button type="submit" className="submit-button">
@@ -307,43 +313,45 @@ function Signup() {
                   />
                   <button
                     type="button"
-                    className="                  toggle-password-btn"
-                  onClick={() => setShowReenterPassword(!showReenterPassword)}
-                >
-                  {showReenterPassword ? "Hide" : "Show"}
-                </button>
+                    className="toggle-password-btn"
+                    onClick={() =>
+                      setShowReenterPassword(!showReenterPassword)
+                    }
+                  >
+                    {showReenterPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
+                {createPasswordMatchError && (
+                  <p className="form-error">{createPasswordMatchError}</p>
+                )}
               </div>
-              {createPasswordMatchError && (
-                <p className="form-error">{createPasswordMatchError}</p>
-              )}
-            </div>
 
-            <button type="submit" className="submit-button">
-              Create Account
-            </button>
-          </form>
-
-          <div className="end-text">
-            <p className="short-policy">
-              By creating an account, you agree to the Terms & Conditions and Privacy Policy.
-            </p>
-            <p className="back-to-sign">
-              Already have an account?{" "}
-              <button
-                type="button"
-                className="signup-link"
-                onClick={() => setShowCreateAccount(false)}
-              >
-                Log in
+              <button type="submit" className="submit-button">
+                Create Account
               </button>
-            </p>
+            </form>
+
+            <div className="end-text">
+              <p className="short-policy">
+                By creating an account, you agree to the Terms & Conditions and
+                Privacy Policy.
+              </p>
+              <p className="back-to-sign">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  className="signup-link"
+                  onClick={() => setShowCreateAccount(false)}
+                >
+                  Log in
+                </button>
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default Signup;
-

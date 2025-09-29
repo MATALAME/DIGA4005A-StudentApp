@@ -20,11 +20,11 @@ function Load() {
     }
   }, [currentPage]);
 
-  const handleNext = () => {  // This function runs when the "Next" button is clicked, 
+  const handleNext = () => {  
     if (currentPage < 4) {
-      setCurrentPage(prev => prev + 1); // If the user is on either page 1 or 2, it should go to the next page
+      setCurrentPage(prev => prev + 1); 
     } else { 
-      navigate('/signup');// If the user is on page 3, it navigates to the signup page
+      navigate('/signup');
     }
   };
 

@@ -21,7 +21,7 @@ export default function AllUsers() {
   .map((doc) => {
     const data = doc.data();
 
-    // Only display users with a real name/email
+    
     if (!data.name || !data.email) return null;
 
     const lastActive = data.lastActive

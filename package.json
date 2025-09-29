@@ -10,7 +10,9 @@
     "@testing-library/user-event": "^13.5.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "firebase": "^12.3.0",
+    "json-server": "^0.17.4",
     "lucide-react": "^0.526.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -21,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "json-server --watch db.json --port 5001",
+    "server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,8 +45,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "json-server": "^1.0.0-beta.3"
   }
 }

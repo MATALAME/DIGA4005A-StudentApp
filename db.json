@@ -2257,6 +2257,68 @@
         "instagram": "",
         "facebook": ""
       }
+    },
+    {
+      "id": "1761301134896",
+      "name": "Gary Doe",
+      "email": "garydoe@example.com",
+      "password": "$2b$10$JdPH3gYyto1apTb/Hh0hCO/G47EMYIn1ntzuKUw0rWy6X89t/MiPS",
+      "accountType": "student",
+      "profile": {
+        "name": "Gary",
+        "middleName": "",
+        "surname": "Doe",
+        "gender": "Male",
+        "age": "20",
+        "institution": "University of the Witwatersrand",
+        "institutionLogo": "/static/media/witsicon.b718e6876ac2acd6a876.png",
+        "faculty": "Law",
+        "studyType": "Full-Time",
+        "yearOfStudy": "1st",
+        "street": "123 Student Street",
+        "suburb": "Studentburb",
+        "city": "Johannesburg",
+        "province": "Gauteng",
+        "zip": "2094",
+        "skills": [
+          "Tutoring"
+        ],
+        "phone": "",
+        "linkedin": "",
+        "instagram": "",
+        "facebook": ""
+      }
+    },
+    {
+      "id": "1761303975304",
+      "name": "Matt Doe",
+      "email": "mattdoe@example.com",
+      "password": "$2b$10$eq1.J1GXtzI6B3IjQgXGleHvkAmMKErzvB9kIE5Bc/46J17h5.XDm",
+      "accountType": "student",
+      "profile": {
+        "name": "Matt",
+        "middleName": "",
+        "surname": "Doe",
+        "gender": "Male",
+        "age": "20",
+        "institution": "University of the Witwatersrand",
+        "institutionLogo": "/static/media/witsicon.b718e6876ac2acd6a876.png",
+        "faculty": "Law",
+        "studyType": "Full-Time",
+        "yearOfStudy": "2nd",
+        "street": "1",
+        "suburb": "2",
+        "city": "3",
+        "province": "4",
+        "zip": "5",
+        "skills": [
+          "Tutoring"
+        ],
+        "phone": "",
+        "linkedin": "",
+        "instagram": "",
+        "facebook": ""
+      }
     }
   ]
 }

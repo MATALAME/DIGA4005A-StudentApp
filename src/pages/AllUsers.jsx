@@ -18,32 +18,28 @@ export default function AllUsers() {
 
     const unsubscribe = onSnapshot(usersRef, (snapshot) => {
       const fetchedUsers = snapshot.docs
-  .map((doc) => {
-    const data = doc.data();
+        .map((doc) => {
+          const data = doc.data();
+          if (!data.name || !data.email) return null;
 
-    
-    if (!data.name || !data.email) return null;
+         
+          const lastActive = data.lastActive?.toDate?.() || new Date(0);
+          const isOnline = new Date() - lastActive < 30000; 
 
-    const lastActive = data.lastActive
-      ? data.lastActive.toDate
-        ? data.lastActive.toDate()
-        : new Date(data.lastActive)
-      : new Date(0);
-
-    const isOnline = new Date() - lastActive < 30000;
-
-    return {
-      id: doc.id,
-      name: data.name,
-      email: data.email,
-      accountType: data.accountType || "student",
-      online: isOnline,
-    };
-  })
-  .filter((user) => user && user.id !== loggedInUser.id);
-
+          return {
+            id: doc.id,
+            name: data.name,
+            email: data.email,
+            accountType: data.accountType || "student",
+            online: isOnline,
+          };
+        })
+        .filter((user) => user && user.id !== loggedInUser.id);
 
       setUsers(fetchedUsers);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error fetching users:", error);
       setLoading(false);
     });
 

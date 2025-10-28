@@ -121,19 +121,20 @@ export const sendNotification = async (sender, receiver, messageText) => {
 export const addJobToFirestore = async (job) => {
   if (!job?.id) return;
 
-  const jobRef = doc(db, "jobs", job.id); 
+  const jobRef = doc(db, "jobs", job.id);
 
   try {
     await setDoc(
       jobRef,
       {
         ...job,
-        timestamp: serverTimestamp(), // Adds timestamp when the job was created, this is NEEDED for users/jobs to be disaplayed correctly
+        timestamp: serverTimestamp(), 
       },
       { merge: true }
     );
-    console.log("Job added to Firestore:", job.id);
+    console.log("Job added to Firestore with timestamp:", job.id);
   } catch (error) {
     console.error("Error adding job to Firestore:", error);
   }
 };
+

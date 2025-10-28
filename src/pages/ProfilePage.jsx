@@ -4,6 +4,8 @@ import { useJobContext } from "../Context/JobContext";
 import Layout from "../Components/Layout";
 import "../Styling/ProfilePage.css";
 import StarRating from "../Components/StarRating";
+import { db } from "../firebase";
+import { doc, setDoc, getDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState(null);
@@ -24,40 +26,53 @@ function ProfilePage() {
   const { addJob } = useJobContext();
   const navigate = useNavigate();
 
+  // ---------------- Load profile from Firestore ----------------
   useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    if (loggedInUser) {
-      const profile = loggedInUser.profile || {};
-      setProfileData({
-        name: loggedInUser.name || profile.name || "Unnamed",
-        email: loggedInUser.email || profile.email || "Unknown",
-        accountType: loggedInUser.accountType,
-        skills: profile.skills || [],
-        institution: profile.institution || "",
-        institutionLogo: profile.institutionLogo || "",
-        faculty: profile.faculty || "",
-        studyType: profile.studyType || "",
-        yearOfStudy: profile.yearOfStudy || "",
-        street: profile.street || "",
-        suburb: profile.suburb || "",
-        city: profile.city || "",
-        province: profile.province || "",
-        zip: profile.zip || "",
-        ...profile,
-      });
-      setAccountType(loggedInUser.accountType);
-    }
+    const fetchProfile = async () => {
+      const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+      if (!loggedInUser) return;
+
+      const userRef = doc(db, "users", loggedInUser.id);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+        const profile = data.profile || {};
+        setProfileData({
+          name: loggedInUser.name || profile.name || "Unnamed",
+          email: loggedInUser.email || profile.email || "Unknown",
+          accountType: loggedInUser.accountType,
+          skills: profile.skills || [],
+          institution: profile.institution || "",
+          institutionLogo: profile.institutionLogo || "",
+          faculty: profile.faculty || "",
+          studyType: profile.studyType || "",
+          yearOfStudy: profile.yearOfStudy || "",
+          street: profile.street || "",
+          suburb: profile.suburb || "",
+          city: profile.city || "",
+          province: profile.province || "",
+          zip: profile.zip || "",
+          reviewScore: profile.reviewScore || 0,
+          ...profile,
+        });
+        setAccountType(loggedInUser.accountType);
+      }
+    };
+
+    fetchProfile();
   }, []);
 
+  // ---------------- Handle job form input ----------------
   const handleInputChange = (e) => {
     setJobDetails({ ...jobDetails, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
+  // ---------------- Create job and save to Firestore ----------------
   const handleCreateJob = async () => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (!loggedInUser) return alert("You must be logged in to create a job.");
-
     if (accountType !== "client") return alert("Only clients can post jobs.");
 
     const requiredFields = [
@@ -80,18 +95,19 @@ function ProfilePage() {
       return;
     }
 
-    const newJob = {
-      ...jobDetails,
-      username: loggedInUser.name,
-      profilePhoto: "default-avatar.png",
-      timePosted: "Just now",
-      reviewScore: 0,
-      id: Date.now().toString(),
-      userId: loggedInUser.id,
-    };
-
     try {
-      await addJob(newJob);
+      const jobsRef = collection(db, "jobs");
+      const newJob = {
+        ...jobDetails,
+        username: loggedInUser.name,
+        profilePhoto: "default-avatar.png",
+        timestamp: serverTimestamp(),
+        reviewScore: 0,
+        userId: loggedInUser.id,
+      };
+
+      await addDoc(jobsRef, newJob);
+
       alert("Job listing created successfully!");
       setShowJobForm(false);
       navigate("/home");
@@ -115,7 +131,7 @@ function ProfilePage() {
             <div className="profile-info">
               <h2>{profileData.name}'s Profile</h2>
               <div className="star-rating">
-                {profileData.reviewScore ? (
+                {profileData.reviewScore > 0 ? (
                   <StarRating rating={profileData.reviewScore} />
                 ) : (
                   <p>No reviews yet</p>
@@ -125,42 +141,38 @@ function ProfilePage() {
           </div>
 
           {/* Student Info */}
-{accountType === "student" && (
-  <div className="profile-section">
-    <h3>Student Info</h3>
-
-    <div className="institution-info">
-      {profileData.institutionLogo && (
-        <img
-          src={profileData.institutionLogo}
-          alt={profileData.institution}
-          className="institution-logo"
-        />
-      )}
-      <span className="institution-name">{profileData.institution}</span>
-    </div>
-
-    <p>Faculty: {profileData.faculty}</p>
-    <p>Study Type: {profileData.studyType}</p>
-    <p>Year of Study: {profileData.yearOfStudy}</p>
-    <p>
-      Location: {profileData.suburb}, {profileData.city}, {profileData.province}
-    </p>
-
-    <div className="skills">
-      {profileData.skills?.length > 0 ? (
-        profileData.skills.map((skill, idx) => (
-          <span key={idx} className="skill-tag">
-            {skill}
-          </span>
-        ))
-      ) : (
-        <p className="no-skills">No skills listed</p>
-      )}
-    </div>
-  </div>
-)}
-
+          {accountType === "student" && (
+            <div className="profile-section">
+              <h3>Student Info</h3>
+              <div className="institution-info">
+                {profileData.institutionLogo && (
+                  <img
+                    src={profileData.institutionLogo}
+                    alt={profileData.institution}
+                    className="institution-logo"
+                  />
+                )}
+                <span className="institution-name">{profileData.institution}</span>
+              </div>
+              <p>Faculty: {profileData.faculty}</p>
+              <p>Study Type: {profileData.studyType}</p>
+              <p>Year of Study: {profileData.yearOfStudy}</p>
+              <p>
+                Location: {profileData.suburb}, {profileData.city}, {profileData.province}
+              </p>
+              <div className="skills">
+                {profileData.skills?.length > 0 ? (
+                  profileData.skills.map((skill, idx) => (
+                    <span key={idx} className="skill-tag">
+                      {skill}
+                    </span>
+                  ))
+                ) : (
+                  <p className="no-skills">No skills listed</p>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Client Info */}
           {accountType === "client" && (
@@ -206,9 +218,7 @@ function ProfilePage() {
                 value={jobDetails.description}
                 onChange={handleInputChange}
               />
-              {errors.description && (
-                <p className="error-text">{errors.description}</p>
-              )}
+              {errors.description && <p className="error-text">{errors.description}</p>}
 
               <input
                 type="number"

@@ -1,4 +1,4 @@
-// This file was used to upload our mock jobs to firestore
+// This file was used to upload our mock jobs to firestore (once off thing)
 import React, { useEffect } from "react";
 import { db } from "../firebase";
 import { collection, doc, setDoc } from "firebase/firestore";

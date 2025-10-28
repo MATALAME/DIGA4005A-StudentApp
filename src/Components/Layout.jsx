@@ -15,7 +15,7 @@ export default function Layout({ children }) {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (!loggedInUser) return;
   
-    const notificationsRef = collection(db, "notifications", loggedInUser.id, "messages"); // ✅ use id
+    const notificationsRef = collection(db, "notifications", loggedInUser.id, "messages"); 
   
     const unsubscribe = onSnapshot(notificationsRef, (snapshot) => {
       const newNotifications = snapshot.docs.map((doc) => ({

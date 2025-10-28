@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Added this to first check if a user is logged in before giving them access to the rest of teh app.
+  
     const loggedInUser = localStorage.getItem("loggedInUser");
     setIsAuthenticated(!!loggedInUser); 
   }, []);

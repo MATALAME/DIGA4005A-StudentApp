@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../Styling/SignUp.css";
-import { toast } from "react-hot-toast";
 import { auth, db } from "../firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { doc, setDoc, serverTimestamp, getDoc } from "firebase/firestore";
+import { toast } from "react-hot-toast";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { useAuthContext } from "../Context/AuthContext";
+import { addUserToFirestore } from "../firebaseUtils";
+import "../Styling/SignUp.css";
 
 function Signup() {
   const navigate = useNavigate();
+  const { login } = useAuthContext();
 
-  
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,108 +22,85 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showReenterPassword, setShowReenterPassword] = useState(false);
 
-  const allowedDomains = [
-    "students.wits.ac.za",
-    "gmail.com",
-    "icloud.com",
-    "yahoo.com",
-    "example.com",
-  ];
+  const allowedDomains = ["students.wits.ac.za", "gmail.com", "icloud.com", "yahoo.com", "example.com"];
 
-  // ------------------- SIGN IN -------------------
+ 
   const handleSignIn = async (e) => {
     e.preventDefault();
     setError("");
 
     if (!allowedDomains.some((d) => email.endsWith(d))) {
-      setError("Email must end with a valid domain like @gmail.com");
+      setError("Email must end with a valid domain.");
       return;
     }
 
     try {
-      
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      const firebaseUser = userCredential.user;
 
-     
-      const userRef = doc(db, "users", user.uid);
+      const userRef = doc(db, "users", firebaseUser.uid);
       const userSnap = await getDoc(userRef);
-
       if (!userSnap.exists()) {
         setError("User record not found in Firestore.");
         return;
       }
 
       const userData = userSnap.data();
+      await setDoc(userRef, { online: true, lastActive: serverTimestamp() }, { merge: true });
 
-      
       const flattenedUser = {
-        id: user.uid,
+        id: firebaseUser.uid,
         name: userData.name || "",
-        email: user.email,
+        email: firebaseUser.email,
         accountType: userData.accountType || "student",
         profile: userData.profile || null,
       };
-      localStorage.setItem("loggedInUser", JSON.stringify(flattenedUser));
 
-      
-      await setDoc(userRef, { online: true, lastActive: serverTimestamp() }, { merge: true });
+      login(flattenedUser);
 
-      
       toast.success(`Welcome back, ${flattenedUser.name || "User"}!`);
       navigate(flattenedUser.profile ? "/home" : "/questionnaire");
     } catch (err) {
       console.error("Sign-in error:", err);
-      setError(err.message || "Failed to sign in. Please check your credentials.");
+      toast.error("Sign-in failed. Please check your credentials.");
+      setError(err.message || "Sign-in failed. Please check your credentials.");
     }
   };
 
-  // ------------------- SIGN UP -------------------
+  
   const handleSignUp = async (e) => {
     e.preventDefault();
     setError("");
 
     if (!allowedDomains.some((d) => email.endsWith(d))) {
-      setError("Email must end with a valid domain like @gmail.com");
+      setError("Email must end with a valid domain.");
       return;
     }
     if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
-      setError("Password must be strong (8+ chars, 1 capital, 1 number)");
+      setError("Password must be strong (8+ chars, 1 capital, 1 number).");
       return;
     }
     if (password !== reenterPassword) {
-      setError("Passwords do not match");
+      setError("Passwords do not match.");
       return;
     }
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      const firebaseUser = userCredential.user;
 
-      
-      await setDoc(doc(db, "users", user.uid), {
-        id: user.uid,
+      const userData = {
+        id: firebaseUser.uid,
         name,
         email,
         accountType,
-        online: true,
-        createdAt: serverTimestamp(),
-        lastActive: serverTimestamp(),
-        profile: null, 
-      });
+        profile: null,
+      };
 
       
-      localStorage.setItem(
-        "loggedInUser",
-        JSON.stringify({
-          id: user.uid,
-          name,
-          email,
-          accountType,
-          profile: null,
-        })
-      );
+      await addUserToFirestore({ ...userData, online: true });
 
+      login(userData);
       toast.success(`Account created for ${name}!`);
       navigate("/questionnaire", { state: { accountType } });
     } catch (err) {
@@ -133,7 +109,7 @@ function Signup() {
     }
   };
 
-  // ------------------- UI -------------------
+  
   return (
     <div className="signup-container">
       <div className="signup-box">
@@ -174,7 +150,6 @@ function Signup() {
               </div>
 
               {error && <p className="form-error">{error}</p>}
-
               <button type="submit" className="submit-button">Sign In</button>
             </form>
 
@@ -278,7 +253,6 @@ function Signup() {
               </div>
 
               {error && <p className="form-error">{error}</p>}
-
               <button type="submit" className="submit-button">Create Account</button>
             </form>
 

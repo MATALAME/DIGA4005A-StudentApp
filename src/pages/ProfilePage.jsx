@@ -26,7 +26,7 @@ function ProfilePage() {
   const { addJob } = useJobContext();
   const navigate = useNavigate();
 
-  // ---------------- Load profile from Firestore ----------------
+  
   useEffect(() => {
     const fetchProfile = async () => {
       const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -63,13 +63,13 @@ function ProfilePage() {
     fetchProfile();
   }, []);
 
-  // ---------------- Handle job form input ----------------
+  
   const handleInputChange = (e) => {
     setJobDetails({ ...jobDetails, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
-  // ---------------- Create job and save to Firestore ----------------
+ 
   const handleCreateJob = async () => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (!loggedInUser) return alert("You must be logged in to create a job.");

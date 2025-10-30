@@ -3,12 +3,10 @@ import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../Context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated } = useAuthContext();
+  const { user, authReady } = useAuthContext();
 
-  if (!isAuthenticated) {
-   
-    return <Navigate to="/signup" />;
-  }
+  if (!authReady) return <div>Loading...</div>;
+  if (!user) return <Navigate to="/signup" replace />;
 
   return children;
 };

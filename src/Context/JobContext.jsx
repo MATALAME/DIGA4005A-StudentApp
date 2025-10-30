@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
 import { addJobToFirestore } from "../firebaseUtils";
 import { db } from "../firebase";
 import { collection, onSnapshot, query, orderBy, Timestamp } from "firebase/firestore";
@@ -25,26 +27,47 @@ export const JobProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  // Load mock jobs
+  
   useEffect(() => {
-    const col = collection(db, "mockJobs");
-    const q = query(col, orderBy("timestamp", "desc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const jobsData = snapshot.docs.map((doc) => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          ...data,
-          timestamp: data.timestamp || Timestamp.now(),
-          isMock: true,
-        };
-      });
-      setMockJobs(jobsData);
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      // added this fix for job loading problems
+      startJobListeners();
+    });
+  
+    return () => unsubscribeAuth();
+  }, []);
+  
+  const startJobListeners = () => {
+    const jobsCol = collection(db, "jobs");
+    const jobsQuery = query(jobsCol, orderBy("timestamp", "desc"));
+    const unsubJobs = onSnapshot(jobsQuery, (snapshot) => {
+      const jobsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        isMock: false,
+      }));
+      setRealJobs(jobsData);
+    });
+  
+    const mockCol = collection(db, "mockJobs");
+    const mockQuery = query(mockCol, orderBy("timestamp", "desc"));
+    const unsubMock = onSnapshot(mockQuery, (snapshot) => {
+      const mockData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        isMock: true,
+      }));
+      setMockJobs(mockData);
     }, (error) => {
       console.error("Error fetching mock jobs:", error);
     });
-    return () => unsubscribe();
-  }, []);
+  
+    
+    return () => {
+      unsubJobs();
+      unsubMock();
+    };
+  };
 
   const jobs = [...realJobs, ...mockJobs].sort((a, b) => {
     const tA = a.timestamp?.seconds || 0;

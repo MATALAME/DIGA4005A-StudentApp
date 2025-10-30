@@ -55,7 +55,7 @@ export default function QuestionnaireWrapper() {
   return accountType === "student" ? <StudentQuestionnaire /> : <ClientQuestionnaire />;
 }
 
-// ----------------- STUDENT QUESTIONNAIRE -----------------
+//Student Questionnaire
 function StudentQuestionnaire() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -127,14 +127,14 @@ function StudentQuestionnaire() {
       const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
       if (!loggedInUser) return toast.error("No user logged in.");
 
-      // Optimistic update
+      
       const updatedUser = { ...loggedInUser, profile: formData };
       localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
 
       toast.success("Profile updated successfully!");
       navigate("/home");
 
-      // Firestore update
+
       const userRef = doc(db, "users", loggedInUser.id);
       setDoc(
         userRef,
@@ -155,7 +155,7 @@ function StudentQuestionnaire() {
   return renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handleInstitutionChange, toggleSkill, errors, formData });
 }
 
-// ----------------- CLIENT QUESTIONNAIRE -----------------
+//Client Questionnire
 function ClientQuestionnaire() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -214,7 +214,6 @@ function ClientQuestionnaire() {
   return renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, toggleSkill, errors, formData, isClient: true });
 }
 
-// ----------------- RENDER HELPER -----------------
 function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handleInstitutionChange, toggleSkill, errors, formData, isClient = false }) {
   return (
     <div className="questionnaire-container">

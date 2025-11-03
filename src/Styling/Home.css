@@ -64,7 +64,7 @@
   height: 70px;
   border: none;
   border-radius: 50%; 
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   cursor: pointer;
   transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
   position: relative;
@@ -73,7 +73,7 @@
 .filter-button:hover {
   background-color: #e0e0e0;
   transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 2px rgba(0,0,0,0.15);
 }
 
 .filter-button:active {
@@ -104,6 +104,21 @@
   transition: color 0.25s ease;
   color: black;
 }
+
+.headline-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headline-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
 
 @media (max-width: 480px) {
   .filter-button {

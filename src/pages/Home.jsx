@@ -4,19 +4,28 @@ import Layout from "../Components/Layout";
 import "../Styling/Home.css";
 import { useJobContext } from "../Context/JobContext";
 
+import Headline from "../images/HeaderGraphic.png"
+import WideHeadline from "../images/WideHeaderGraphic.png"
+
 export default function Home() {
   const { jobs } = useJobContext(); 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filteredJobs, setFilteredJobs] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const categories = [
     { name: "All", icon: "🌍" },
     { name: "Tutoring", icon: "📚" },
-    { name: "Deliveries", icon: "🚚" },
+    { name: "Deliveries", icon: "🚛" },
     { name: "Errands", icon: "🛒" },
     { name: "Other Jobs", icon: "💼" },
   ];
 
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   
   useEffect(() => {
     const sortedJobs = [...jobs].sort((a, b) => {
@@ -33,8 +42,14 @@ export default function Home() {
     setFilteredJobs(filtered);
   }, [jobs, selectedCategory]);
 
+  const headlineImage = windowWidth < 768 ? Headline : WideHeadline;
+
   return (
     <Layout>
+      <div className="headline-container">
+        <img src={headlineImage} alt="Headline-graphic" className="headline-img" />
+      </div>
+
       <div className="home-wrapper">
         <div className="home-content">
           {/* Filter Buttons */}

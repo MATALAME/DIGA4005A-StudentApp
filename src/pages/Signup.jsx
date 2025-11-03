@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useAuthContext } from "../Context/AuthContext";
+import { FiEye, FiEyeOff, FiCheck} from "react-icons/fi";
 import { addUserToFirestore } from "../firebaseUtils";
 import "../Styling/SignUp.css";
 
@@ -143,8 +144,9 @@ function Signup() {
                     type="button"
                     className="toggle-password-btn"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? "Hide" : "Show"}
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
                   </button>
                 </div>
               </div>
@@ -189,28 +191,35 @@ function Signup() {
                 />
               </div>
 
-              <div className="radio-group">
-                <label>
-                  <input
-                    type="radio"
-                    name="accountType"
-                    value="student"
-                    checked={accountType === "student"}
-                    onChange={(e) => setAccountType(e.target.value)}
-                  />
-                  Student Account
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="accountType"
-                    value="client"
-                    checked={accountType === "client"}
-                    onChange={(e) => setAccountType(e.target.value)}
-                  />
-                  Client Account
-                </label>
-              </div>
+              <div className="account-type-options">
+              <label
+                className={`account-option ${accountType === "student" ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="student"
+                  checked={accountType === "student"}
+                  onChange={(e) => setAccountType(e.target.value)}
+                />
+                <span className="check-icon"><FiCheck /></span>
+                <span className="option-text">Student</span>
+              </label>
+
+              <label
+                className={`account-option ${accountType === "client" ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="client"
+                  checked={accountType === "client"}
+                  onChange={(e) => setAccountType(e.target.value)}
+                />
+                <span className="check-icon"><FiCheck /></span>
+                <span className="option-text">Client</span>
+              </label>
+            </div>
 
               <div className="form-group">
                 <label className="form-label">PASSWORD</label>
@@ -226,9 +235,11 @@ function Signup() {
                     type="button"
                     className="toggle-password-btn"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? "Hide" : "Show"}
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
                   </button>
+
                 </div>
               </div>
 
@@ -246,8 +257,9 @@ function Signup() {
                     type="button"
                     className="toggle-password-btn"
                     onClick={() => setShowReenterPassword(!showReenterPassword)}
+                    aria-label={showReenterPassword ? "Hide password" : "Show password"}
                   >
-                    {showReenterPassword ? "Hide" : "Show"}
+                    {showReenterPassword ? <FiEyeOff /> : <FiEye />}
                   </button>
                 </div>
               </div>

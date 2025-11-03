@@ -1,106 +1,132 @@
 .job-card {
-  background-color: #f1f5f9;
-  border-radius: 16px;
-  padding: 16px;
-  margin: 12px 0;
-  margin-bottom: 25px;
-  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); */
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px;
+  margin: 22px 0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: all 0.25s ease;
   position: relative;
 }
 
 .job-card:hover {
-  background-color: #e2e8f0;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #c7d2fe;
+  background: #f9fafb;
 }
 
+/* --- Header --- */
 .job-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .job-avatar {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #e5e7eb;
+  flex-shrink: 0;
 }
 
 .job-title-section {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .job-title {
-  font-weight: bold;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1e293b;
   margin: 0;
 }
 
 .job-poster {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #6b7280;
-  margin: 2px 0;
+  margin-top: 4px;
 }
 
+/* --- Body --- */
 .job-body {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
+  align-items: flex-start;
+  margin-top: 16px;
+  gap: 18px;
 }
 
 .job-description {
-  color: #374151;
+  color: #475569;
   font-size: 0.95rem;
+  line-height: 1.6;
   flex: 1;
 }
 
 .job-pay {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-left: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #226A4D; 
+  background: #ecfdf5;
+  padding: 8px 14px;
+  border-radius: 12px;
+  align-self: flex-start;
   white-space: nowrap;
 }
 
+/* --- Location --- */
 .job-location {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: #64748b;
   display: flex;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .location-icon {
-  margin-right: 4px;
+  margin-right: 6px;
+  color: #226A4D;
+  font-size: 1rem;
 }
 
+/* --- Footer --- */
 .job-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 18px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
 }
 
+/* --- Priority Badges --- */
 .priority-badge {
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
   font-size: 0.75rem;
-  font-weight: bold;
-  color: white;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 .priority-badge.urgent {
-  background-color: #ef4444;
+  background-color: #e25c62; 
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(226, 92, 98, 0.2);
 }
 
 .priority-badge.low {
-  background-color: #d1cfc5;
-  color: #4b5563;
+  background-color: #dbeafe;
+  color: #1e3a8a;
+  box-shadow: 0 2px 5px rgba(59, 130, 246, 0.1);
 }
 
+/* --- Time --- */
 .job-time {
   font-size: 0.8rem;
-  color: #2563eb;
+  color: #366CC2;
   font-weight: 500;
 }

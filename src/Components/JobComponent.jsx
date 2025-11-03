@@ -3,42 +3,44 @@ import { useNavigate } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import StarRating from "./StarRating";
 import "../Styling/JobComponent.css";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const JobComponent = ({ job }) => {
   const navigate = useNavigate();
   const [reviewScore, setReviewScore] = useState(null);
+  const [userLoaded, setUserLoaded] = useState(false);
 
   useEffect(() => {
     const fetchUserReviewScore = async () => {
+      if (!job?.userId) {
+        console.warn("Job has no userId:", job);
+        setUserLoaded(true);
+        return;
+      }
+
       try {
-        const response = await fetch(`http://localhost:5001/users`);
-        const users = await response.json();
+        const userRef = doc(db, "users", job.userId);
+        const userSnap = await getDoc(userRef);
 
-        console.log("Fetched users:", users);
-        console.log("Job username:", job.username); 
-
-       
-        const user = users.find((user) => user.name === job.username);
-
-        console.log("Matched user:", user); 
-
-     
-        if (user && user.profile?.reviewScore) {
-          setReviewScore(user.profile.reviewScore);
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          const score = userData.reviewScore ?? null; 
+          setReviewScore(score);
         } else {
-          console.log("No review score found for user:", job.username); 
+          console.warn(`No user found with ID: ${job.userId}`);
         }
       } catch (error) {
         console.error("Error fetching user review score:", error);
+      } finally {
+        setUserLoaded(true);
       }
     };
 
     fetchUserReviewScore();
-  }, [job.username]);
+  }, [job.userId]);
 
-  const handleClick = () => {
-    navigate(`/job/${job.id}`);
-  };
+  const handleClick = () => navigate(`/job/${job.id}`);
 
   return (
     <div className="job-card" onClick={handleClick}>
@@ -49,39 +51,45 @@ const JobComponent = ({ job }) => {
           className="job-avatar"
         />
         <div className="job-title-section">
-          <h3 className="job-title">{job.jobTitle}</h3>
-          <p className="job-poster">Posted by {job.username}</p>
-          {reviewScore !== null ? (
-  <div className="review-score">
-    {/*<span>Review Score:</span>*/}
-    <StarRating rating={reviewScore} />
-  </div>
-) : (
-  <p>No reviews yet</p>
-)}
+          <h3 className="job-title">{job.jobTitle || "Untitled Job"}</h3>
+          <p className="job-poster">
+            Posted by {job.username || "Unknown"}
+          </p>
+          <div className="review-score">
+            {userLoaded ? (
+              reviewScore !== null ? (
+                <StarRating rating={reviewScore} />
+              ) : (
+                <p>No reviews yet</p>
+              )
+            ) : (
+              <p>Loading reviews...</p>
+            )}
+          </div>
         </div>
       </div>
 
       <div className="job-body">
         <div className="job-description">
-          <p>{job.description}</p>
+          <p>{job.description || "No description provided."}</p>
         </div>
-
-        <p className="job-pay">R{job.payAmount}.00</p>
+        <p className="job-pay">R{job.payAmount ?? 0}.00</p>
       </div>
 
       <div className="job-location">
         <MapPin size={16} color="black" className="location-icon" />
-        {job.suburb}, {job.city}
+        {job.suburb || "Unknown Suburb"}, {job.city || "Unknown City"}
       </div>
 
       <div className="job-footer">
-        {job.priority.toLowerCase() === "urgent" ? (
-          <span className="priority-badge urgent">URGENT</span>
-        ) : (
-          <span className="priority-badge low">LOW PRIORITY</span>
-        )}
-        <span className="job-time">{job.timePosted}</span>
+        <span
+          className={`priority-badge ${
+            job.priority?.toLowerCase() === "urgent" ? "urgent" : "low"
+          }`}
+        >
+          {job.priority ? job.priority.toUpperCase() : "LOW PRIORITY"}
+        </span>
+        <span className="job-time">{job.timePosted || "Unknown time"}</span>
       </div>
     </div>
   );

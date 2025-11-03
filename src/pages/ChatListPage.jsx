@@ -18,7 +18,7 @@ const ChatListPage = () => {
 
   return (
     <div className="chatlist-page">
-      {/* HEADER */}
+   
       <header className="chatlist-header">
         <button className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeft size={24} color="white" />
@@ -26,7 +26,6 @@ const ChatListPage = () => {
         <h2 className="chatlist-title">Your Chats</h2>
       </header>
 
-      {/* CONTACT LIST */}
       {contacts.length === 0 ? (
         <p className="no-chats-message">No chats yet. Start contacting people!</p>
       ) : (

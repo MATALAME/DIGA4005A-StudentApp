@@ -6,14 +6,14 @@ import { toast } from "react-hot-toast";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
-// Images
+
 import nameIcon from "../images/Name.png";
 import institutionIcon from "../images/Institution.png";
 import locationIcon from "../images/Location.png";
 import skillsIcon from "../images/Skills.png";
 import contactIcon from "../images/Contact.png";
 
-// University logos (same as before)
+
 import uctLogo from "../images/ucticon.png";
 import stellenboschLogo from "../images/Stelliesicon.png";
 import witsLogo from "../images/witsicon.png";
@@ -30,7 +30,7 @@ import dutLogo from "../images/duticon.png";
 import nmuLogo from "../images/nmuicon.png";
 import ulLogo from "../images/ulicon.png";
 
-// Institutions array
+
 const institutions = [
   { name: "University of Cape Town", logo: uctLogo },
   { name: "Stellenbosch University", logo: stellenboschLogo },
@@ -140,6 +140,7 @@ function StudentQuestionnaire() {
         userRef,
         {
           profile: formData,
+          reviewScore: formData.reviewScore ?? null,
           accountType: loggedInUser.accountType || "student",
           updatedAt: serverTimestamp(),
         },
@@ -200,6 +201,7 @@ function ClientQuestionnaire() {
         userRef,
         {
           profile: formData,
+          reviewScore: formData.reviewScore ?? null,
           accountType: loggedInUser.accountType || "client",
           updatedAt: serverTimestamp(),
         },

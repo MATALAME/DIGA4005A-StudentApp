@@ -2,8 +2,8 @@ import { doc, setDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
 
 /**
- * Add a new user to Firestore (for chat and online status)
- * @param {object} user - { name, email, accountType, id }
+ * 
+ * @param {object} user - 
  */
 export const addUserToFirestore = async (user) => {
   if (!user?.id) return;
@@ -24,7 +24,7 @@ export const addUserToFirestore = async (user) => {
     );
     console.log("User added to Firestore:", user.id);
 
-    // Start heartbeat for online status (the hearbeat is just periodic checks, like a "tick") 
+     
     startUserHeartbeat(user.id);
   } catch (error) {
     console.error("Error adding user to Firestore:", error);
@@ -32,7 +32,7 @@ export const addUserToFirestore = async (user) => {
 };
 
 /**
- * Update online status for a user 
+ * 
  * @param {string} userId
  * @param {boolean} status
  */
@@ -53,7 +53,7 @@ export const setUserOnlineStatus = async (userId, status = true) => {
 };
 
 /**
- * Heartbeat system updates lastActive every 10 seconds
+ * 
  * @param {string} userId
  */
 export const startUserHeartbeat = (userId) => {
@@ -69,7 +69,7 @@ export const startUserHeartbeat = (userId) => {
     }
   }, 10000);
 
-  // Changes user status to offline when they close tab
+  //Changes user status to offline when they close tab
   const handleBeforeUnload = async () => {
     clearInterval(interval);
     try {
@@ -88,9 +88,9 @@ export const startUserHeartbeat = (userId) => {
 };
 
 /**
- * Sends a notification when a message is sent
- * @param {object} sender - { id, name, email }
- * @param {object} receiver - { id, name, email }
+ * 
+ * @param {object} sender 
+ * @param {object} receiver 
  * @param {string} messageText
  */
 export const sendNotification = async (sender, receiver, messageText) => {

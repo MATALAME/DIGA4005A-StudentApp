@@ -26,50 +26,58 @@ function ProfilePage() {
   const { addJob } = useJobContext();
   const navigate = useNavigate();
 
-  
+
   useEffect(() => {
     const fetchProfile = async () => {
       const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
       if (!loggedInUser) return;
-
-      const userRef = doc(db, "users", loggedInUser.id);
-      const userSnap = await getDoc(userRef);
-
-      if (userSnap.exists()) {
-        const data = userSnap.data();
-        const profile = data.profile || {};
-        setProfileData({
-          name: loggedInUser.name || profile.name || "Unnamed",
-          email: loggedInUser.email || profile.email || "Unknown",
-          accountType: loggedInUser.accountType,
-          skills: profile.skills || [],
-          institution: profile.institution || "",
-          institutionLogo: profile.institutionLogo || "",
-          faculty: profile.faculty || "",
-          studyType: profile.studyType || "",
-          yearOfStudy: profile.yearOfStudy || "",
-          street: profile.street || "",
-          suburb: profile.suburb || "",
-          city: profile.city || "",
-          province: profile.province || "",
-          zip: profile.zip || "",
-          reviewScore: profile.reviewScore || 0,
-          ...profile,
-        });
-        setAccountType(loggedInUser.accountType);
+  
+      try {
+        const userRef = doc(db, "users", loggedInUser.id);
+        const userSnap = await getDoc(userRef);
+  
+        if (userSnap.exists()) {
+          const data = userSnap.data();
+          const profile = data.profile || {};
+  
+          console.log("Fetched Firestore user data:", data); 
+  
+          setProfileData({
+            name: data.name || loggedInUser.name || "Unnamed",
+            email: data.email || loggedInUser.email || "Unknown",
+            accountType: data.accountType || loggedInUser.accountType,
+            skills: profile.skills || [],
+            institution: profile.institution || "",
+            institutionLogo: profile.institutionLogo || "",
+            faculty: profile.faculty || "",
+            studyType: profile.studyType || "",
+            yearOfStudy: profile.yearOfStudy || "",
+            street: profile.street || "",
+            suburb: profile.suburb || "",
+            city: profile.city || "",
+            province: profile.province || "",
+            zip: profile.zip || "",
+            reviewScore: data.reviewScore ?? null,
+          });
+  
+          setAccountType(data.accountType || loggedInUser.accountType);
+        } else {
+          console.warn("No user found in Firestore for this ID.");
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
       }
     };
-
+  
     fetchProfile();
   }, []);
-
   
+
   const handleInputChange = (e) => {
     setJobDetails({ ...jobDetails, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
- 
   const handleCreateJob = async () => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (!loggedInUser) return alert("You must be logged in to create a job.");
@@ -123,7 +131,6 @@ function ProfilePage() {
     <Layout>
       <div className="profile-page">
         <div className="profile-card">
-          {/* Header */}
           <div className="profile-header">
             <div className="profile-avatar">
               {profileData.name.charAt(0).toUpperCase()}
@@ -140,7 +147,6 @@ function ProfilePage() {
             </div>
           </div>
 
-          {/* Student Info */}
           {accountType === "student" && (
             <div className="profile-section">
               <h3>Student Info</h3>
@@ -174,7 +180,6 @@ function ProfilePage() {
             </div>
           )}
 
-          {/* Client Info */}
           {accountType === "client" && (
             <div className="profile-section">
               <h3>Client Info</h3>

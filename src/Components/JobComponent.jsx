@@ -46,7 +46,7 @@ const JobComponent = ({ job }) => {
     <div className="job-card" onClick={handleClick}>
       <div className="job-header">
         <img
-          src={job.profileImage || "https://picsum.photos/150"}
+          src={job.profileImage || `https://picsum.photos/seed/${job.id}/150`} //the profile photos were the same and seed/${job.id} ensures each job gets a unique profile photo.
           alt="avatar"
           className="job-avatar"
         />

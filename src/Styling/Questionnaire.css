@@ -20,6 +20,40 @@
   object-fit: contain; 
 }
 
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.skill-button {
+  background: #f1f5ff;
+  border: 2px solid #366CC2;
+  color: #366CC2;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 100%; 
+}
+
+.skill-button:hover {
+  background: #366CC2;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(54, 108, 194, 0.2);
+}
+
+.skill-button.active-skill {
+  background: linear-gradient(135deg, #366CC2, #274c8a);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 8px rgba(54, 108, 194, 0.4);
+  transform: scale(1.05);
+}
+
 input, select, button {
   display: block;
   width: 100%;
@@ -71,7 +105,6 @@ button:hover {
   background-color: #226A4D; 
 }
 
-
 input, select {
   display: block;
   width: 100%;
@@ -114,7 +147,7 @@ input, select {
 }
 
 .custom-select:focus {
-  border-color: #366CC2;
+  border-color: #1C4689;
   outline: none;
 }
 
@@ -134,9 +167,19 @@ input, select {
 }
 
 .radio-group input[type="radio"] {
-  accent-color: #366CC2; 
+  accent-color: #1C4689; 
   width: 18px;
   height: 18px;
+}
+
+.dropdown-container select {
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  background: transparent;
+  padding-right: 2rem; 
+  position: relative;
+  z-index: 2;
 }
 
 .progress-bar-container {

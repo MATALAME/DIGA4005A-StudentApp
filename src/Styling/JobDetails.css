@@ -1,19 +1,49 @@
-.job-details-wrapper {
-    padding: 0px;
-  }
-  
-
-.back-button {
-  position: absolute; 
-  left: 16px; 
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 8px 12px;
+.job-details-page {
+  position: relative;
+  padding: 20px; 
+  background-color: #f0f4f8;
+  min-height: 100vh;
 }
 
+.job-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center; 
+}
+
+.details-back-button {
+  display: inline-block;
+  margin-bottom: 16px;      
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  width: 250px;
+  border-radius: 8px;
+  background-color: #F6B104;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.details-back-button:hover {
+  background-color: #1d4ed8;
+}
+
+.details-back-button:active {
+  transform: translateY(1px);
+}
+
+.job-details-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px; 
+}
+
+  
 .job-details-title {
   font-size: 20px;
   font-weight: bold;
@@ -27,14 +57,20 @@
   border-radius: 50%;
   object-fit: cover;
 }
-  
-  .job-details-card {
-    background-color: #e3e7ef;
-    border-radius: 16px;
-    padding: 24px;
-    text-align: center;
-  }
-  
+
+.job-details-card {
+  background-color: #e3e7ef;
+  border-radius: 16px;
+  padding: 24px;
+  width: 300px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   
+  align-items: center;       
+  text-align: center;
+}
+
   .job-profile-image {
     width: 100px;
     height: 100px;
@@ -92,6 +128,7 @@
   .cancel-button {
     padding: 10px 24px;
     border-radius: 8px;
+    width: 250px;
     border: none;
     font-weight: bold;
     font-size: 0.95rem;
@@ -112,6 +149,7 @@
     border-radius: 8px;
     border: none;
     font-weight: bold;
+    width: 250px;
     font-size: 0.95rem;
     cursor: pointer;
     color: white;

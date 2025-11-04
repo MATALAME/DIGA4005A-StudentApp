@@ -25,7 +25,6 @@ const JobDetails = () => {
       return;
     }
 
-    
     const otherUser = {
       id: job.userId,
       name: job.username,
@@ -37,10 +36,12 @@ const JobDetails = () => {
 
   return (
     <Layout>
+      <div className="job-details-page">
       <div className="job-details-wrapper">
+         <button className="details-back-button" onClick={() => navigate("/Home")}> ← Back </button>
         <div className="job-details-card">
           <img
-            src={job.profilePhoto || "https://picsum.photos/150"}
+            src={job.profileImage || `https://picsum.photos/seed/${job.id}/150`}
             alt="Profile"
             className="job-profile-image"
           />
@@ -78,6 +79,7 @@ const JobDetails = () => {
             </button>
           )}
         </div>
+      </div>
       </div>
     </Layout>
   );

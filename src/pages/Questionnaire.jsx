@@ -5,14 +5,13 @@ import "../Styling/Questionnaire.css";
 import { toast } from "react-hot-toast";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
-
+import {FiCheck} from "react-icons/fi";
 
 import nameIcon from "../images/Name.png";
 import institutionIcon from "../images/Institution.png";
 import locationIcon from "../images/Location.png";
 import skillsIcon from "../images/Skills.png";
 import contactIcon from "../images/Contact.png";
-
 
 import uctLogo from "../images/ucticon.png";
 import stellenboschLogo from "../images/Stelliesicon.png";
@@ -29,7 +28,6 @@ import tutLogo from "../images/tshwaneicon.png";
 import dutLogo from "../images/duticon.png";
 import nmuLogo from "../images/nmuicon.png";
 import ulLogo from "../images/ulicon.png";
-
 
 const institutions = [
   { name: "University of Cape Town", logo: uctLogo },
@@ -257,10 +255,32 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
                   {institutions.map(inst => <option key={inst.name} value={inst.name}>{inst.name}</option>)}
                 </select>
                 <input name="faculty" placeholder="Faculty / Department" onChange={handleChange} />
-                <div>
-                  <label><input type="radio" name="studyType" value="Full-Time" onChange={handleChange} /> Full-Time</label>
-                  <label><input type="radio" name="studyType" value="Part-Time" onChange={handleChange} /> Part-Time</label>
+                <div className="account-type-options">
+                  <label className={`account-option ${formData.studyType === "Full-Time" ? "selected" : ""}`}>
+                    <input
+                      type="radio"
+                      name="studyType"
+                      value="Full-Time"
+                      checked={formData.studyType === "Full-Time"}
+                      onChange={handleChange}
+                    />
+                    <span className="check-icon"><FiCheck /></span>
+                    <span className="option-text">Full-Time</span>
+                  </label>
+
+                  <label className={`account-option ${formData.studyType === "Part-Time" ? "selected" : ""}`}>
+                    <input
+                      type="radio"
+                      name="studyType"
+                      value="Part-Time"
+                      checked={formData.studyType === "Part-Time"}
+                      onChange={handleChange}
+                    />
+                     <span className="check-icon"><FiCheck /></span>
+                    <span className="option-text">Part-Time</span>
+                  </label>
                 </div>
+
                 <select name="yearOfStudy" onChange={handleChange}>
                   <option value="">Year of Study</option>
                   <option>1st</option>
@@ -298,16 +318,18 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           <div>
             <h2>{isClient ? "Job Preferences" : "Skills"}</h2>
             <img src={skillsIcon} alt="Skills Icon" className="Questionnaire-icon" />
+            <div className="skills-container">
             {["Deliveries","Errands","Cleaning","Repairs","Tutoring","Photography"].map(skill => (
               <button
                 key={skill}
                 type="button"
-                className={formData.skills.includes(skill) ? "active-skill" : ""}
+                className={`skill-button ${formData.skills.includes(skill) ? "active-skill" : ""}`}
                 onClick={() => toggleSkill(skill)}
               >
                 {skill}
               </button>
             ))}
+          </div>
             <button onClick={handleSubmit}>Submit</button>
           </div>
         )}

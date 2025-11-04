@@ -11,13 +11,12 @@
 }
 
 .job-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   border-color: #c7d2fe;
   background: #f9fafb;
 }
 
-/* --- Header --- */
 .job-header {
   display: flex;
   align-items: center;
@@ -50,12 +49,11 @@
   margin-top: 4px;
 }
 
-/* --- Body --- */
 .job-body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 16px;
+  margin-top: 0px;
   gap: 18px;
 }
 
@@ -77,7 +75,6 @@
   white-space: nowrap;
 }
 
-/* --- Location --- */
 .job-location {
   font-size: 0.9rem;
   color: #64748b;
@@ -92,7 +89,6 @@
   font-size: 1rem;
 }
 
-/* --- Footer --- */
 .job-footer {
   display: flex;
   justify-content: space-between;
@@ -102,7 +98,6 @@
   padding-top: 12px;
 }
 
-/* --- Priority Badges --- */
 .priority-badge {
   padding: 6px 14px;
   border-radius: 20px;
@@ -124,7 +119,6 @@
   box-shadow: 0 2px 5px rgba(59, 130, 246, 0.1);
 }
 
-/* --- Time --- */
 .job-time {
   font-size: 0.8rem;
   color: #366CC2;

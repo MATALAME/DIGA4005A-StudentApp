@@ -15,8 +15,8 @@ export default function Home() {
 
   const categories = [
     { name: "All", icon: "🌍" },
-    { name: "Tutoring", icon: "📚" },
-    { name: "Deliveries", icon: "🚛" },
+    { name: "Tutoring", icon: "📕" },
+    { name: "Deliveries", icon: "🚚" },
     { name: "Errands", icon: "🛒" },
     { name: "Other Jobs", icon: "💼" },
   ];

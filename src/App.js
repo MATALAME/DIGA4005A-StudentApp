@@ -16,6 +16,7 @@ import AllUsers from "./pages/AllUsers";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Notifications from "./pages/Notifications";
 import UploadMockJobTimestamps from "./Components/UploadMockJobTimestamps"; 
+import ApplicationPage from "./pages/ApplicationPage";
 
 function App() {
   return (
@@ -65,6 +66,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <JobDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/application"
+              element={
+                <ProtectedRoute>
+                  <ApplicationPage />
                 </ProtectedRoute>
               }
             />

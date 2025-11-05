@@ -15,8 +15,7 @@ const JobDetails = () => {
   if (!job) return <p>Job not found.</p>;
 
   const handleApplyClick = () => {
-    if (!isApplied) alert("Application successful");
-    setIsApplied((prev) => !prev);
+    navigate("/application"); 
   };
 
   const handleContactClick = () => {

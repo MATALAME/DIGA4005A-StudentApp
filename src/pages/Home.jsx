@@ -69,7 +69,7 @@ export default function Home() {
           </div>
 
           <div className="home-title">
-            <h2>FIND JOBS</h2>
+            <h2>FIND JOBS 🔍</h2>
           </div>
 
           {/* Job Container */}

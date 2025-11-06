@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MapPin } from "lucide-react";
+// import { MapPin } from "lucide-react";
 import StarRating from "./StarRating";
 import "../Styling/JobComponent.css";
 import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+
+import LocationIcon from "../images/LocationIcon.png";
 
 const JobComponent = ({ job }) => {
   const navigate = useNavigate();
@@ -77,7 +79,8 @@ const JobComponent = ({ job }) => {
       </div>
 
       <div className="job-location">
-        <MapPin size={16} color="black" className="location-icon" />
+        {/* <MapPin size={16} color="black" className="location-icon" /> */}
+        <img src= {LocationIcon} className="location-icon"/>
         {job.suburb || "Unknown Suburb"}, {job.city || "Unknown City"}
       </div>
 

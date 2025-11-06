@@ -5,6 +5,8 @@ import { useJobContext } from "../Context/JobContext";
 import Layout from "../Components/Layout";
 import "../Styling/JobDetails.css";
 
+import LocationIcon from "../images/LocationIcon.png"
+
 const JobDetails = () => {
   const { jobId } = useParams();
   const { jobs } = useJobContext();
@@ -57,7 +59,8 @@ const JobDetails = () => {
           </div>
 
           <div className="job-location">
-            <MapPin size={18} color="black" />
+            {/* <MapPin size={18} color="black" /> */}
+            <img src= {LocationIcon} className="location-icon"/>
             {job.suburb}, {job.city}
           </div>
 

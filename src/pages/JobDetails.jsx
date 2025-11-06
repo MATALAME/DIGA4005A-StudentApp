@@ -37,7 +37,7 @@ const JobDetails = () => {
     <Layout>
       <div className="job-details-page">
       <div className="job-details-wrapper">
-         <button className="details-back-button" onClick={() => navigate("/Home")}> ← Back </button>
+         <button className="details-back-button" onClick={() => navigate("/Home")}> Back </button>
         <div className="job-details-card">
           <img
             src={job.profileImage || `https://picsum.photos/seed/${job.id}/150`}
@@ -51,7 +51,7 @@ const JobDetails = () => {
             <strong>Job Info:</strong>
             <ul>
               {job.description.split("\n").map((line, idx) => (
-                <li key={idx}>{line}</li>
+                <p key={idx}>{line}</p>
               ))}
             </ul>
           </div>
@@ -61,7 +61,7 @@ const JobDetails = () => {
             {job.suburb}, {job.city}
           </div>
 
-          <p className="job-pay">R{job.payAmount}.00</p>
+          <p className="job-pay2">R{job.payAmount}.00</p>
 
           <div className="job-button-row">
             <button

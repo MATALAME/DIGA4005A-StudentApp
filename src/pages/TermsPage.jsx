@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styling/TermsPage.css"; 
 
+import TermsImage from "../images/TermsPhoto.png"
+
 const TermsPage = ({ userType }) => {
   const navigate = useNavigate();
   const [accepted, setAccepted] = useState(false);
@@ -16,6 +18,7 @@ const TermsPage = ({ userType }) => {
 
   return (
     <div className="terms-container">
+      <img src={TermsImage} alt="Character holding contract" className="terms-image" />
       <div className="terms-content">
       <h2>Terms and Conditions</h2>
         <p>

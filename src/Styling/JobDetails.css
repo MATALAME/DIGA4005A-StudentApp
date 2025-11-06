@@ -93,7 +93,7 @@
   }
   
   .job-info {
-    text-align: left;
+    text-align: center;
     margin: 16px 0;
     font-size: 0.95rem;
   }
@@ -113,10 +113,16 @@
     gap: 4px;
   }
   
-  .job-pay {
+  .job-pay2 {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 12px 0;
+    text-align: center;
+    display: block; 
+    background: #598c6a;
+    color: white;
+    padding: 0px 30px;
+    border-radius: 10px;
   }
   
   .job-button-row {

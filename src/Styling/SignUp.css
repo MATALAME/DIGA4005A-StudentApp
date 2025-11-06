@@ -1,199 +1,198 @@
 .signup-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    padding: 20px;
-  }
-  
-  .signup-box {
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .signup-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-  
-  .signup-intro {
-    color: #4b5563;
-    margin-bottom: 1.5rem;
-  }
-  
-  .signup-form .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    font-size: 0.9rem;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    font-size: 1rem;
-    outline: none;
-  }
-  
-  .form-input:focus {
-    border-color: #2563eb;
-  }
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 20px;
+}
 
-  .form-error {
-    color: #e74c3c;
-    font-size: 13px;
-    margin-top: 4px;
-    font-weight: 500;
-    line-height: 1.2;
-    transition: opacity 0.3s ease;
-  }
-  
-  .password-input-wrapper {
-    position: relative;  
-    display: flex;
-    align-items: center;
-  }
-  
-  .password-input {
-    width: 100%;
-    padding: 10px;
-    padding-right: 40px; 
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    font-size: 1rem;
-    outline: none;
-  }
-  
-  .toggle-password-btn {
-    position: absolute;
-    top: 50%;
-    right: 12px;
-    transform: translateY(-50%);
-    all: unset;            
-    cursor: pointer;
-    color: #6b7280;      
-    font-size: 1rem;   
-    display: flex;
-    align-items: center;
-  }
+.signup-box {
+  width: 100%;
+  max-width: 400px;
+}
 
-  .toggle-password-btn svg {
-    margin-left: 8px;
-    font-size: 1.8rem;
-    color: #6b7280;
-  }
-  
-  
-  
-  .submit-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #1d4ed8;
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
-  
-  .submit-button:hover {
-    background-color: #1e40af;
-  }
-  
-  .Create-Section {
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
-  .create-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #e5e7eb;
-    color: #111827;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .create-button:hover {
-    background-color: #d1d5db;
-  }
-  
-  .signup-footer {
-    text-align: center;
-    margin-top: 2rem;
-    color: #9ca3af;
-    font-size: 0.875rem;
-  }
-  
-  .account-type-options {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin: 1.5rem 0;
-    width: 100%;
-  }
-  
-  .account-option {
-    flex: 1; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 6px 0;
-    border-radius: 10px;
-    background-color: #f3f4f6;
-    border: 2px solid transparent;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    text-align: center;
-    transition: all 0.25s ease;
-  }
-  
-  .account-option:hover {
-    background-color: #e5e7eb;
-  }
-  
-  .account-option.selected {
-    background-color: #2563eb;
-    color: white;
-  }
-  
-  .account-option input {
-    display: none;
-  }
-  
-  .check-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
-    border: 2px solid #d1d5db;
-    background-color: white;
-    color: transparent;
-    font-size: 14px;
-    transition: all 0.2s ease;
-  }
-  
-  .account-option.selected .check-icon {
-    background-color: white;
-    color: #2563eb;
-    border-color: white;
-  }
-  
+.signup-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.signup-intro {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.signup-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #2563eb;
+}
+
+.form-error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: opacity 0.3s ease;
+}
+
+.password-input-wrapper {
+  position: relative;  
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; 
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  outline: none;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  all: unset;            
+  cursor: pointer;
+  color: #6b7280;      
+  font-size: 1rem;   
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password-btn svg {
+  margin-left: 8px;
+  font-size: 1.8rem;
+  color: #6b7280;
+}
+
+
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1d4ed8;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #1e40af;
+}
+
+.Create-Section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.create-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e5e7eb;
+  color: #111827;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #d1d5db;
+}
+
+.signup-footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.account-type-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.account-option {
+  flex: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.account-option:hover {
+  background-color: #e5e7eb;
+}
+
+.account-option.selected {
+  background-color: #2563eb;
+  color: white;
+}
+
+.account-option input {
+  display: none;
+}
+
+.check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid #d1d5db;
+  background-color: white;
+  color: transparent;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.account-option.selected .check-icon {
+  background-color: white;
+  color: #2563eb;
+  border-color: white;
+}

@@ -3,7 +3,7 @@
   padding: 20px; 
   background-color: #f0f4f8;
   min-height: 100vh;
-  animation: popIn 1.5s ease-out;
+  animation: fadeInRight 1.5s ease-out;
 }
 
 .job-details-wrapper {
@@ -15,12 +15,12 @@
 
 .details-back-button {
   display: inline-block;
-  margin-bottom: 16px;      
-  padding: 8px 14px;
+  margin-bottom: 13px;      
+  /* padding: 8px 14px; */
   font-size: 0.85rem;
   font-weight: 600;
   border: none;
-  width: 250px;
+  width: 160px;
   border-radius: 8px;
   background-color: #F6B104;
   color: white;
@@ -41,7 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px; 
+ 
 }
 
   

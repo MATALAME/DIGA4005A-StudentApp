@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import "../Styling/ChatListPage.css";
+import Layout from "../Components/Layout";
 
 const ChatListPage = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const ChatListPage = () => {
   };
 
   return (
+    <Layout>
     <div className="chatlist-page">
    
       <header className="chatlist-header">
@@ -50,6 +52,7 @@ const ChatListPage = () => {
         </div>
       )}
     </div>
+    </Layout>
   );
 };
 

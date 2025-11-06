@@ -130,7 +130,7 @@ function StudentQuestionnaire() {
       localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
 
       toast.success("Profile updated successfully!");
-      navigate("/home");
+      navigate("/terms");
 
 
       const userRef = doc(db, "users", loggedInUser.id);

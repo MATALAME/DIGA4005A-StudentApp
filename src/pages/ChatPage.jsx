@@ -84,7 +84,11 @@ const ChatPage = () => {
         <button className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeft size={24} color="white" />
         </button>
-        <h1 className="chat-title">{otherUser.name}</h1>
+
+        <div className="chat-title-container">
+          <h1 className="chat-title">{otherUser.name}</h1>
+        </div>
+
         <div className="profile-picture">
           <img src={"https://picsum.photos/150"} alt="Profile" />
         </div>

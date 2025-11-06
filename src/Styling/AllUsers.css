@@ -1,40 +1,99 @@
 .all-users {
-  padding: 20px;
-  max-width: 800px;
+  /* padding: 30px 20px; */
+  max-width: 900px;
   margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  animation: fadeInUp 1.5s ease-out;
 }
 
 .all-users h2 {
   font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .user-list {
   list-style: none;
   padding: 0;
+  display: grid;
+  gap: 15px;
 }
 
 .user-item {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 5px 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(21, 57, 218, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s;
+  cursor: pointer;
 }
 
-.user-item p {
-  margin: 0;
-  font-size: 16px;
-  color: #555;
+.user-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  background-color: #f5f7ff;
+}
+
+.user-avatar-section {
+  position: relative;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #1e3a8a;
+  transition: transform 0.2s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
 }
 
 .online-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-left: 6px;
-    border-radius: 50%;
-    background-color: #4caf50; 
-  }
-  
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #4caf50; 
+  box-shadow: 0 0 4px #4caf50;
+  border: 2px solid #fff;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1e3a8a;
+  margin: 0;
+}
+
+.user-email {
+  font-size: 14px;
+  color: #555;
+  margin: 2px 0;
+}
+
+.user-account-type {
+  font-size: 12px;
+  color: #6d6d6d;
+  text-transform: capitalize;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

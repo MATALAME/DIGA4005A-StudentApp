@@ -17,6 +17,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import Notifications from "./pages/Notifications";
 import UploadMockJobTimestamps from "./Components/UploadMockJobTimestamps"; 
 import ApplicationPage from "./pages/ApplicationPage";
+import TermsPage from "./pages/TermsPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             {/* Public Routes */}
             <Route path="/" element={<Load />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/terms" element={<TermsPage/>}/>
 
             {/* Protected Routes */}
             <Route

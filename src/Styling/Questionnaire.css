@@ -2,7 +2,8 @@
   height: 100vh;            
   display: flex;
   justify-content: center;    
-  align-items: center;        
+  align-items: center;   
+  animation: fadeInRight 1.5s ease-out;
 }
 
 .questionnaire {
@@ -10,8 +11,12 @@
   width: 100%;
   padding: 20px;
   text-align: center;
+  animation: fadeInRight 1.5s ease-out;
 }
 
+.questionnaire h2{
+ color: #000000;
+}
 .Questionnaire-icon {
   width: 80px;   
   height: 80px; 
@@ -203,3 +208,8 @@ input, select {
 .progress-bar-fill.step-3 { width: 60%; }
 .progress-bar-fill.step-4 { width: 80%; }
 .progress-bar-fill.step-5 { width: 100%; }
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}

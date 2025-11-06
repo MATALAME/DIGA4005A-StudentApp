@@ -32,6 +32,7 @@ export default function AllUsers() {
             email: data.email,
             accountType: data.accountType || "student",
             online: isOnline,
+            profileImage: data.profileImage || `https://picsum.photos/seed/${doc.id}/150`
           };
         })
         .filter((user) => user && user.id !== loggedInUser.id);
@@ -59,26 +60,37 @@ export default function AllUsers() {
   return (
     <Layout>
       <div className="all-users">
-        <h2>All Users</h2>
+        <h2>Inbox 📨</h2>
         {users.length === 0 ? (
           <p>No users found.</p>
         ) : (
           <ul className="user-list">
-            {users.map((user) => (
-              <li
-                key={user.id}
-                className="user-item"
-                onClick={() =>
-                  navigate(`/chat/${user.id}`, { state: { otherUser: user } })
-                }
-              >
+          {users.map((user) => (
+            <li
+              key={user.id}
+              className="user-item"
+              onClick={() =>
+                navigate(`/chat/${user.id}`, { state: { otherUser: user } })
+              }
+            >
+              <div className="user-avatar-section">
+                <img
+                  src={user.profileImage || `https://picsum.photos/seed/${user.id}/150`}
+                  alt={user.name}
+                  className="user-avatar"
+                />
+                {user.online && <span className="online-dot"></span>}
+              </div>
+              <div className="user-info">
                 <p>
                   <strong>{user.name}</strong> ({user.email})
-                  {user.online && <span className="online-dot"></span>}
                 </p>
-              </li>
-            ))}
-          </ul>
+                <p className="user-account-type">{user.accountType}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        
         )}
       </div>
     </Layout>

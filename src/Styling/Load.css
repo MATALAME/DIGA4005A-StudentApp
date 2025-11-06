@@ -29,6 +29,7 @@
 .Start-Page p {
   font-size: 1rem;
   margin-bottom: 20px;
+  color: #ffff;
 }
 
 .Start-Page img {
@@ -49,6 +50,7 @@
 .Page h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
+  color: black;
 }
 
 .Page p {

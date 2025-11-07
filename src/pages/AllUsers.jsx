@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../Components/Layout";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
+import { setupChatBetweenUsers } from "../firebaseUtils";
 import "../Styling/AllUsers.css";
 
 export default function AllUsers() {
@@ -22,9 +23,8 @@ export default function AllUsers() {
           const data = doc.data();
           if (!data.name || !data.email) return null;
 
-         
           const lastActive = data.lastActive?.toDate?.() || new Date(0);
-          const isOnline = new Date() - lastActive < 30000; 
+          const isOnline = new Date() - lastActive < 30000;
 
           return {
             id: doc.id,
@@ -57,6 +57,18 @@ export default function AllUsers() {
     );
   }
 
+  const handleUserClick = async (user) => {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!loggedInUser) return;
+
+    try {
+      await setupChatBetweenUsers(loggedInUser, user);
+      navigate(`/chat/${user.id}`, { state: { otherUser: user } });
+    } catch (error) {
+      console.error("Failed to open chat:", error);
+    }
+  };
+
   return (
     <Layout>
       <div className="all-users">
@@ -65,32 +77,29 @@ export default function AllUsers() {
           <p>No users found.</p>
         ) : (
           <ul className="user-list">
-          {users.map((user) => (
-            <li
-              key={user.id}
-              className="user-item"
-              onClick={() =>
-                navigate(`/chat/${user.id}`, { state: { otherUser: user } })
-              }
-            >
-              <div className="user-avatar-section">
-                <img
-                  src={user.profileImage || `https://picsum.photos/seed/${user.id}/150`}
-                  alt={user.name}
-                  className="user-avatar"
-                />
-                {user.online && <span className="online-dot"></span>}
-              </div>
-              <div className="user-info">
-                <p>
-                  <strong>{user.name}</strong> ({user.email})
-                </p>
-                <p className="user-account-type">{user.accountType}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        
+            {users.map((user) => (
+              <li
+                key={user.id}
+                className="user-item"
+                onClick={() => handleUserClick(user)}
+              >
+                <div className="user-avatar-section">
+                  <img
+                    src={user.profileImage || `https://picsum.photos/seed/${user.id}/150`}
+                    alt={user.name}
+                    className="user-avatar"
+                  />
+                  {user.online && <span className="online-dot"></span>}
+                </div>
+                <div className="user-info">
+                  <p>
+                    <strong>{user.name}</strong> ({user.email})
+                  </p>
+                  <p className="user-account-type">{user.accountType}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </Layout>

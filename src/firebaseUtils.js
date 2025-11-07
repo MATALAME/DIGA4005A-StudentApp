@@ -1,4 +1,4 @@
-import { doc, setDoc, collection, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, collection, serverTimestamp, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
 /**
@@ -24,7 +24,6 @@ export const addUserToFirestore = async (user) => {
     );
     console.log("User added to Firestore:", user.id);
 
-     
     startUserHeartbeat(user.id);
   } catch (error) {
     console.error("Error adding user to Firestore:", error);
@@ -62,14 +61,12 @@ export const startUserHeartbeat = (userId) => {
 
   const interval = setInterval(async () => {
     try {
-   
       await setDoc(userRef, { lastActive: serverTimestamp(), online: true }, { merge: true });
     } catch (error) {
       console.error("Error updating heartbeat:", error);
     }
   }, 10000);
 
-  //Changes user status to offline when they close tab
   const handleBeforeUnload = async () => {
     clearInterval(interval);
     try {
@@ -115,7 +112,7 @@ export const sendNotification = async (sender, receiver, messageText) => {
 };
 
 /**
- * Adding a new job to Firestore that way it can be done automatically one signup and we dont need manually add it
+ * 
  * @param {object} job 
  */
 export const addJobToFirestore = async (job) => {
@@ -138,3 +135,27 @@ export const addJobToFirestore = async (job) => {
   }
 };
 
+/**
+ *
+ * @param {Object} loggedInUser 
+ * @param {Object} otherUser 
+ * @returns {Promise<string>} 
+ */
+export const setupChatBetweenUsers = async (user1, user2) => {
+  if (!user1?.email || !user2?.email) throw new Error("Invalid users");
+
+  const chatId = [user1.email, user2.email].sort().join("_");
+  const chatDocRef = doc(db, "chats", chatId);
+  const chatSnap = await getDoc(chatDocRef);
+
+  if (!chatSnap.exists()) {
+    await setDoc(chatDocRef, {
+      participants: [user1.email, user2.email],
+      createdAt: serverTimestamp(),
+      lastMessage: "",
+      lastUpdated: serverTimestamp(),
+    });
+  }
+
+  return chatId;
+};

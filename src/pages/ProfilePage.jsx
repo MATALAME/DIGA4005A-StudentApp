@@ -4,11 +4,13 @@ import { useJobContext } from "../Context/JobContext";
 import Layout from "../Components/Layout";
 import "../Styling/ProfilePage.css";
 import StarRating from "../Components/StarRating";
+import LoadingOverlay from "../Components/LoadingOverlay";
 import { db } from "../firebase";
 import { doc, setDoc, getDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [accountType, setAccountType] = useState("");
   const [showJobForm, setShowJobForm] = useState(false);
   const [jobDetails, setJobDetails] = useState({
@@ -66,12 +68,15 @@ function ProfilePage() {
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
+      } finally {
+        setLoading(false);
       }
     };
   
     fetchProfile();
   }, []);
   
+  if (loading) return <LoadingOverlay text="Loading profile..." />;
 
   const handleInputChange = (e) => {
     setJobDetails({ ...jobDetails, [e.target.name]: e.target.value });
@@ -125,8 +130,7 @@ function ProfilePage() {
     }
   };
 
-  if (!profileData) return <p className="no-data">Loading profile...</p>;
-
+  if (!profileData) return <p className="no-data">No profile data found.</p>;
   return (
     <Layout>
       <div className="profile-page">

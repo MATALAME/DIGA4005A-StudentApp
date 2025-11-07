@@ -222,7 +222,7 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           <div className={`progress-bar-fill step-${step}`} />
         </div>
 
-        {/* Step 1 */}
+      
         {step === 1 && (
           <div>
             <h2>Personal Info</h2>
@@ -243,7 +243,7 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           </div>
         )}
 
-        {/* Step 2 */}
+       
         {step === 2 && (
           <div>
             <h2>{isClient ? "Contact Info" : "Institution"}</h2>
@@ -299,7 +299,7 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           </div>
         )}
 
-        {/* Step 3 */}
+        
         {step === 3 && (
           <div>
             <h2>Location</h2>
@@ -313,7 +313,7 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           </div>
         )}
 
-        {/* Step 4 */}
+       
         {step === 4 && (
           <div>
             <h2>{isClient ? "Job Preferences" : "Skills"}</h2>
@@ -334,7 +334,7 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           </div>
         )}
 
-        {/* Step 5 (students only) */}
+        
         {!isClient && step === 5 && (
           <div>
             <h2>Contact</h2>

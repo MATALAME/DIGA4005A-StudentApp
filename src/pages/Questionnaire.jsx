@@ -5,7 +5,7 @@ import "../Styling/Questionnaire.css";
 import { toast } from "react-hot-toast";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
-import {FiCheck} from "react-icons/fi";
+import { FiCheck } from "react-icons/fi";
 
 import nameIcon from "../images/Name.png";
 import institutionIcon from "../images/Institution.png";
@@ -53,7 +53,87 @@ export default function QuestionnaireWrapper() {
   return accountType === "student" ? <StudentQuestionnaire /> : <ClientQuestionnaire />;
 }
 
-//Student Questionnaire
+const saveProfile = async (formData, accountType, navigate) => {
+  try {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!loggedInUser) return toast.error("No user logged in.");
+
+    const cleanData = (obj) =>
+      Object.fromEntries(
+        Object.entries(obj).map(([key, value]) => [key, value === undefined ? null : value])
+      );
+
+    let publicProfile = {};
+    let privateProfile = {};
+
+    if (accountType === "student") {
+      publicProfile = cleanData({
+        name: formData.name,
+        middleName: formData.middleName,
+        surname: formData.surname,
+        skills: formData.skills,
+        institution: formData.institution,
+        institutionLogo: formData.institutionLogo,
+        faculty: formData.faculty,
+        studyType: formData.studyType,
+        yearOfStudy: formData.yearOfStudy,
+        suburb: formData.suburb,
+        city: formData.city,
+        province: formData.province,
+        reviewScore: loggedInUser.publicProfile?.reviewScore ?? 0,
+      });
+
+      privateProfile = cleanData({
+        email: formData.email || loggedInUser.email,
+        phone: formData.phone,
+        street: formData.street,
+        zip: formData.zip,
+        linkedin: formData.linkedin,
+        instagram: formData.instagram,
+        facebook: formData.facebook,
+      });
+    } else {
+
+      publicProfile = cleanData({
+        name: formData.name,
+        skills: formData.skills,
+      });
+
+      privateProfile = cleanData({
+        email: formData.email || loggedInUser.email,
+        phone: formData.phone,
+        street: formData.street,
+        suburb: formData.suburb,
+        city: formData.city,
+        province: formData.province,
+        zip: formData.zip,
+      });
+    }
+
+    const updatedUser = { ...loggedInUser, publicProfile, privateProfile };
+    localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+    toast.success("Profile updated successfully!");
+
+    const userRef = doc(db, "users", loggedInUser.id);
+    await setDoc(
+      userRef,
+      {
+        publicProfile,
+        privateProfile,
+        accountType: loggedInUser.accountType || accountType,
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    navigate("/profile");
+  } catch (error) {
+    console.error("Error saving profile:", error);
+    toast.error("Error updating profile.");
+  }
+};
+
+
 function StudentQuestionnaire() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -120,41 +200,12 @@ function StudentQuestionnaire() {
 
   const handleSubmit = async () => {
     if (!validateStep()) return;
-
-    try {
-      const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-      if (!loggedInUser) return toast.error("No user logged in.");
-
-      
-      const updatedUser = { ...loggedInUser, profile: formData };
-      localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
-
-      toast.success("Profile updated successfully!");
-      navigate("/terms");
-
-
-      const userRef = doc(db, "users", loggedInUser.id);
-      setDoc(
-        userRef,
-        {
-          profile: formData,
-          reviewScore: formData.reviewScore ?? null,
-          accountType: loggedInUser.accountType || "student",
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      ).catch(err => console.error("Error updating profile:", err));
-
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      toast.error("Error updating profile.");
-    }
+    await saveProfile(formData, "student", navigate);
   };
 
   return renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handleInstitutionChange, toggleSkill, errors, formData });
 }
 
-//Client Questionnire
 function ClientQuestionnaire() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -184,35 +235,12 @@ function ClientQuestionnaire() {
   const nextStep = () => setStep(prev => prev + 1);
 
   const handleSubmit = async () => {
-    try {
-      const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-      if (!loggedInUser) return toast.error("No user logged in.");
-
-      const updatedUser = { ...loggedInUser, profile: formData };
-      localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
-      toast.success("Profile updated successfully!");
-      navigate("/profile");
-
-     
-      const userRef = doc(db, "users", loggedInUser.id);
-      setDoc(
-        userRef,
-        {
-          profile: formData,
-          reviewScore: formData.reviewScore ?? null,
-          accountType: loggedInUser.accountType || "client",
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      ).catch(err => console.error("Error updating profile:", err));
-    } catch (error) {
-      console.error(error);
-      toast.error("Error updating profile.");
-    }
+    await saveProfile(formData, "client", navigate);
   };
 
   return renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, toggleSkill, errors, formData, isClient: true });
 }
+
 
 function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handleInstitutionChange, toggleSkill, errors, formData, isClient = false }) {
   return (
@@ -222,7 +250,6 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           <div className={`progress-bar-fill step-${step}`} />
         </div>
 
-      
         {step === 1 && (
           <div>
             <h2>Personal Info</h2>
@@ -243,7 +270,6 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           </div>
         )}
 
-       
         {step === 2 && (
           <div>
             <h2>{isClient ? "Contact Info" : "Institution"}</h2>
@@ -257,30 +283,16 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
                 <input name="faculty" placeholder="Faculty / Department" onChange={handleChange} />
                 <div className="account-type-options">
                   <label className={`account-option ${formData.studyType === "Full-Time" ? "selected" : ""}`}>
-                    <input
-                      type="radio"
-                      name="studyType"
-                      value="Full-Time"
-                      checked={formData.studyType === "Full-Time"}
-                      onChange={handleChange}
-                    />
+                    <input type="radio" name="studyType" value="Full-Time" checked={formData.studyType === "Full-Time"} onChange={handleChange} />
                     <span className="check-icon"><FiCheck /></span>
                     <span className="option-text">Full-Time</span>
                   </label>
-
                   <label className={`account-option ${formData.studyType === "Part-Time" ? "selected" : ""}`}>
-                    <input
-                      type="radio"
-                      name="studyType"
-                      value="Part-Time"
-                      checked={formData.studyType === "Part-Time"}
-                      onChange={handleChange}
-                    />
-                     <span className="check-icon"><FiCheck /></span>
+                    <input type="radio" name="studyType" value="Part-Time" checked={formData.studyType === "Part-Time"} onChange={handleChange} />
+                    <span className="check-icon"><FiCheck /></span>
                     <span className="option-text">Part-Time</span>
                   </label>
                 </div>
-
                 <select name="yearOfStudy" onChange={handleChange}>
                   <option value="">Year of Study</option>
                   <option>1st</option>
@@ -299,7 +311,6 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           </div>
         )}
 
-        
         {step === 3 && (
           <div>
             <h2>Location</h2>
@@ -313,28 +324,26 @@ function renderQuestionnaire({ step, nextStep, handleSubmit, handleChange, handl
           </div>
         )}
 
-       
         {step === 4 && (
           <div>
             <h2>{isClient ? "Job Preferences" : "Skills"}</h2>
             <img src={skillsIcon} alt="Skills Icon" className="Questionnaire-icon" />
             <div className="skills-container">
-            {["Deliveries","Errands","Cleaning","Repairs","Tutoring","Photography"].map(skill => (
-              <button
-                key={skill}
-                type="button"
-                className={`skill-button ${formData.skills.includes(skill) ? "active-skill" : ""}`}
-                onClick={() => toggleSkill(skill)}
-              >
-                {skill}
-              </button>
-            ))}
-          </div>
+              {["Deliveries","Errands","Cleaning","Repairs","Tutoring","Photography"].map(skill => (
+                <button
+                  key={skill}
+                  type="button"
+                  className={`skill-button ${formData.skills.includes(skill) ? "active-skill" : ""}`}
+                  onClick={() => toggleSkill(skill)}
+                >
+                  {skill}
+                </button>
+              ))}
+            </div>
             <button onClick={handleSubmit}>Submit</button>
           </div>
         )}
 
-        
         {!isClient && step === 5 && (
           <div>
             <h2>Contact</h2>

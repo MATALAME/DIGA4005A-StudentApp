@@ -6,7 +6,7 @@ import "../Styling/ProfilePage.css";
 import StarRating from "../Components/StarRating";
 import LoadingOverlay from "../Components/LoadingOverlay";
 import { db } from "../firebase";
-import { doc, setDoc, getDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState(null);
@@ -28,40 +28,40 @@ function ProfilePage() {
   const { addJob } = useJobContext();
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchProfile = async () => {
       const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
       if (!loggedInUser) return;
-  
+
       try {
         const userRef = doc(db, "users", loggedInUser.id);
         const userSnap = await getDoc(userRef);
-  
+
         if (userSnap.exists()) {
           const data = userSnap.data();
-          const profile = data.profile || {};
-  
-          console.log("Fetched Firestore user data:", data); 
-  
+          const publicProfile = data.publicProfile || {};
+          const privateProfile = data.privateProfile || {};
+
+          console.log("Fetched Firestore user data:", data);
+
           setProfileData({
-            name: data.name || loggedInUser.name || "Unnamed",
-            email: data.email || loggedInUser.email || "Unknown",
+            name: publicProfile.name || loggedInUser.name || "Unnamed",
+            email: privateProfile.email || loggedInUser.email || "Unknown",
             accountType: data.accountType || loggedInUser.accountType,
-            skills: profile.skills || [],
-            institution: profile.institution || "",
-            institutionLogo: profile.institutionLogo || "",
-            faculty: profile.faculty || "",
-            studyType: profile.studyType || "",
-            yearOfStudy: profile.yearOfStudy || "",
-            street: profile.street || "",
-            suburb: profile.suburb || "",
-            city: profile.city || "",
-            province: profile.province || "",
-            zip: profile.zip || "",
+            skills: publicProfile.skills || [],
+            institution: publicProfile.institution || "",
+            institutionLogo: publicProfile.institutionLogo || "",
+            faculty: publicProfile.faculty || "",
+            studyType: publicProfile.studyType || "",
+            yearOfStudy: publicProfile.yearOfStudy || "",
+            street: privateProfile.street || "",
+            suburb: publicProfile.suburb || "",
+            city: publicProfile.city || "",
+            province: publicProfile.province || "",
+            zip: privateProfile.zip || "",
             reviewScore: data.reviewScore ?? null,
           });
-  
+
           setAccountType(data.accountType || loggedInUser.accountType);
         } else {
           console.warn("No user found in Firestore for this ID.");
@@ -72,10 +72,10 @@ function ProfilePage() {
         setLoading(false);
       }
     };
-  
+
     fetchProfile();
   }, []);
-  
+
   if (loading) return <LoadingOverlay text="Loading profile..." />;
 
   const handleInputChange = (e) => {
@@ -208,7 +208,6 @@ function ProfilePage() {
             </div>
           )}
 
-          {/* Job Form (Client Only) */}
           {showJobForm && accountType === "client" && (
             <div className="job-form">
               <h3>Create Job Listing</h3>

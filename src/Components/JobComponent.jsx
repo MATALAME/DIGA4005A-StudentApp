@@ -39,7 +39,8 @@ const JobComponent = ({ job }) => {
         const userRef = doc(db, "users", job.userId);
         const userSnap = await getDoc(userRef);
         if (userSnap.exists()) {
-          setReviewScore(userSnap.data().reviewScore ?? null);
+          const data = userSnap.data();
+          setReviewScore(data.reviewScore ?? null);
         }
       } catch (error) {
         console.error("Error fetching user review score:", error);
@@ -49,6 +50,7 @@ const JobComponent = ({ job }) => {
     };
     fetchUserReviewScore();
   }, [job.userId]);
+  
 
 
   useEffect(() => {

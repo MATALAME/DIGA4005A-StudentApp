@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../firebase";
-import { addUserToFirestore } from "../firebaseUtils";
+import { auth, db } from "../firebase";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import LoadingOverlay from "../Components/LoadingOverlay";
 
 const AuthContext = createContext();
@@ -15,33 +13,60 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        const userRef = doc(db, "users", firebaseUser.uid);
-        const userSnap = await getDoc(userRef);
+        try {
 
-        let userData;
-        if (userSnap.exists()) {
-          userData = userSnap.data();
-        } else {
-          userData = {
-            id: firebaseUser.uid,
-            name: firebaseUser.displayName || "",
-            email: firebaseUser.email,
-            accountType: "student",
-            profile: null,
-          };
-          await addUserToFirestore(userData); 
+          const publicRef = doc(db, "users", firebaseUser.uid, "publicProfile", "data");
+          const privateRef = doc(db, "users", firebaseUser.uid, "privateProfile", "data");
+
+          const [publicSnap, privateSnap] = await Promise.all([getDoc(publicRef), getDoc(privateRef)]);
+
+        
+          if (!publicSnap.exists() && !privateSnap.exists()) {
+            const defaultPublic = {
+              name: firebaseUser.displayName || "",
+              reviewScore: 0,
+              accountType: "student",
+              skills: [],
+            };
+            const defaultPrivate = {
+              email: firebaseUser.email,
+            };
+
+            await Promise.all([
+              setDoc(publicRef, defaultPublic),
+              setDoc(privateRef, defaultPrivate),
+            ]);
+
+            const newUser = {
+              id: firebaseUser.uid,
+              name: defaultPublic.name,
+              email: firebaseUser.email,
+              accountType: defaultPublic.accountType,
+              publicProfile: defaultPublic,
+              privateProfile: defaultPrivate,
+            };
+
+            setUser(newUser);
+            localStorage.setItem("loggedInUser", JSON.stringify(newUser));
+          } else {
+            const publicData = publicSnap.exists() ? publicSnap.data() : {};
+            const privateData = privateSnap.exists() ? privateSnap.data() : {};
+
+            const flattenedUser = {
+              id: firebaseUser.uid,
+              name: publicData.name || "",
+              email: firebaseUser.email,
+              accountType: publicData.accountType || "student",
+              publicProfile: publicData,
+              privateProfile: privateData,
+            };
+
+            setUser(flattenedUser);
+            localStorage.setItem("loggedInUser", JSON.stringify(flattenedUser));
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
         }
-
-        const flattenedUser = {
-          id: firebaseUser.uid,
-          name: userData.name || "",
-          email: firebaseUser.email,
-          accountType: userData.accountType || "student",
-          profile: userData.profile || null,
-        };
-
-        setUser(flattenedUser);
-        localStorage.setItem("loggedInUser", JSON.stringify(flattenedUser));
       } else {
         setUser(null);
         localStorage.removeItem("loggedInUser");

@@ -102,13 +102,14 @@ function Signup() {
         name: userData.name || "",
         email: firebaseUser.email,
         accountType: userData.accountType || "student",
-        profile: userData.profile || null,
+        publicProfile: userData.publicProfile || null,
+        privateProfile: userData.privateProfile || null,
       };
 
       login(flattenedUser);
 
       toast.success(`Welcome back, ${flattenedUser.name || "User"}!`);
-      navigate(flattenedUser.profile ? "/home" : "/questionnaire");
+      navigate(flattenedUser.privateProfile ? "/home" : "/questionnaire");
     } catch (err) {
       console.error("Sign-in error:", err);
       const friendlyMessage = firebaseAuthErrorMessages(err);
@@ -157,7 +158,8 @@ function Signup() {
         name,
         email,
         accountType,
-        profile: null,
+        publicProfile: null,
+        privateProfile: null,
       };
 
       await addUserToFirestore({ ...userData, online: true });

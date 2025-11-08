@@ -134,6 +134,23 @@
   color: black;
 }
 
+.load-more-button {
+  padding: 10px 20px;
+  background-color: #1e3a8a;
+  color: white;;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.load-more-button:hover {
+  background-color: #122352;
+}
+
+
 .headline-container {
   width: 100%;
   display: flex;

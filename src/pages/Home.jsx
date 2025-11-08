@@ -4,13 +4,13 @@ import Layout from "../Components/Layout";
 import "../Styling/Home.css";
 import { useJobContext } from "../Context/JobContext";
 
-import Headline from "../images/HeaderGraphic.png"
-import WideHeadline from "../images/WideHeaderGraphic.png"
+import Headline from "../images/HeaderGraphic.png";
+import WideHeadline from "../images/WideHeaderGraphic.png";
 
 export default function Home() {
   const { jobs } = useJobContext(); 
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(10);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const categories = [
@@ -21,28 +21,24 @@ export default function Home() {
     { name: "Other Jobs", icon: "💼" },
   ];
 
+  const headlineImage = windowWidth < 768 ? Headline : WideHeadline;
+
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
-  useEffect(() => {
-    const sortedJobs = [...jobs].sort((a, b) => {
-      const tA = a.timestamp?.seconds || 0; 
-      const tB = b.timestamp?.seconds || 0;
-      return tB - tA; 
-    });
 
-    const filtered =
-      selectedCategory === "All"
-        ? sortedJobs
-        : sortedJobs.filter((job) => job.category === selectedCategory);
+  const filteredJobs = selectedCategory === "All"
+    ? [...jobs].sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0))
+    : [...jobs].filter(job => job.category === selectedCategory)
+          .sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
 
-    setFilteredJobs(filtered);
-  }, [jobs, selectedCategory]);
+  const visibleJobs = filteredJobs.slice(0, visibleCount);
 
-  const headlineImage = windowWidth < 768 ? Headline : WideHeadline;
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 10);
+  };
 
   return (
     <Layout>
@@ -52,15 +48,15 @@ export default function Home() {
 
       <div className="home-wrapper">
         <div className="home-content">
-          {/* Filter Buttons */}
           <div className="filter-buttons">
-            {categories.map((category) => (
+            {categories.map(category => (
               <button
                 key={category.name}
-                className={`filter-button ${
-                  selectedCategory === category.name ? "active" : ""
-                }`}
-                onClick={() => setSelectedCategory(category.name)}
+                className={`filter-button ${selectedCategory === category.name ? "active" : ""}`}
+                onClick={() => {
+                  setSelectedCategory(category.name);
+                  setVisibleCount(10); 
+                }}
               >
                 <span className="filter-icon">{category.icon}</span>
                 <span className="filter-text">{category.name}</span>
@@ -72,16 +68,21 @@ export default function Home() {
             <h2>FIND JOBS 🔍</h2>
           </div>
 
-          {/* Job Container */}
           <div className="job-container">
-            {filteredJobs.length === 0 ? (
+            {visibleJobs.length === 0 ? (
               <p>No jobs available.</p>
             ) : (
-              filteredJobs.map((job) => (
-                <JobComponent key={job.id} job={job} />
-              ))
+              visibleJobs.map(job => <JobComponent key={job.id} job={job} />)
             )}
           </div>
+
+          {visibleCount < filteredJobs.length && (
+            <div style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
+              <button className="load-more-button" onClick={handleLoadMore}>
+                Load More
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

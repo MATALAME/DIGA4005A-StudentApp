@@ -5,14 +5,14 @@ import { db } from "../firebase";
 import {
   collection,
   addDoc,
+  setDoc,
   doc,
   onSnapshot,
   query,
   orderBy,
   serverTimestamp,
-  getDoc
 } from "firebase/firestore";
-import { sendNotification } from "../firebaseUtils"; 
+import { setupChatBetweenUsers, sendNotification } from "../firebaseUtils"; 
 import "../Styling/ChatPage.css";
 
 const ChatPage = () => {
@@ -31,12 +31,12 @@ const ChatPage = () => {
     else setLoggedInUser(user);
   }, [navigate]);
 
- 
+  
   useEffect(() => {
     const fetchOtherUser = async () => {
       if (!id || otherUser) return;
       const userRef = doc(db, "users", id);
-      const snap = await getDoc(userRef);
+      const snap = await userRef.get();
       if (snap.exists()) setOtherUser({ id: snap.id, ...snap.data() });
     };
     fetchOtherUser();
@@ -45,36 +45,69 @@ const ChatPage = () => {
   
   useEffect(() => {
     if (!loggedInUser || !otherUser) return;
-    const chatId = [loggedInUser.email, otherUser.email].sort().join("_");
-    const messagesRef = collection(db, "chats", chatId, "messages");
-    const q = query(messagesRef, orderBy("timestamp", "asc"));
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setMessages(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-    });
+    const setupChatListener = async () => {
+      try {
+        const chatId = await setupChatBetweenUsers(loggedInUser, otherUser);
+        const chatDocRef = doc(db, "chats", chatId);
+        const messagesRef = collection(chatDocRef, "messages");
+        const q = query(messagesRef, orderBy("timestamp", "asc"));
 
-    return () => unsubscribe();
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          setMessages(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+        });
+
+        return unsubscribe;
+      } catch (error) {
+        console.error("Error setting up chat listener:", error);
+      }
+    };
+
+    const cleanupPromise = setupChatListener();
+    return () => {
+      cleanupPromise.then((unsubscribe) => {
+        if (unsubscribe) unsubscribe();
+      });
+    };
   }, [loggedInUser, otherUser]);
 
+ 
   const handleSendMessage = async () => {
     if (!userMessage.trim() || !loggedInUser || !otherUser) return;
-
-    const chatId = [loggedInUser.email, otherUser.email].sort().join("_");
-    const messagesRef = collection(db, "chats", chatId, "messages");
-
-    await addDoc(messagesRef, {
-      text: userMessage.trim(),
-      sender: loggedInUser.email,
-      senderName: loggedInUser.name,
-      receiver: otherUser.email,
-      timestamp: serverTimestamp(),
-    });
-
-    
-    await sendNotification(loggedInUser, otherUser, userMessage.trim());
-
-    setUserMessage("");
+  
+    try {
+      
+      const chatId = await setupChatBetweenUsers(loggedInUser, otherUser);
+      const chatDocRef = doc(db, "chats", chatId);
+      const messagesRef = collection(chatDocRef, "messages");
+  
+      
+      await addDoc(messagesRef, {
+        text: userMessage.trim(),
+        sender: loggedInUser.email,
+        senderName: loggedInUser.name,
+        receiver: otherUser.email,
+        timestamp: serverTimestamp(),
+      });
+  
+      
+      await setDoc(
+        chatDocRef,
+        {
+          lastMessage: userMessage.trim(),
+          lastUpdated: serverTimestamp(),
+        },
+        { merge: true }
+      );
+  
+      await sendNotification(loggedInUser, otherUser, userMessage.trim());
+      setUserMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("Failed to send message. Check permissions or try again.");
+    }
   };
+  
 
   if (!loggedInUser || !otherUser) return <p>Loading chat...</p>;
 

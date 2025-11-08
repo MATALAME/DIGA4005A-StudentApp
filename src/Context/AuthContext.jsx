@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { addUserToFirestore } from "../firebaseUtils";
+import LoadingOverlay from "../Components/LoadingOverlay";
 
 const AuthContext = createContext();
 
@@ -65,7 +66,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, authReady, login, logout }}>
-      {authReady ? children : <div>Loading authentication...</div>}
+      {authReady ? children : <LoadingOverlay text="Preparing your experience..." />}
     </AuthContext.Provider>
   );
 };

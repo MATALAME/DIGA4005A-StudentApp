@@ -30,7 +30,7 @@ export const JobProvider = ({ children }) => {
   
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
-      // added this fix for job loading problems
+      
       startJobListeners();
     });
   

@@ -18,6 +18,7 @@ import Notifications from "./pages/Notifications";
 import UploadMockJobTimestamps from "./Components/UploadMockJobTimestamps"; 
 import ApplicationPage from "./pages/ApplicationPage";
 import TermsPage from "./pages/TermsPage";
+import SavedJobs from "./pages/SavedJobs";
 
 function App() {
   return (
@@ -71,6 +72,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/saved"
+              element={
+                <ProtectedRoute>
+                  <SavedJobs />
+                </ProtectedRoute>
+              }
+              />
             <Route
               path="/application"
               element={

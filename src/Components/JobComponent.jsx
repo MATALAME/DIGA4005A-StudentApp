@@ -6,6 +6,8 @@ import "../Styling/JobComponent.css";
 import { db, auth } from "../firebase";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
 
+import LocationIcon from "../images/LocationIcon.png"
+
 const JobComponent = ({ job }) => {
   const navigate = useNavigate();
   const [reviewScore, setReviewScore] = useState(null);
@@ -122,7 +124,8 @@ const JobComponent = ({ job }) => {
       </div>
 
       <div className="job-location">
-        <MapPin size={16} color="black" className="location-icon" />
+      <img src= {LocationIcon} className="location-icon"/>
+        {/* <MapPin size={16} color="black" className="location-icon" /> */}
         {job.suburb || "Unknown Suburb"}, {job.city || "Unknown City"}
       </div>
 

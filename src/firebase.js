@@ -5,13 +5,12 @@ import {getAuth} from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCXk-NlFeDvaLniVNa1ZKfy6LWkUxukpFQ",
-  authDomain: "student-app-chat.firebaseapp.com",
-  projectId: "student-app-chat",
-  storageBucket: "student-app-chat.firebasestorage.app",
-  messagingSenderId: "184744512499",
-  appId: "1:184744512499:web:0722c82b813e509acca086",
-  locationId: "africa-south1",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 
